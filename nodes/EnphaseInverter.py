@@ -63,7 +63,6 @@ class InverterNode(udi_interface.Node):
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
         else:
-            self.invertInfo(self)
             LOGGER.debug('longPoll (node)')
 
     def query(self, command=None):
