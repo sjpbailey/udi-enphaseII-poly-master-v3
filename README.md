@@ -18,7 +18,7 @@
   
 ![Enphase Site](<https://github.com/sjpbailey/udi-enphaseII-poly-master-v3/blob/master/images-archive/Enphase_Controller.png>)
 
-![Enphase Inverter](<https://github.com/sjpbailey/udi-enphaseII-poly-master-v3/blob/4bfad0c6a79762c0defcbfa60840eff0e3a65451/images-archive/Enphase_Inverter.png>)
+![Enphase Inverter](<https://github.com/sjpbailey/udi-enphaseII-poly-master-v3/blob/b07144956a1947ec35dcb9dd20c072d62a73c10b/images-archive/Enphase_Inverter.png>)
 
 ### Node Settings
 
