@@ -19,7 +19,6 @@ ST-str-GV6-NAME = kWh Two Days Ago
 ST-str-GV7-NAME = kWh Three Days Ago
 ST-str-GV8-NAME = kWh Four Days Ago
 ST-str-GV9-NAME = kWh Five Days Ago
-
 CMD-str-SITEINFO-NAME = Update Information
 
 # Inverters OnSite

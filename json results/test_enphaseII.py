@@ -13,20 +13,24 @@ params = (('key', key), ('user_id', user_id))
 # ('user_id', '4d6a55794e7a55354d413d3d0a'),  # 4d6a55794e7a55354d413d3d0a
 # )
 
-"""response = requests.get(
+response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=2527105',  params=params)  # 'https://api.enphaseenergy.com/api/v2/systems', # https://enlighten.enphaseenergy.com/app_user_auth/new?app_id=1409622241421 # https://api.enphaseenergy.com/api/v2/systems/[system_id]/stats
 # https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=1409622241421
-print(response)
+# print(response)
 
 presentday = datetime.now()
 yesterday = presentday - timedelta(1)
 second = presentday - timedelta(2)
 third = presentday - timedelta(3)
+fourth = presentday - timedelta(4)
+fifth = presentday - timedelta(5)
 
 start_date = yesterday.strftime('%Y-%m-%d')
 end_date = presentday.strftime('%Y-%m-%d')
 end_scnd = second.strftime('%Y-%m-%d')
 end_tird = third.strftime('%Y-%m-%d')
+end_four = fourth.strftime('%Y-%m-%d')
+end_five = fourth.strftime('%Y-%m-%d')
 
 # print(start_date)
 # print(end_date)
@@ -38,22 +42,27 @@ end_tird = third.strftime('%Y-%m-%d')
 # 'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?+start_date+end_date'
 response2 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?start_date='+start_date+'&end_date='+end_date,  params=params).text
-#print('\n Lifetime Energy Daily Report \n' + response2)
+print('\n Lifetime Energy Daily Report \n' + response2)
 response3 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?start_date='+end_scnd+'&end_date='+end_scnd,  params=params).text
-#print('\n Lifetime Energy Daily Report \n' + response3)
+print('\n Lifetime Energy Daily Report \n' + response3)
 response4 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?start_date='+end_tird+'&end_date='+end_tird,  params=params).text
-#print('\n Lifetime Energy Daily Report \n' + response4)
-
+print('\n Lifetime Energy Daily Report \n' + response4)
+response5 = requests.get(
+    'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?start_date='+end_four+'&end_date='+end_four,  params=params).text
+print('\n Lifetime Energy Daily Report \n' + response5)
+response6 = requests.get(
+    'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?start_date='+end_five+'&end_date='+end_five,  params=params).text
+print('\n Lifetime Energy Daily Report \n' + response6)
 # gives 401 is no consumption meter
-response8 = requests.get(
-    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetimeconsumption_lifetime',  params=params).text
-print('\n rgm \n' + response8)
+# response8 = requests.get(
+#    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetimeconsumption_lifetime',  params=params).text
+#print('\n rgm \n' + response8)
 
 # Customers Systems = system_id
 # for loop looking at system id to add Systems
-response3 = requests.get(
+"""response3 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems', params=params).text  # params=params
 # print(response3)
 systemResponse = json.loads(response3)
@@ -61,7 +70,7 @@ print(systemResponse["systems"][0]["status"])
 print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 #print('\n System Status \n', systemResponse["systems"][0]["status"])
 #print('\n System Country \n', systemResponse["systems"][0]["country"])
-hellohere = systemResponse["systems"][0]
+hellohere = systemResponse["systems"][0]"""
 
 #print('\n Str Found \n {} sites'.format(hellohere))
 # print(hellohere["system_id"])
@@ -71,7 +80,7 @@ hellohere = systemResponse["systems"][0]
 #    print('\n', i,  hellohere[i])
 
 #'system_id' in hellohere.values()
-#print(i, hellohere[i])"""
+#print(i, hellohere[i])
 
 # energy_lifetime?start_date=2013-01-01&end_date=2013-01-06
 
@@ -83,7 +92,7 @@ print('\n Equipmet Inventory \n' + response4)"""
     'https://api.enphaseenergy.com/api/v2/systems/2527105/stats?datetime_format=iso8601',  params=params).text
 print('\n Equipment Stats \n' + response5)"""
 
-response6 = requests.get(
+"""response6 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=2527105',  params=params).text  # for loop for solar array
 print('\n Inverters \n' + response6)
 # for i in response6["micro_inverters"]:  # inverter_summary
@@ -101,7 +110,7 @@ print('\n System kW \n', jsonResponse["current_power"])
 print('\n System kWh \n', jsonResponse["energy_today"]/1000)
 print('\n System Status \n', jsonResponse["status"])
 print('\n System kWh Today\n', jsonResponse["energy_today"]/1000)
-print('\n System kWh Life Time\n', jsonResponse["energy_lifetime"]/1000)
+print('\n System kWh Life Time\n', jsonResponse["energy_lifetime"]/1000)"""
 
 # print(int(jsonResponse["current_power"]))
 
