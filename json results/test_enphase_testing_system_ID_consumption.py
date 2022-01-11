@@ -24,9 +24,16 @@ response = requests.get(
     'https://enlighten.enphaseenergy.com/app_user_auth/new?app_id=1409622241421',  params=params)  # 'https://api.enphaseenergy.com/api/v2/systems', # https://enlighten.enphaseenergy.com/app_user_auth/new?app_id=1409622241421 # https://api.enphaseenergy.com/api/v2/systems/[system_id]/stats
 
 print(response)"""
-f = open('/Users/stevenbailey/UDI Development PG3/Nodeservers/udi-enphaseII-poly-master-v3/json results/owners-systems.json',)
+
+
+#f = open('/Users/stevenbailey/UDI Development PG3/Nodeservers/udi-enphaseII-poly-master-v3/json results/owners-systems.json',)
 # jsonData = open('snapshot.json',)  # json.loads(jsonData)
+f = open('//Users/stevenbailey/UDI Development PG3/Nodeservers/udi-enphaseII-poly-master-v3/json results/lifetime-consumption-report.json',)
 jsonResponse = json.load(f)
+print(jsonResponse['consumption'][5])
+if jsonResponse['consumption'][0] is not None:
+    print('meter up')
+
 
 #system_id = '2527105'
 """response = requests.get(
@@ -35,7 +42,7 @@ jsonResponse = json.load(f)
 jsonResponse = json.loads(response.text)"""
 
 # print(jsonResponse)
-print(jsonResponse["systems"][0]["system_id"])  # [0]["system_id"])
+"""print(jsonResponse["system"][0]["system_id"])  # [0]["system_id"])
 
 df = pd.json_normalize(jsonResponse['systems'])
 df = df.fillna(-1)
@@ -50,7 +57,7 @@ for device in device_list:
         system_id = row['system_id']
         address = 'Site' + '-%s' % (idx+1)
         print('\n{name}\n{system_id}\n{address}\n'.format(name=name, system_id=system_id, address=address)
-              )
+              )"""
 
 
 # print(response.text.encode('utf8'))
