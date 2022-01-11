@@ -1,0 +1,57 @@
+<nodeDefs>
+
+  <nodeDef id="ctl" nodeType="139" nls="ctl">
+    <sts>
+      <st id="ST" editor="bool" />
+    </sts>
+    <cmds>
+      <sends />
+      <accepts>
+        <cmd id="QUERY" />
+        <cmd id="REMOVE_NOTICES_ALL" />
+        <cmd id="SITEINFO" />
+      </accepts>
+    </cmds>
+  </nodeDef>
+
+  <nodeDef id="site" nodeType="139" nls="str">
+    <sts>
+      <st id="ST" editor="bool" />
+      <st id="GV1" editor="kw" />
+      <st id="GV2" editor="kwh" />
+      <st id="GV3" editor="kwh" />
+      <st id="GV4" editor="stat" />
+      <st id="GV5" editor="kwh" />
+      <st id="GV6" editor="kwh" />
+      <st id="GV7" editor="kwh" />
+      <st id="GV8" editor="kwh" />
+      <st id="GV9" editor="kwh" />
+    </sts>
+    <cmds>
+      <sends />
+      <accepts>
+        <cmd id="SITEINFO" />
+      </accepts>
+    </cmds>
+  </nodeDef>
+
+  <nodeDef id="inverter" nodeType="139" nls="inv">
+    <sts>
+      <st id="ST" editor="bool" />
+      <st id="GV1" editor="kw" />
+      <st id="GV2" editor="kwh" />
+      <st id="GV3" editor="rawval" />
+      <st id="GV4" editor="stat" />
+      <st id="GV5" editor="rawval" />
+    </sts>
+    <cmds>
+      <sends />
+      <accepts>
+        <cmd id="SITEINFO" />
+      </accepts>
+    </cmds>
+  </nodeDef>
+
+
+</nodeDefs>
+
