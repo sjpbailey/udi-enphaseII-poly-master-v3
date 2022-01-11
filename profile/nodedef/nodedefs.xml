@@ -21,7 +21,6 @@
       <st id="GV1" editor="kw" />
       <st id="GV2" editor="kwh" />
       <st id="GV3" editor="kwh" />
-      <st id="GV4" editor="stat" />
       <st id="GV5" editor="kwh" />
       <st id="GV6" editor="kwh" />
       <st id="GV7" editor="kwh" />
@@ -53,6 +52,4 @@
     </cmds>
   </nodeDef>
 
-
 </nodeDefs>
-
