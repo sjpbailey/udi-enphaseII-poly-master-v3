@@ -16,6 +16,7 @@ ST-str-GV1-NAME = Current kW
 ST-str-GV2-NAME = kWh Today
 ST-str-GV5-NAME = kWh Yesterday
 ST-str-GV6-NAME = kWh Two Days Ago
+ST-str-GV7-NAME = kWh Three Days Ago
 ST-str-GV8-NAME = kWh Four Days Ago
 ST-str-GV9-NAME = kWh Five Days Ago
 
