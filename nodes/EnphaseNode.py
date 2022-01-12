@@ -97,11 +97,12 @@ class SiteNode(udi_interface.Node):
 
     def poll(self, polltype):
         pass
-        """if 'shortPoll' in polltype:
+        if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
         else:
-            LOGGER.debug('longPoll (node)')"""
+            pass
+        #LOGGER.debug('longPoll (node)')
 
     def query(self, command=None):
         self.reportDrivers()
