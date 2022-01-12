@@ -95,8 +95,9 @@ class SiteNode(udi_interface.Node):
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
 
-    """def poll(self, polltype):
-        if 'shortPoll' in polltype:
+    def poll(self, polltype):
+        pass
+        """if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
         else:

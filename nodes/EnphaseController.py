@@ -194,8 +194,8 @@ class Controller(udi_interface.Node):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
-            self.customerSites(self)
         else:
+            self.customerSites(self)
             LOGGER.debug('longPoll (node)')
 
     id = 'ctl'
