@@ -95,12 +95,12 @@ class SiteNode(udi_interface.Node):
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
 
-    def poll(self, polltype):
+    """def poll(self, polltype):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
         else:
-            LOGGER.debug('longPoll (node)')
+            LOGGER.debug('longPoll (node)')"""
 
     def query(self, command=None):
         self.reportDrivers()

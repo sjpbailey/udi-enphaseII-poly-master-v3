@@ -58,12 +58,12 @@ class InverterNode(udi_interface.Node):
             self.setDriver('ST', 0)
         pass
 
-    def poll(self, polltype):
+    """def poll(self, polltype):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
         else:
-            LOGGER.debug('longPoll (node)')
+            LOGGER.debug('longPoll (node)')"""
 
     def query(self, command=None):
         self.reportDrivers()
