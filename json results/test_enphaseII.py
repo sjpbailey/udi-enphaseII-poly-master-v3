@@ -97,7 +97,7 @@ print('\n Equipment Stats \n' + response5)"""
 print('\n Inverters \n' + response6)
 # for i in response6["micro_inverters"]:  # inverter_summary
 #    inverters = str(["micro_inverters"])
-#    print(inverters)    # inverter
+#    print(inverters)    # inverter"""
 
 system_id = '2527105'
 response = requests.get(
@@ -106,11 +106,11 @@ response = requests.get(
 jsonResponse = json.loads(response.text)
 
 # print(response.text.encode('utf8'))
-print('\n System kW \n', jsonResponse["current_power"])
+#print('\n System kW \n', jsonResponse["current_power"])
 print('\n System kWh \n', jsonResponse["energy_today"]/1000)
 print('\n System Status \n', jsonResponse["status"])
 print('\n System kWh Today\n', jsonResponse["energy_today"]/1000)
-print('\n System kWh Life Time\n', jsonResponse["energy_lifetime"]/1000)"""
+print('\n System kWh Life Time\n', jsonResponse["energy_lifetime"]/1000)
 
 # print(int(jsonResponse["current_power"]))
 

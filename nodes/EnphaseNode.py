@@ -96,7 +96,6 @@ class SiteNode(udi_interface.Node):
             LOGGER.error("Error: " + str(e))
 
     def poll(self, polltype):
-        pass
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
