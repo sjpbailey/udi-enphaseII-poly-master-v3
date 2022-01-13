@@ -142,7 +142,7 @@ class Controller(udi_interface.Node):
         try:
             r1 = requests.get(URL_SITE, params=params)
             #LOGGER.info('\n Summary \n' + r)
-            Response1 = json.loads(r.text)
+            Response1 = json.loads(r1.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
         if self.key != self.default_key:
@@ -170,7 +170,7 @@ class Controller(udi_interface.Node):
         try:
             r2 = requests.get(URL_SITE, params=params)
             #LOGGER.info('\n Summary \n' + r)
-            Response2 = json.loads(r.text)
+            Response2 = json.loads(r2.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
 
