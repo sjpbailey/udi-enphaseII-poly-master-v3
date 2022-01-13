@@ -99,9 +99,10 @@ class SiteNode(udi_interface.Node):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
+            self.siteInfo(self)
+            self.siteHist(self)
         else:
-            pass
-        #LOGGER.debug('longPoll (node)')
+            LOGGER.debug('longPoll (node)')
 
     def query(self, command=None):
         self.reportDrivers()
