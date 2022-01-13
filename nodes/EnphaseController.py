@@ -136,22 +136,46 @@ class Controller(udi_interface.Node):
 
     #### Add Inverters ####
 
-    def Inverters(self, command, system_id,):
-        self.system_id == system_id
-        if self.system_id is not None:
-            self.system_id = str(self.system_id)
-        URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
-            self.system_id
+    def Inverters(self, command):
+        URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-            r = requests.get(URL_SITE, params=params)
+            r1 = requests.get(URL_SITE, params=params)
             #LOGGER.info('\n Summary \n' + r)
-            Response = json.loads(r.text)
+            Response1 = json.loads(r.text)
+        except requests.exceptions.RequestException as e:
+            LOGGER.error("Error: " + str(e))
+        if self.key != self.default_key:
+            df = pd.json_normalize(Response1['systems'])
+            df = df.fillna(-1)
+            df['type'] = None
+            df['type'] = np.where(df['system_id'], 'system', df['type'])
+            system = df[df['type'] == 'system'].reset_index(drop=True)
+            # Add System Nodes (system string)
+            device_list = [system]
+            for device in device_list:
+                for idx, row in device.iterrows():
+                    name = row['system_name']
+                    system_id = row['system_id']
+                    LOGGER.info('\n{name}\n{system_id}\n'
+                                .format(name=name, system_id=system_id))
+                    LOGGER.info('SystemId {}' .format(system_id))
+
+        if system_id is not None:
+            system_id = str(system_id)
+        URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
+            system_id
+        params = (('key', self.key), ('user_id', self.user_id))
+
+        try:
+            r2 = requests.get(URL_SITE, params=params)
+            #LOGGER.info('\n Summary \n' + r)
+            Response2 = json.loads(r.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
 
         # GET Inverter Data
-        df = pd.json_normalize(Response[0]['micro_inverters'])
+        df = pd.json_normalize(Response2[0]['micro_inverters'])
         df = df.fillna(-1)
         df['type'] = None
         df['type'] = np.where(df['energy.value'], 'inverter', df['type'])

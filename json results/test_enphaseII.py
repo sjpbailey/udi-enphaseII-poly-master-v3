@@ -40,7 +40,7 @@ end_five = fourth.strftime('%Y-%m-%d')
 
 # 'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?start_date=2021-11-10&end_date=2021-11-25'
 # 'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?+start_date+end_date'
-response2 = requests.get(
+"""response2 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?start_date='+start_date+'&end_date='+end_date,  params=params).text
 print('\n Lifetime Energy Daily Report \n' + response2)
 response3 = requests.get(
@@ -58,11 +58,11 @@ print('\n Lifetime Energy Daily Report \n' + response6)
 # gives 401 is no consumption meter
 # response8 = requests.get(
 #    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetimeconsumption_lifetime',  params=params).text
-#print('\n rgm \n' + response8)
+#print('\n rgm \n' + response8)"""
 
 # Customers Systems = system_id
 # for loop looking at system id to add Systems
-"""response3 = requests.get(
+response3 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems', params=params).text  # params=params
 # print(response3)
 systemResponse = json.loads(response3)
@@ -70,7 +70,7 @@ print(systemResponse["systems"][0]["status"])
 print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 #print('\n System Status \n', systemResponse["systems"][0]["status"])
 #print('\n System Country \n', systemResponse["systems"][0]["country"])
-hellohere = systemResponse["systems"][0]"""
+hellohere = systemResponse["systems"][0]
 
 #print('\n Str Found \n {} sites'.format(hellohere))
 # print(hellohere["system_id"])
