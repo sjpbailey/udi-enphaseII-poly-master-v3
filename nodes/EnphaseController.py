@@ -136,8 +136,8 @@ class Controller(udi_interface.Node):
 
     #### Add Inverters ####
 
-    def Inverters(self, command):
-        self.system_id = str(self.system_id)
+    def Inverters(self, system_id, command):
+        self.system_id == system_id
         if self.system_id is not None:
             self.system_id = str(self.system_id)
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
