@@ -135,8 +135,8 @@ class Controller(udi_interface.Node):
                     time.sleep(10)
 
     #### Add Inverters ####
-
     def Inverters(self, command):
+        # GET system_id
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
@@ -160,9 +160,9 @@ class Controller(udi_interface.Node):
                     LOGGER.info('\n{name}\n{system_id}\n'
                                 .format(name=name, system_id=system_id))
                     LOGGER.info('SystemId {}' .format(system_id))
-
         if system_id is not None:
             system_id = str(system_id)
+
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             system_id
         params = (('key', self.key), ('user_id', self.user_id))
