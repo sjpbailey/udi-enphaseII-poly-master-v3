@@ -100,7 +100,7 @@ class Controller(udi_interface.Node):
             self.setDriver('ST', 1)
     #### Find Customer Sites ####
         self.customerSites(self)
-        time.sleep(10)
+        time.sleep(5)
         self.Inverters(self)
 
     #### Add Sites ####
@@ -132,16 +132,15 @@ class Controller(udi_interface.Node):
                     node = EnphaseNode.SiteNode(self.poly, self.address,
                                                 'site'+'_%s' % (idx+1), str(name), str(system_id), self.key, self.user_id)
                     self.poly.addNode(node)
-                    time.sleep(10)
 
     #### Add Inverters ####
     def Inverters(self, command):
-        # GET system_id
+        #### GET system_id ####
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r1 = requests.get(URL_SITE, params=params)
-            #LOGGER.info('\n Summary \n' + r)
+            #LOGGER.info('\n Summary \n' + r1)
             Response1 = json.loads(r1.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
@@ -162,19 +161,17 @@ class Controller(udi_interface.Node):
                     LOGGER.info('SystemId {}' .format(system_id))
         if system_id is not None:
             system_id = str(system_id)
-
+        #### GET Inverter Data ####
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             system_id
         params = (('key', self.key), ('user_id', self.user_id))
-
         try:
             r2 = requests.get(URL_SITE, params=params)
-            #LOGGER.info('\n Summary \n' + r)
+            #LOGGER.info('\n Summary \n' + r2)
             Response2 = json.loads(r2.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
-
-        # GET Inverter Data
+        #### Sort Inverter Data ####
         df = pd.json_normalize(Response2[0]['micro_inverters'])
         df = df.fillna(-1)
         df['type'] = None
@@ -199,9 +196,9 @@ class Controller(udi_interface.Node):
                 self.poly.addNode(node)
 
         #### Get Consumption Meter ####
-        if self.system_id is not None:
+        if system_id is not None:
             URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
-                self.system_id + '/consumption_stats'
+                system_id + '/consumption_stats'
             params = (('key', self.key), ('user_id', self.user_id))
             try:
                 r = requests.get(URL_SITE, params=params)
