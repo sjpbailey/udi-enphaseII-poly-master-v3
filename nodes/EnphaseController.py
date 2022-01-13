@@ -100,6 +100,8 @@ class Controller(udi_interface.Node):
             self.setDriver('ST', 1)
     #### Find Customer Sites ####
         self.customerSites(self)
+        time.sleep(10)
+        self.Inverters(self)
 
     #### Add Sites ####
     def customerSites(self, command):
@@ -130,9 +132,10 @@ class Controller(udi_interface.Node):
                     node = EnphaseNode.SiteNode(self.poly, self.address,
                                                 'site'+'_%s' % (idx+1), str(name), str(system_id), self.key, self.user_id)
                     self.poly.addNode(node)
-                    self.Inverters(self)
+                    time.sleep(10)
 
     #### Add Inverters ####
+
     def Inverters(self, command):
         self.system_id = str(self.system_id)
         if self.system_id is not None:
@@ -146,7 +149,7 @@ class Controller(udi_interface.Node):
             Response = json.loads(r.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
-        time.sleep(5)
+
         # GET Inverter Data
         df = pd.json_normalize(Response[0]['micro_inverters'])
         df = df.fillna(-1)
