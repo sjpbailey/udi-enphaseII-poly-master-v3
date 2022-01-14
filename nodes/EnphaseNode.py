@@ -57,6 +57,7 @@ class SiteNode(udi_interface.Node):
             normal1 = Response["status"]
             if normal1 == 'normal':
                 self.setDriver('GV4', 1)
+                self.siteHist(self)
             else:
                 self.setDriver('GV4', 0)
             if r.status_code == 200:
@@ -65,9 +66,9 @@ class SiteNode(udi_interface.Node):
                 self.setDriver('ST', 0)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
-            self.siteHist(self)
 
     #### Get History ####
+
     def siteHist(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
             self.system_id + '/energy_lifetime'
