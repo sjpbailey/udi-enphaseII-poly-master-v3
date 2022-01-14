@@ -40,7 +40,7 @@ end_five = fourth.strftime('%Y-%m-%d')
 
 # 'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?start_date=2021-11-10&end_date=2021-11-25'
 # 'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?+start_date+end_date'
-response2 = requests.get(
+"""response2 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?start_date='+start_date+'&end_date='+end_date,  params=params).text
 print('\n Lifetime Energy Daily Report \n' + response2)
 response3 = requests.get(
@@ -58,7 +58,7 @@ print('\n Lifetime Energy Daily Report \n' + response6)
 # gives 401 is no consumption meter
 # response8 = requests.get(
 #    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetimeconsumption_lifetime',  params=params).text
-#print('\n rgm \n' + response8)
+#print('\n rgm \n' + response8)"""
 
 # Customers Systems = system_id
 # for loop looking at system id to add Systems
@@ -101,16 +101,18 @@ print('\n Inverters \n' + response6)
 
 system_id = '2527105'
 response = requests.get(
-    'https://api.enphaseenergy.com/api/v2/systems/' + system_id + '/summary',  params=params)
-#print('\n Summary \n' + response)
-jsonResponse = json.loads(response.text)
+    'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=2527105',  params=params)
 
+jsonResponse = json.loads(response.text)
+# print(jsonResponse)
 # print(response.text.encode('utf8'))
-print('\n System current kW \n', jsonResponse["current_power"])
-print('\n System energy kWh \n', jsonResponse["energy_today"])
-print('\n System Status \n', jsonResponse["status"])
-print('\n System kWh Today\n', jsonResponse["energy_today"]/1000)
-print('\n System kWh Life Time\n', jsonResponse["energy_lifetime"]/1000)
+
+print('\n System current kQ \n',
+      jsonResponse[0]['micro_inverters'][0]['power_produced'])
+#print('\n System energy Wh \n', jsonResponse["energy_today"])
+#print('\n System Status \n', jsonResponse["status"])
+#print('\n System kWh Today\n', jsonResponse["energy_today"]/1000)
+#print('\n System kWh Life Time\n', jsonResponse["energy_lifetime"]/1000)
 
 # print(int(jsonResponse["current_power"]))
 

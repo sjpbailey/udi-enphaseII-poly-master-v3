@@ -69,7 +69,7 @@ class InverterNode(udi_interface.Node):
 
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},
-        {'driver': 'GV1', 'value': 0, 'uom': 33},
+        {'driver': 'GV1', 'value': 0, 'uom': 119},
         {'driver': 'GV2', 'value': 0, 'uom': 33},
         {'driver': 'GV3', 'value': 0, 'uom': 56},
         {'driver': 'GV4', 'value': 0, 'uom': 25},
