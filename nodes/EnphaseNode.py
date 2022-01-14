@@ -28,7 +28,7 @@ class SiteNode(udi_interface.Node):
         self.poly = polyglot
         self.lpfx = '%s:%s' % (address, name)
         self.poly.subscribe(self.poly.START, self.start, address)
-        self.poly.subscribe(self.poly.POLL, self.poll)
+        #self.poly.subscribe(self.poly.POLL, self.poll)
         self.name = name
         self.system_id = system_id
         self.key = key
@@ -95,14 +95,14 @@ class SiteNode(udi_interface.Node):
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
 
-    def poll(self, polltype):
+    """def poll(self, polltype):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
             self.siteInfo(self)
             self.siteHist(self)
         else:
-            LOGGER.debug('longPoll (node)')
+            LOGGER.debug('longPoll (node)')"""
 
     def query(self, command=None):
         self.reportDrivers()

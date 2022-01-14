@@ -40,8 +40,8 @@ class InverterNode(udi_interface.Node):
     def invertInfo(self, command):
         LOGGER.info('ID {}'.format(self.inv_id))
         self.setDriver('GV5', self.inv_id)
-        LOGGER.info('kW {}'.format(float(self.inv_kW)/1000))
-        self.setDriver('GV1', float(self.inv_kW)/1000)
+        LOGGER.info('kW {}'.format(float(self.inv_kW)))  # /1000
+        self.setDriver('GV1', float(self.inv_kW))
         LOGGER.info('Wh {}'.format(float(self.inv_kWh)/1000))
         self.setDriver('GV2', float(self.inv_kWh)/1000)
         LOGGER.info('S/N {}'.format(self.inv_serial))
