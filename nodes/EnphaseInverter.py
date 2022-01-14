@@ -67,9 +67,6 @@ class InverterNode(udi_interface.Node):
             pass
             #LOGGER.debug('longPoll (node)')"""
 
-    def query(self, command=None):
-        self.reportDrivers()
-
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},
         {'driver': 'GV1', 'value': 0, 'uom': 33},
@@ -77,12 +74,10 @@ class InverterNode(udi_interface.Node):
         {'driver': 'GV3', 'value': 0, 'uom': 56},
         {'driver': 'GV4', 'value': 0, 'uom': 25},
         {'driver': 'GV5', 'value': 0, 'uom': 56},
-
     ]
 
     id = 'inverter'
 
     commands = {
         'SITEINFO': invertInfo
-
     }

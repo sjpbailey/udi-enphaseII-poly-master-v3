@@ -36,7 +36,6 @@ class SiteNode(udi_interface.Node):
 
     def start(self):
         self.siteInfo(self)
-        self.siteHist(self)
         self.http = urllib3.PoolManager()
 
     #### Get Current Production ####
@@ -66,6 +65,7 @@ class SiteNode(udi_interface.Node):
                 self.setDriver('ST', 0)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
+            self.siteHist(self)
 
     #### Get History ####
     def siteHist(self, command):
@@ -91,7 +91,6 @@ class SiteNode(udi_interface.Node):
             self.setDriver('GV8', float(Response["production"][dybft]/1000))
             LOGGER.info(Response['production'][dybf2]/1000)  # Five Days Ago
             self.setDriver('GV9', float(Response["production"][dybf2]/1000))
-
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
 
@@ -100,12 +99,8 @@ class SiteNode(udi_interface.Node):
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
             self.siteInfo(self)
-            self.siteHist(self)
         else:
             LOGGER.debug('longPoll (node)')"""
-
-    def query(self, command=None):
-        self.reportDrivers()
 
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},
@@ -118,7 +113,6 @@ class SiteNode(udi_interface.Node):
         {'driver': 'GV7', 'value': 0, 'uom': 33},
         {'driver': 'GV8', 'value': 0, 'uom': 33},
         {'driver': 'GV9', 'value': 0, 'uom': 33},
-
     ]
 
     id = 'site'
