@@ -106,8 +106,8 @@ response = requests.get(
 jsonResponse = json.loads(response.text)
 
 # print(response.text.encode('utf8'))
-print('\n System kW \n', jsonResponse["current_power"])
-print('\n System kWh \n', jsonResponse["energy_today"]/1000)
+print('\n System current kW \n', jsonResponse["current_power"])
+print('\n System energy kWh \n', jsonResponse["energy_today"])
 print('\n System Status \n', jsonResponse["status"])
 print('\n System kWh Today\n', jsonResponse["energy_today"]/1000)
 print('\n System kWh Life Time\n', jsonResponse["energy_lifetime"]/1000)

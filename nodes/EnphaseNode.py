@@ -49,7 +49,7 @@ class SiteNode(udi_interface.Node):
             #print('\n Summary \n' + response)
             Response = json.loads(r.text)
             LOGGER.info(Response["current_power"])
-            self.setDriver('GV1', float(Response["current_power"]/1000))
+            self.setDriver('GV1', float(Response["current_power"]))  # /1000
             LOGGER.info(Response["energy_today"])
             self.setDriver('GV2', float(Response["energy_today"]/1000))
             LOGGER.info(Response["energy_lifetime"])

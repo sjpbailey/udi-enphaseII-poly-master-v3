@@ -100,8 +100,6 @@ class Controller(udi_interface.Node):
             self.setDriver('ST', 1)
     #### Find Customer Sites ####
         self.customerSites(self)
-        time.sleep(5)
-        self.Inverters(self)
 
     #### Add Sites ####
     def customerSites(self, command):
@@ -132,6 +130,7 @@ class Controller(udi_interface.Node):
                     node = EnphaseNode.SiteNode(self.poly, self.address,
                                                 'site'+'_%s' % (idx+1), str(name), str(system_id), self.key, self.user_id)
                     self.poly.addNode(node)
+                    self.Inverters(self)
 
     #### Add Inverters ####
     def Inverters(self, command):
@@ -221,7 +220,7 @@ class Controller(udi_interface.Node):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
-            self.Inverters(self)
+            self.customerSites(self)
         else:
             LOGGER.debug('longPoll (node)')
 
