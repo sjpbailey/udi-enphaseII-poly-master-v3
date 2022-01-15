@@ -35,7 +35,9 @@ print()
 
 
 inv_idx = 4
-df = pd.json_normalize(Response[0]['micro_inverters'][inv_idx])
+# Response[0]['micro_inverters'][inv_idx]
+# Use Line above to check each inverter one at a tiime
+df = pd.json_normalize(Response[0]['micro_inverters'])
 df = df.fillna(-1)
 
 df['type'] = None
@@ -54,7 +56,7 @@ for device in device_list:
         inv_kWh = row['energy.value']
         inv_kW = row['power_produced']
         inv_idx = '%s' % (idx)
-        print('\n{inv_id}\n{inv_serial}\n{inv_status}\n{inv_kWh}\n{inv_kW}\n{inv_idx}\n'.format(
+        print('\nID\n{inv_id}\nSN\n{inv_serial}\nStatus\n{inv_status}\nWh\n{inv_kWh}\nW\n{inv_kW}\nIDX\n{inv_idx}\n'.format(
             inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
 # GETS from Inverters
 # inv_id = Response  # 0]['micro_inverters'][inv_idx]  # ['id']

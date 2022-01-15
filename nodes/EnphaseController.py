@@ -50,6 +50,8 @@ class Controller(udi_interface.Node):
     def start(self):
         self.poly.updateProfile()
         self.poly.setCustomParamsDoc()
+        #### Find Customer Sites ####
+        self.customerSites(self)
 
     def parameterHandler(self, params):
         self.Parameters.load(params)
@@ -98,8 +100,6 @@ class Controller(udi_interface.Node):
             self.setDriver('ST', 0)
         else:
             self.setDriver('ST', 1)
-    #### Find Customer Sites ####
-        self.customerSites(self)
 
     #### Add Sites ####
     def customerSites(self, command):
@@ -224,6 +224,8 @@ class Controller(udi_interface.Node):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
+        if 'longpoll' in polltype:
+            self.
         else:
             LOGGER.debug('longPoll (node)')
 

@@ -32,7 +32,7 @@
 
 #### Long Poll
 
-* Not used
+* Every 15 Minutes
 
 ![Enphase config](<https://github.com/sjpbailey/udi-enphaseII-poly-master-v3/blob/master/images-archive/configuration.png>)
 

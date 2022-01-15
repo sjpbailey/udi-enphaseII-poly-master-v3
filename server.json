@@ -7,7 +7,7 @@
 	"description": "Enphase Solae Site Summary with micro inverter inventory per customer site.",
 	"notice": "",
 	"shortPoll": "600",
-	"longPoll": "6600",
+	"longPoll": "900",
 	"logLevel": "INFO",
 	"profile_version": "1.0.0",
 	"customParams": {

@@ -7,6 +7,7 @@ MIT License
 
 import udi_interface
 from datetime import datetime, timedelta
+import time
 import json
 import urllib3
 import logging
@@ -100,6 +101,8 @@ class SiteNode(udi_interface.Node):
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
             self.siteHist(self)
+            # time.sleep(2)
+            # self.siteInfo(self)
         else:
             LOGGER.debug('longPoll (node)')
 
