@@ -223,9 +223,9 @@ class Controller(udi_interface.Node):
     def poll(self, polltype):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            # self.reportDrivers()
-        if 'longpoll' in polltype:
             self.Inverters(self)
+        if 'longpoll' in polltype:
+            self.reportDrivers()
         else:
             LOGGER.debug('longPoll (node)')
 

@@ -76,7 +76,7 @@ Bob"""
 # for x in response2:
 #    print("%s: %d" % (x, response2[x]))
 
-response3 = requests.get(
+"""response3 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime?start_date='+end_scnd+'&end_date='+end_scnd,  params=params).text
 print('\n Lifetime Energy Response 3 Report \n' + response3)
 print('\n Lifetime Energy Response 3 Report \n' +
@@ -119,7 +119,7 @@ print('\n Consumption Meter Stats \n' + response8)
 #    print('True')
 
 # Customers Systems = system_id
-# for loop looking at system id to add Systems
+# for loop looking at system id to add Systems"""
 
 """response3 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems', params=params).text  # params=params
@@ -129,7 +129,7 @@ print(systemResponse["systems"][0]["status"])
 print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 #print('\n System Status \n', systemResponse["systems"][0]["status"])
 #print('\n System Country \n', systemResponse["systems"][0]["country"])
-#hellohere = systemResponse["systems"][0]"""
+#hellohere = systemResponse["systems"][0]
 
 #print('\n Str Found \n {} sites'.format(hellohere))
 # print(hellohere["system_id"])
@@ -147,8 +147,7 @@ print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 # GET https://api.enphaseenergy.com/api/v2/systems/66/production_meter_readings?end_at=1473901755
 response10 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/production_meter_readings',  params=params).text
-#print('\n Equipmet Inventory \n' + response10)
-
+print('\n Equipmet Inventory \n' + response10)"""
 
 """response4 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/inventory',  params=params).text

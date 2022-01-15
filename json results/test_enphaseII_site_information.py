@@ -13,6 +13,39 @@ params = (('key', key), ('user_id', user_id))
 # ('user_id', '4d6a55794e7a55354d413d3d0a'),  # 4d6a55794e7a55354d413d3d0a
 # )
 
+system_id = '2527105'
+response = requests.get(
+    'https://api.enphaseenergy.com/api/v2/systems/2527105/summary',  params=params)
+
+jsonResponse = json.loads(response.text)
+print(jsonResponse)
+# print(response.text.encode('utf8'))
+
+print('\nsystem id\n' + str(jsonResponse['system_id']))
+print('\ncurrent power id\n' + str(jsonResponse['current_power']))
+print('\nenergy_today\n' + str(jsonResponse['energy_today']))
+print('\nenergy_lifetime\n' + str(jsonResponse['energy_lifetime']))
+print('\nsummary_date\n' + str(jsonResponse['summary_date']))
+print('\nstatus\n' + str(jsonResponse['status']))
+print('\ninverters\n' + str(jsonResponse['modules']))
+
+"""print('\n System current kW \n',
+      jsonResponse[0]['micro_inverters']['power_produced'])
+print('\n System energy Wh \n',
+      jsonResponse[0]['micro_inverters']["energy_today"])
+print('\n System Status \n', jsonResponse[0]['micro_inverters']["status"])
+print('\n System kWh Today\n',
+      jsonResponse[0]['micro_inverters']["energy_today"]/1000)
+print('\n System kWh Life Time\n',
+      jsonResponse[0]['micro_inverters']["energy_lifetime"]/1000)
+
+# print(int(jsonResponse["current_power"]))
+
+# print(response3["system_id"])
+# for key, value in response7:
+#    print(value)"""
+
+
 response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=2527105',  params=params)  # 'https://api.enphaseenergy.com/api/v2/systems', # https://enlighten.enphaseenergy.com/app_user_auth/new?app_id=1409622241421 # https://api.enphaseenergy.com/api/v2/systems/[system_id]/stats
 # https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=1409622241421
@@ -98,27 +131,6 @@ print('\n Inverters \n' + response6)
 # for i in response6["micro_inverters"]:  # inverter_summary
 #    inverters = str(["micro_inverters"])
 #    print(inverters)    # inverter"""
-
-system_id = '2527105'
-response = requests.get(
-    'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=2527105',  params=params)
-
-jsonResponse = json.loads(response.text)
-# print(jsonResponse)
-# print(response.text.encode('utf8'))
-
-print('\n System current kW \n',
-      jsonResponse[0]['micro_inverters'][0]['power_produced'])
-#print('\n System energy Wh \n', jsonResponse["energy_today"])
-#print('\n System Status \n', jsonResponse["status"])
-#print('\n System kWh Today\n', jsonResponse["energy_today"]/1000)
-#print('\n System kWh Life Time\n', jsonResponse["energy_lifetime"]/1000)
-
-# print(int(jsonResponse["current_power"]))
-
-# print(response3["system_id"])
-# for key, value in response7:
-#    print(value)"""
 
 
 # NB. Original query string below. It seems impossible to parse and
