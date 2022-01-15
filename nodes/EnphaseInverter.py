@@ -40,59 +40,56 @@ class InverterNode(udi_interface.Node):
     def start(self):
         self.invertInfo(self)
         self.http = urllib3.PoolManager()
+
+    def invertInfo(self, command):
         LOGGER.info('ID {}'.format(self.inv_id))
         self.setDriver('GV5', self.inv_id)  # ID
         LOGGER.info('S/N {}'.format(self.inv_serial))
         self.setDriver('GV3', self.inv_serial)  # Serial Number
-
-    def invertInfo(self, command):
         #### GET Inverter Data ####
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             self.system_id
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-            r2 = requests.get(URL_SITE, params=params)
-            #LOGGER.info('\n Summary \n' + r2)
-            Response2 = json.loads(r2.text)
-            LOGGER.info(Response2)
+            r = requests.get(URL_SITE, params=params)
+            Response2 = json.loads(r.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
-        #### Sort Inverter Data ####
+        #### Sort Inverter Status ####
+        df = pd.json_normalize(
+            Response2[0]['micro_inverters'][int(self.inv_idx)])
+        df = df.fillna(-1)
+        df['type'] = None
+        df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
+        inverters = df[df['type'] == 'inverter'].reset_index(drop=True)
+        # inverter string
         if self.system_id is not None:
-            df = pd.json_normalize(
-                Response2[0]['micro_inverters'][int(self.inv_idx)])
-            df = df.fillna(-1)
-            df['type'] = None
-            df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
-            inverters = df[df['type'] == 'inverter'].reset_index(drop=True)
-            # inverter string
-            if self.system_id is not None:
-                device_list = [inverters]
-                for device in device_list:
-                    for idx, row in device.iterrows():
-                        inv_status = row['status']
-                        inv_kWh = row['energy.value']
-                        inv_kW = row['power_produced']
-                        LOGGER.info('\n{inv_status}\n{inv_kWh}\n{inv_kW}\\n'.format(
-                            inv_kWh=inv_kWh, inv_kW=inv_kW, inv_status=inv_status))
-                        LOGGER.info('kW {}'.format(float(self.inv_kW)))  # kW
-                        self.setDriver('GV1', float(inv_kW))  # kW
-                        LOGGER.info('Wh {}'.format(float(inv_kWh)/1000))
-                        self.setDriver('GV2', float(inv_kWh)/1000)  # kWh
-                        LOGGER.info('S/N {}'.format(self.inv_serial))
-                        self.setDriver('GV3', self.inv_serial)  # Serial Number
-                        LOGGER.info('STATUS {}'.format(inv_status))
-                        LOGGER.info(self.inv_status)
-                        if self.inv_status == 'normal':
-                            self.setDriver('GV4', 1)
-                        else:
-                            self.setDriver('GV4', 0)
-                        if self.inv_status is not None:
-                            self.setDriver('ST', 1)
-                        else:
-                            self.setDriver('ST', 0)
-                        pass
+            device_list = [inverters]
+            for device in device_list:
+                for idx, row in device.iterrows():
+                    inv_status = row['status']
+                    inv_kWh = row['energy.value']
+                    inv_kW = row['power_produced']
+                    LOGGER.info('\n{inv_status}\n{inv_kWh}\n{inv_kW}\\n'.format(
+                        inv_kWh=inv_kWh, inv_kW=inv_kW, inv_status=inv_status))
+                    LOGGER.info('kW {}'.format(float(self.inv_kW)))  # kW
+                    self.setDriver('GV1', float(inv_kW))  # kW
+                    LOGGER.info('Wh {}'.format(float(inv_kWh)/1000))
+                    self.setDriver('GV2', float(inv_kWh)/1000)  # kWh
+                    LOGGER.info('S/N {}'.format(self.inv_serial))
+                    self.setDriver('GV3', self.inv_serial)  # Serial Number
+                    LOGGER.info('STATUS {}'.format(inv_status))
+                    LOGGER.info(self.inv_status)
+                    if self.inv_status == 'normal':
+                        self.setDriver('GV4', 1)
+                    else:
+                        self.setDriver('GV4', 0)
+                    if self.inv_status is not None:
+                        self.setDriver('ST', 1)
+                    else:
+                        self.setDriver('ST', 0)
+                    pass
 
     def poll(self, polltype):
         pass
