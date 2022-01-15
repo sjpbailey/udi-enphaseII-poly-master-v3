@@ -65,7 +65,7 @@ for device in device_list:
 #inv_kWh = Response[0]['micro_inverters'][inv_idx]['energy']['value']
 #inv_kW = Response[0]['micro_inverters'][inv_idx]['power_produced']"""
 
-df = pd.json_normalize(Response[0]['micro_inverters'][inv_idx])
+df = pd.json_normalize(Response[0]['micro_inverters'])
 df = df.fillna(-1)
 
 df['type'] = None
