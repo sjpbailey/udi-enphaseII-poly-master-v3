@@ -40,6 +40,8 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.invertInfo(self)
+        time.sleep(15)
+        self.getpower(self)
         self.http = urllib3.PoolManager()
 
     def invertInfo(self, command):
@@ -48,7 +50,8 @@ class InverterNode(udi_interface.Node):
         LOGGER.info('S/N {}'.format(self.inv_serial))
         self.setDriver('GV3', self.inv_serial)  # Serial Number
         #### GET Inverter Data ####
-        time.sleep(5)
+
+    def getpower(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             self.system_id
         params = (('key', self.key), ('user_id', self.user_id))
@@ -97,7 +100,7 @@ class InverterNode(udi_interface.Node):
         pass
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            self.invertInfo(self)
+            self.getpower(self)
         else:
             LOGGER.debug('longPoll (node)')
 
@@ -113,5 +116,5 @@ class InverterNode(udi_interface.Node):
     id = 'inverter'
 
     commands = {
-        'SITEINFO': invertInfo
+        'SITEINFO': getpower
     }
