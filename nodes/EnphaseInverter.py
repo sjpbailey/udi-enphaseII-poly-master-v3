@@ -76,7 +76,7 @@ class InverterNode(udi_interface.Node):
                     inv_status = row['status']
                     inv_kWh = row['energy.value']
                     inv_kW = row['power_produced']
-                    LOGGER.info('\n{inv_status}\n{inv_kWh}\n{inv_kW}\\n'.format(
+                    LOGGER.info('\n{inv_status}\n{inv_kWh}\n{inv_kW}\n'.format(
                         inv_kWh=inv_kWh, inv_kW=inv_kW, inv_status=inv_status))
                     LOGGER.info('kW {}'.format(float(self.inv_kW)))  # kW
                     self.setDriver('GV1', float(inv_kW))  # kW
