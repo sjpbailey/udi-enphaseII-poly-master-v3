@@ -195,7 +195,7 @@ class Controller(udi_interface.Node):
                     LOGGER.info('\n{inv_id}\n{inv_serial}\n{inv_status}\n{inv_kWh}\n{inv_kW}\n{inv_idx}\n'.format(
                         inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
                     node = EnphaseInverter.InverterNode(
-                        self.poly, self.address, address, name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx)
+                        self.poly, self.address, address, name, str(system_id), self.key, self.user_id, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx)
                     self.poly.addNode(node)
                     # , str(system_id), self.key, self.user_id,
 
