@@ -58,7 +58,7 @@ class InverterNode(udi_interface.Node):
             LOGGER.info(self.inv_idx)
         #### Sort Inverter Status ####
         df = pd.json_normalize(
-            Response2['micro_inverters'][int(self.inv_idx)])
+            Response2[0]['micro_inverters'][int(self.inv_idx)])
         df = df.fillna(-1)
         df['type'] = None
         df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
