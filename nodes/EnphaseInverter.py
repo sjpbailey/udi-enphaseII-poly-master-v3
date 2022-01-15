@@ -39,13 +39,13 @@ class InverterNode(udi_interface.Node):
 
     def invertInfo(self, command):
         LOGGER.info('ID {}'.format(self.inv_id))
-        self.setDriver('GV5', self.inv_id)
-        LOGGER.info('kW {}'.format(float(self.inv_kW)))  # /1000
-        self.setDriver('GV1', float(self.inv_kW))
+        self.setDriver('GV5', self.inv_id)  # ID
+        LOGGER.info('kW {}'.format(float(self.inv_kW)))  # Wh["power_produced"]
+        self.setDriver('GV1', float(self.inv_kW))  # kW
         LOGGER.info('Wh {}'.format(float(self.inv_kWh)/1000))
-        self.setDriver('GV2', float(self.inv_kWh)/1000)
+        self.setDriver('GV2', float(self.inv_kWh)/1000)  # kWh
         LOGGER.info('S/N {}'.format(self.inv_serial))
-        self.setDriver('GV3', self.inv_serial)
+        self.setDriver('GV3', self.inv_serial)  # ISerial Number
         LOGGER.info('STATUS {}'.format(self.inv_status))
         LOGGER.info(self.inv_status)
         if self.inv_status == 'normal':
