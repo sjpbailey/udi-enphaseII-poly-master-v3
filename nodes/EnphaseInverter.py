@@ -25,7 +25,7 @@ class InverterNode(udi_interface.Node):
         self.poly = polyglot
         self.lpfx = '%s:%s' % (address, name)
         self.poly.subscribe(self.poly.START, self.start, address)
-        #self.poly.subscribe(self.poly.POLL, self.poll)
+        self.poly.subscribe(self.poly.POLL, self.poll)
         self.inv_id = inv_id
         self.inv_serial = inv_serial
         self.inv_status = inv_status
@@ -58,14 +58,13 @@ class InverterNode(udi_interface.Node):
             self.setDriver('ST', 0)
         pass
 
-    """def poll(self, polltype):
+    def poll(self, polltype):
         pass
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
         else:
-            pass
-            #LOGGER.debug('longPoll (node)')"""
+            LOGGER.debug('longPoll (node)')
 
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},
