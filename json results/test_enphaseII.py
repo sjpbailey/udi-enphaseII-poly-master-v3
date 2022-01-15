@@ -107,7 +107,7 @@ jsonResponse = json.loads(response.text)
 # print(jsonResponse)
 # print(response.text.encode('utf8'))
 
-print('\n System current kQ \n',
+print('\n System current kW \n',
       jsonResponse[0]['micro_inverters'][0]['power_produced'])
 #print('\n System energy Wh \n', jsonResponse["energy_today"])
 #print('\n System Status \n', jsonResponse["status"])
