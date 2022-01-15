@@ -57,10 +57,11 @@ class InverterNode(udi_interface.Node):
             LOGGER.info(Response2)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
+            LOGGER.info(self.inv_idx)
         #### Sort Inverter Data ####
         if self.system_id is not None:
             df = pd.json_normalize(
-                Response2[0]['micro_inverters'][str(self.inv_idx)])
+                Response2[0]['micro_inverters'][int(self.inv_idx)])
             df = df.fillna(-1)
             df['type'] = None
             df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
