@@ -130,7 +130,10 @@ class Controller(udi_interface.Node):
                     node = EnphaseNode.SiteNode(self.poly, self.address,
                                                 'site'+'_%s' % (idx+1), str(name), str(system_id), self.key, self.user_id)
                     self.poly.addNode(node)
-                    self.Inverters(self)
+        if system_id is not None:
+            self.Inverters(self)
+        else:
+            pass
 
     #### Add Inverters ####
     def Inverters(self, command):
@@ -177,22 +180,23 @@ class Controller(udi_interface.Node):
         df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
         inverters = df[df['type'] == 'inverter'].reset_index(drop=True)
         # inverter string
-        device_list = [inverters]
-        for device in device_list:
-            for idx, row in device.iterrows():
-                inv_id = row['id']
-                name = 'Inverter' + '-%s' % (idx+1)
-                inv_serial = row['serial_number']
-                inv_status = row['status']
-                inv_kWh = row['energy.value']
-                inv_kW = row['power_produced']
-                address = row['type'] + '_%s' % (idx+1)
-                inv_idx = '%s' % (idx)
-                LOGGER.info('\n{inv_id}\n{inv_serial}\n{inv_status}\n{inv_kWh}\n{inv_kW}\n{inv_idx}\n'.format(
-                    inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
-                node = EnphaseInverter.InverterNode(
-                    self.poly, self.address, address, name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx)
-                self.poly.addNode(node)
+        if system_id is not None:
+            device_list = [inverters]
+            for device in device_list:
+                for idx, row in device.iterrows():
+                    inv_id = row['id']
+                    name = 'Inverter' + '-%s' % (idx+1)
+                    inv_serial = row['serial_number']
+                    inv_status = row['status']
+                    inv_kWh = row['energy.value']
+                    inv_kW = row['power_produced']
+                    address = row['type'] + '_%s' % (idx+1)
+                    inv_idx = '%s' % (idx)
+                    LOGGER.info('\n{inv_id}\n{inv_serial}\n{inv_status}\n{inv_kWh}\n{inv_kW}\n{inv_idx}\n'.format(
+                        inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
+                    node = EnphaseInverter.InverterNode(
+                        self.poly, self.address, address, name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx)
+                    self.poly.addNode(node)
 
         #### Get Consumption Meter ####
         if system_id is not None:
@@ -220,7 +224,7 @@ class Controller(udi_interface.Node):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.reportDrivers()
-            self.customerSites(self)
+            self.Inverters(self)
         else:
             LOGGER.debug('longPoll (node)')
 
