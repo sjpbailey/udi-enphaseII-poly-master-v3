@@ -22,7 +22,7 @@ print(jsonResponse)
 # print(response.text.encode('utf8'))
 
 print('\nsystem id\n' + str(jsonResponse['system_id']))
-print('\ncurrent power id\n' + str(jsonResponse['current_power']))
+print('\ncurrent power\n' + str(jsonResponse['current_power']))
 print('\nenergy_today\n' + str(jsonResponse['energy_today']))
 print('\nenergy_lifetime\n' + str(jsonResponse['energy_lifetime']))
 print('\nsummary_date\n' + str(jsonResponse['summary_date']))
