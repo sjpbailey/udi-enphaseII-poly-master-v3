@@ -39,7 +39,7 @@ class Controller(udi_interface.Node):
         self.TypedParameters = Custom(polyglot, 'customtypedparams')
         self.TypedData = Custom(polyglot, 'customtypeddata')
         self.poly.subscribe(self.poly.START, self.start, address)
-        self.poly.subscribe(self.poly.POLL, self.poll)
+        #self.poly.subscribe(self.poly.POLL, self.poll)
         self.poly.subscribe(self.poly.LOGLEVEL, self.handleLevelChange)
         self.poly.subscribe(self.poly.CUSTOMPARAMS, self.parameterHandler)
         self.poly.ready()
@@ -220,14 +220,14 @@ class Controller(udi_interface.Node):
         # Remove all existing notices
         self.Notices.clear()
 
-    def poll(self, polltype):
+    """def poll(self, polltype):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.Inverters(self)
         if 'longpoll' in polltype:
             self.reportDrivers()
         else:
-            LOGGER.debug('longPoll (node)')
+            LOGGER.debug('longPoll (node)')"""
 
     id = 'ctl'
 
