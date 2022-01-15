@@ -225,7 +225,7 @@ class Controller(udi_interface.Node):
             LOGGER.debug('shortPoll (node)')
             # self.reportDrivers()
         if 'longpoll' in polltype:
-            self.customerSites(self)
+            self.Inverters(self)
         else:
             LOGGER.debug('longPoll (node)')
 
@@ -234,7 +234,7 @@ class Controller(udi_interface.Node):
     commands = {
         'QUERY': query,
         'REMOVE_NOTICES_ALL': remove_notices_all,
-        'SITEINFO': customerSites,
+        'SITEINFO': query,
     }
 
     drivers = [
