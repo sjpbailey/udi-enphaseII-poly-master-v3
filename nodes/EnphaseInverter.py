@@ -40,7 +40,7 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.invertInfo(self)
-        time.sleep(15)
+        time.sleep(45)
         self.getpower(self)
         self.http = urllib3.PoolManager()
 
