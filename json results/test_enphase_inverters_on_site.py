@@ -21,7 +21,7 @@ params = (('key', key), ('user_id', user_id))
 r = requests.get(URL_SITE, params=params)
 #LOGGER.info('\n Summary \n' + response)
 Response = json.loads(r.text)  # r.text
-# print(Response)
+print(Response[0]['micro_inverters'][0])
 
 """params = (('key', key), ('user_id', user_id))
 

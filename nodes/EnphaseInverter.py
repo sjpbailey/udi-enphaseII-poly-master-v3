@@ -52,6 +52,7 @@ class InverterNode(udi_interface.Node):
             Response2 = json.loads(r2.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
+        LOGGER.info(Response2)
         #### Sort Inverter Data ####
         df = pd.json_normalize(Response2[0]['micro_inverters'][self.inv_idx])
         df = df.fillna(-1)
