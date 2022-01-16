@@ -51,8 +51,19 @@ class InverterNode(udi_interface.Node):
         self.setDriver('GV5', self.inv_id)  # ID
         LOGGER.info('S/N {}'.format(self.inv_serial))
         self.setDriver('GV3', self.inv_serial)  # Serial Number
-        #### GET Inverter Data ####
+        LOGGER.info('STATUS {}'.format(inv_status))
+        LOGGER.info(self.inv_status)
+        if self.inv_status == 'normal':
+            self.setDriver('GV4', 1)
+        else:
+            self.setDriver('GV4', 0)
+        if self.inv_status is not None:
+            self.setDriver('ST', 1)
+        else:
+            self.setDriver('ST', 0)
+            pass
 
+        #### GET Inverter Data ####
     def getpower(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             self.system_id
@@ -82,23 +93,10 @@ class InverterNode(udi_interface.Node):
                         inv_kWh=inv_kWh, inv_kW=inv_kW, inv_status=inv_status))
                 else:
                     pass
-                LOGGER.info('kW {}'.format(float(self.inv_kW)))  # kW
+                LOGGER.info('kW {}'.format(float(inv_kW)))  # kW
                 self.setDriver('GV1', float(inv_kW))  # kW
                 LOGGER.info('Wh {}'.format(float(inv_kWh)/1000))
                 self.setDriver('GV2', float(inv_kWh)/1000)  # kWh
-                LOGGER.info('S/N {}'.format(self.inv_serial))
-                self.setDriver('GV3', self.inv_serial)  # Serial Number
-                LOGGER.info('STATUS {}'.format(inv_status))
-                LOGGER.info(self.inv_status)
-                if self.inv_status == 'normal':
-                    self.setDriver('GV4', 1)
-                else:
-                    self.setDriver('GV4', 0)
-                if self.inv_status is not None:
-                    self.setDriver('ST', 1)
-                else:
-                    self.setDriver('ST', 0)
-                pass
 
     def poll(self, polltype):
         pass
