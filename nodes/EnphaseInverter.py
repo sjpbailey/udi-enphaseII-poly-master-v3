@@ -51,7 +51,7 @@ class InverterNode(udi_interface.Node):
         self.setDriver('GV5', self.inv_id)  # ID
         LOGGER.info('S/N {}'.format(self.inv_serial))
         self.setDriver('GV3', self.inv_serial)  # Serial Number
-        LOGGER.info('STATUS {}'.format(inv_status))
+        LOGGER.info('STATUS {}'.format(self.inv_status))
         LOGGER.info(self.inv_status)
         if self.inv_status == 'normal':
             self.setDriver('GV4', 1)
