@@ -41,7 +41,7 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.invertInfo(self)
-        time.sleep(75)
+        time.sleep(5)
         self.getpower(self)
         self.http = urllib3.PoolManager()
 
@@ -79,23 +79,25 @@ class InverterNode(udi_interface.Node):
                     inv_kW = row['power_produced']
                     LOGGER.info('\n{inv_status}\n{inv_kWh}\n{inv_kW}\n'.format(
                         inv_kWh=inv_kWh, inv_kW=inv_kW, inv_status=inv_status))
-                    LOGGER.info('kW {}'.format(float(self.inv_kW)))  # kW
-                    self.setDriver('GV1', float(inv_kW))  # kW
-                    LOGGER.info('Wh {}'.format(float(inv_kWh)/1000))
-                    self.setDriver('GV2', float(inv_kWh)/1000)  # kWh
-                    LOGGER.info('S/N {}'.format(self.inv_serial))
-                    self.setDriver('GV3', self.inv_serial)  # Serial Number
-                    LOGGER.info('STATUS {}'.format(inv_status))
-                    LOGGER.info(self.inv_status)
-                    if self.inv_status == 'normal':
-                        self.setDriver('GV4', 1)
-                    else:
-                        self.setDriver('GV4', 0)
-                    if self.inv_status is not None:
-                        self.setDriver('ST', 1)
-                    else:
-                        self.setDriver('ST', 0)
+                else:
                     pass
+                LOGGER.info('kW {}'.format(float(self.inv_kW)))  # kW
+                self.setDriver('GV1', float(inv_kW))  # kW
+                LOGGER.info('Wh {}'.format(float(inv_kWh)/1000))
+                self.setDriver('GV2', float(inv_kWh)/1000)  # kWh
+                LOGGER.info('S/N {}'.format(self.inv_serial))
+                self.setDriver('GV3', self.inv_serial)  # Serial Number
+                LOGGER.info('STATUS {}'.format(inv_status))
+                LOGGER.info(self.inv_status)
+                if self.inv_status == 'normal':
+                    self.setDriver('GV4', 1)
+                else:
+                    self.setDriver('GV4', 0)
+                if self.inv_status is not None:
+                    self.setDriver('ST', 1)
+                else:
+                    self.setDriver('ST', 0)
+                pass
 
     def poll(self, polltype):
         pass
