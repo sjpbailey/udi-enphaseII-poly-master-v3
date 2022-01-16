@@ -14,6 +14,7 @@ import logging
 import pandas as pd
 import numpy as np
 import requests
+from requests.auth import HTTPBasicAuth  # HTTP
 
 from nodes import EnphaseController
 from nodes import EnphaseNode
@@ -40,7 +41,7 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.invertInfo(self)
-        time.sleep(45)
+        time.sleep(75)
         self.getpower(self)
         self.http = urllib3.PoolManager()
 
