@@ -54,6 +54,7 @@ class SiteNode(udi_interface.Node):
             self.setDriver('GV2', float(Response["energy_today"]/1000))
             LOGGER.info(Response["energy_lifetime"])
             self.setDriver('GV3', float(Response["energy_lifetime"]/1000))
+            self.setDriver('GV10', str(Response['modules']))
             LOGGER.info(Response["status"])
             normal1 = Response["status"]
             if normal1 == 'normal':
@@ -117,6 +118,7 @@ class SiteNode(udi_interface.Node):
         {'driver': 'GV7', 'value': 0, 'uom': 33},
         {'driver': 'GV8', 'value': 0, 'uom': 33},
         {'driver': 'GV9', 'value': 0, 'uom': 33},
+        {'driver': 'GV10', 'value': 0, 'uom': 56},
     ]
 
     id = 'site'
