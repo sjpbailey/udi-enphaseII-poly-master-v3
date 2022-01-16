@@ -74,8 +74,6 @@ class InverterNode(udi_interface.Node):
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
-        #### Delay ###
-        time.sleep(10)
         #### Sort Inverter Status ####
         df = pd.json_normalize(
             Response[0]['micro_inverters'][int(self.inv_idx)])
@@ -121,5 +119,5 @@ class InverterNode(udi_interface.Node):
     id = 'inverter'
 
     commands = {
-        'SITEINFO': invertInfo
+        'SITEINFO': getpower
     }
