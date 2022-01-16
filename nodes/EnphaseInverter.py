@@ -65,6 +65,7 @@ class InverterNode(udi_interface.Node):
 
         #### GET Inverter Data ####
     def getpower(self, command):
+        self.inv_dex = int(self.inv_dex)
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             self.system_id
         params = (('key', self.key), ('user_id', self.user_id))
@@ -77,9 +78,9 @@ class InverterNode(udi_interface.Node):
             self.setDriver(
                 'GV1', response[0]['micro_inverters'][self.inv_idx]['power_produced'])  # kW
             LOGGER.info('Wh {}'.format(
-                response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
+                response[0]['micro_inverters'][self.inv_idx]['energy']['value']/1000))
             self.setDriver(
-                'GV2', response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000)  # kWh
+                'GV2', response[0]['micro_inverters'][self.inv_idx]['energy']['value']/1000)  # kWh
 
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
