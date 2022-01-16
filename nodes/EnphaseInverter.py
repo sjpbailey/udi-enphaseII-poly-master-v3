@@ -73,13 +73,13 @@ class InverterNode(udi_interface.Node):
             response = json.loads(r.text)
 
             LOGGER.info('kW {}'.format(
-                response[0]['micro_inverters'][self.inv_idx]['power_produced']))  # kW
+                response[0]['micro_inverters'][int(self.inv_idx)]['power_produced']))  # kW
             self.setDriver(
-                'GV1', response[0]['micro_inverters'][self.inv_idx]['power_produced'])  # kW
+                'GV1', response[0]['micro_inverters'][int(self.inv_idx)]['power_produced'])  # kW
             LOGGER.info('Wh {}'.format(
-                response[0]['micro_inverters'][self.inv_idx]['energy']['value']/1000))
+                response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
             self.setDriver(
-                'GV2', response[0]['micro_inverters'][self.inv_idx]['energy']['value']/1000)  # kWh
+                'GV2', response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000)  # kWh
 
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
