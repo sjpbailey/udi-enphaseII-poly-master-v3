@@ -101,7 +101,7 @@ class SiteNode(udi_interface.Node):
             LOGGER.debug('shortPoll (node)')
             # self.reportDrivers()
             # self.siteHist(self)
-            # time.sleep(2)
+            time.sleep(2)
             self.siteInfo(self)
         else:
             LOGGER.debug('longPoll (node)')
