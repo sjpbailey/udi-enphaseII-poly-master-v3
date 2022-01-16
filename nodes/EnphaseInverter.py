@@ -42,7 +42,7 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.invertInfo(self)
-        time.sleep(130)
+        # time.sleep(130)
         # self.getpower(self)
         #self.http = urllib3.PoolManager()
 
@@ -74,6 +74,8 @@ class InverterNode(udi_interface.Node):
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
+        #### Delay ###
+        time.sleep(10)
         #### Sort Inverter Status ####
         df = pd.json_normalize(
             Response[0]['micro_inverters'][int(self.inv_idx)])
