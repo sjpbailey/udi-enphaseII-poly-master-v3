@@ -70,13 +70,13 @@ class InverterNode(udi_interface.Node):
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r = requests.get(URL_SITE, params=params)
-            Response = json.loads(open(r.text))
+            response = json.loads(open(r.text))
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
         #### Sort Inverter Status ####
         df = pd.json_normalize(
-            Response[0]['micro_inverters'][int(self.inv_idx)])
+            response[0]['micro_inverters'][int(self.inv_idx)])
         df = df.fillna(-1)
         df['type'] = None
         df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
