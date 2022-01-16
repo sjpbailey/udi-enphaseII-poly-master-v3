@@ -23,7 +23,8 @@ LOGGER = udi_interface.LOGGER
 
 
 class InverterNode(udi_interface.Node):
-    def __init__(self, polyglot, primary, address, name, system_id, key, user_id, inv_id, inv_serial, inv_status, inv_kWh, inv_kW, inv_idx, ):
+    def __init__(self, polyglot, primary, address, name, system_id, key, user_id, inv_id, inv_serial, inv_status,  inv_idx, ):
+        #inv_kWh, inv_kW,
         super(InverterNode, self).__init__(polyglot, primary, address, name)
         self.poly = polyglot
         self.lpfx = '%s:%s' % (address, name)
@@ -32,8 +33,8 @@ class InverterNode(udi_interface.Node):
         self.inv_id = inv_id
         self.inv_serial = inv_serial
         self.inv_status = inv_status
-        self.inv_kWh = inv_kWh
-        self.inv_kW = inv_kW
+        #self.inv_kWh = inv_kWh
+        #self.inv_kW = inv_kW
         self.inv_idx = inv_idx
         self.system_id = system_id
         self.key = key
@@ -41,8 +42,8 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.invertInfo(self)
-        time.sleep(5)
-        self.getpower(self)
+        # time.sleep(5)
+        # self.getpower(self)
         self.http = urllib3.PoolManager()
 
     def invertInfo(self, command):
