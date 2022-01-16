@@ -70,7 +70,7 @@ class InverterNode(udi_interface.Node):
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r = requests.get(URL_SITE, params=params)
-            Response = json.loads(r.text)
+            Response = json.loads(open(r.text))
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
@@ -102,7 +102,6 @@ class InverterNode(udi_interface.Node):
         pass
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            time.sleep(2)
             self.getpower(self)
         else:
             LOGGER.debug('longPoll (node)')
