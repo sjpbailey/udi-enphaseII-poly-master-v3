@@ -21,8 +21,8 @@ params = (('key', key), ('user_id', user_id))
 r = requests.get(URL_SITE, params=params)
 #LOGGER.info('\n Summary \n' + response)
 Response = json.loads(r.text)  # r.text
-print(Response[0]['micro_inverters'][0])
-
+print(Response[0]['micro_inverters'][0]['energy']['value'])
+print(Response[0]['micro_inverters'][0]['power_produced'])
 """params = (('key', key), ('user_id', user_id))
 
 response = requests.get(
@@ -31,7 +31,7 @@ response = requests.get(
 jsonData = json.loads(response)"""
 
 print()
-# print(Response[0]['micro_inverters'][inv_idx]['id'])
+# print(Response[0]['micro_inverters'][0]['id'])
 
 
 inv_idx = 21
@@ -88,8 +88,8 @@ for device in device_list:
         print('\n\nStatus\n{inv_status}\nWh\n{inv_kWh}\nW\n{inv_kW}\nIDX\n{inv_idx}\n'.format(
             inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
 
-
-# print(Response)
+print(Response[0]['micro_inverters'][inv_idx]['power_produced'])
+print(Response[0])
 # print(inv_id)
 # print(inv_serial)
 # print(inv_stat)

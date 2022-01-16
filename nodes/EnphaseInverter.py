@@ -72,8 +72,21 @@ class InverterNode(udi_interface.Node):
             r = requests.get(URL_SITE, params=params)
             response = json.loads(r.text)
 
+            LOGGER.info('kW {}'.format(
+                response[0]['micro_inverters'][self.inv_idx]['power_produced']))  # kW
+            self.setDriver(
+                'GV1', response[0]['micro_inverters'][self.inv_idx]['power_produced'])  # kW
+            LOGGER.info('Wh {}'.format(
+                response[0]['micro_inverters'][self.inv_idx]['energy']['value']/1000))
+            self.setDriver(
+                'GV2', response[0]['micro_inverters'][self.inv_idx]['energy']['value']/1000)  # kWh
+
+        except requests.exceptions.RequestException as e:
+            LOGGER.error("Error: " + str(e))
+            LOGGER.info(self.inv_idx)
+
         #### Sort Inverter Status ####
-            df = pd.json_normalize(
+            """"df = pd.json_normalize(
                 response[int(0)]['micro_inverters'][int(self.inv_idx)])
             df = df.fillna(-1)
 
@@ -92,14 +105,7 @@ class InverterNode(udi_interface.Node):
                     LOGGER.info('\n{inv_status}\n{inv_kWh}\n{inv_kW}\n'.format(
                         inv_kWh=inv_kWh, inv_kW=inv_kW, inv_status=inv_status))
                 else:
-                    pass
-            LOGGER.info('kW {}'.format(float(inv_kW)))  # kW
-            self.setDriver('GV1', float(inv_kW))  # kW
-            LOGGER.info('Wh {}'.format(float(inv_kWh)/1000))
-            self.setDriver('GV2', float(inv_kWh)/1000)  # kWh
-        except requests.exceptions.RequestException as e:
-            LOGGER.error("Error: " + str(e))
-            LOGGER.info(self.inv_idx)
+                    pass"""
 
     def poll(self, polltype):
         pass
