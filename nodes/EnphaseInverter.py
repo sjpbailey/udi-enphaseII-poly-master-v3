@@ -35,7 +35,7 @@ class InverterNode(udi_interface.Node):
         self.inv_status = inv_status
         # self.inv_kWh = inv_kWh
         # self.inv_kW = inv_kW
-        self.inv_idx = inv_idx
+        self.inv_idx = int(inv_idx)
         self.system_id = system_id
         self.key = key
         self.user_id = user_id
@@ -73,9 +73,9 @@ class InverterNode(udi_interface.Node):
             response = json.loads(r.text)
 
             LOGGER.info('kW {}'.format(
-                response[0]['micro_inverters'][int(self.inv_idx)]['power_produced']))  # kW
+                response[0]['micro_inverters'][self.inv_idx]['power_produced']))  # kW
             self.setDriver(
-                'GV1', response[0]['micro_inverters'][int(self.inv_idx)]['power_produced'])  # kW
+                'GV1', response[0]['micro_inverters'][self.inv_idx]['power_produced'])  # kW
             LOGGER.info('Wh {}'.format(
                 response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
             self.setDriver(
