@@ -18,6 +18,7 @@
     <sts>
       <st id="ST" editor="bool" />
       <st id="GV4" editor="stat" />
+      <st id="GV10" editor="rawval" />
       <st id="GV1" editor="kw" />
       <st id="GV3" editor="kwh" />
       <st id="GV2" editor="kwh" />
@@ -26,7 +27,6 @@
       <st id="GV7" editor="kwh" />
       <st id="GV8" editor="kwh" />
       <st id="GV9" editor="kwh" />
-      <st id="GV10" editor="rawval" />
     </sts>
     <cmds>
       <sends />
