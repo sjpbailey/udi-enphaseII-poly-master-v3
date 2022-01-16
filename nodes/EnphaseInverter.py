@@ -82,21 +82,21 @@ class InverterNode(udi_interface.Node):
         df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
         inverters = df[df['type'] == 'inverter'].reset_index(drop=True)
         # inverter string
-        if self.system_id is not None:
-            device_list = [inverters]
-            for device in device_list:
-                for idx, row in device.iterrows():
-                    inv_status = row['status']
-                    inv_kWh = row['energy.value']
-                    inv_kW = row['power_produced']
-                    LOGGER.info('\n{inv_status}\n{inv_kWh}\n{inv_kW}\n'.format(
-                        inv_kWh=inv_kWh, inv_kW=inv_kW, inv_status=inv_status))
-                else:
-                    pass
-                LOGGER.info('kW {}'.format(float(inv_kW)))  # kW
-                self.setDriver('GV1', float(inv_kW))  # kW
-                LOGGER.info('Wh {}'.format(float(inv_kWh)/1000))
-                self.setDriver('GV2', float(inv_kWh)/1000)  # kWh
+        # if self.system_id is not None:
+        device_list = [inverters]
+        for device in device_list:
+            for idx, row in device.iterrows():
+                inv_status = row['status']
+                inv_kWh = row['energy.value']
+                inv_kW = row['power_produced']
+                LOGGER.info('\n{inv_status}\n{inv_kWh}\n{inv_kW}\n'.format(
+                    inv_kWh=inv_kWh, inv_kW=inv_kW, inv_status=inv_status))
+            else:
+                pass
+            LOGGER.info('kW {}'.format(float(inv_kW)))  # kW
+            self.setDriver('GV1', float(inv_kW))  # kW
+            LOGGER.info('Wh {}'.format(float(inv_kWh)/1000))
+            self.setDriver('GV2', float(inv_kWh)/1000)  # kWh
 
     def poll(self, polltype):
         pass
