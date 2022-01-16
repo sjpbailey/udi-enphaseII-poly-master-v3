@@ -20,9 +20,12 @@ params = (('key', key), ('user_id', user_id))
 
 r = requests.get(URL_SITE, params=params)
 #LOGGER.info('\n Summary \n' + response)
+print(r)
+
 Response = json.loads(r.text)  # r.text
-print(Response[0]['micro_inverters'][0]['energy']['value'])
-print(Response[0]['micro_inverters'][0]['power_produced'])
+if (r.status_code == 200):
+    print(Response[0]['micro_inverters'][0]['energy']['value'])
+    print(Response[0]['micro_inverters'][0]['power_produced'])
 """params = (('key', key), ('user_id', user_id))
 
 response = requests.get(
