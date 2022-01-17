@@ -41,7 +41,6 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.invertInfo(self)
-        sleep(randint(10, 60))
         asyncio.run(self.getpower(self))
         #self.http = urllib3.PoolManager()
 
@@ -71,6 +70,7 @@ class InverterNode(udi_interface.Node):
             r = requests.get(URL_SITE, params=params)
             response = json.loads(r.text)
             if (r.status_code == 200):
+                sleep(randint(10, 60))
                 LOGGER.info('Energy values are currently present')
                 LOGGER.info('kW {}'.format(
                     response[0]['micro_inverters'][int(self.inv_idx)]['power_produced']))
