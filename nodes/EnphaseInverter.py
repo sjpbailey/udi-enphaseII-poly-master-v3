@@ -129,5 +129,5 @@ class InverterNode(udi_interface.Node):
     id = 'inverter'
 
     commands = {
-        'SITEINFO': start
+        'SITEINFO': asyncio.run(getpower())
     }
