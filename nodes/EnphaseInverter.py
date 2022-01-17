@@ -107,5 +107,5 @@ class InverterNode(udi_interface.Node):
     id = 'inverter'
 
     commands = {
-        'SITEINFO': poll
+        'SITEINFO': start
     }
