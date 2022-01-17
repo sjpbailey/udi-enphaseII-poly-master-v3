@@ -39,7 +39,6 @@ class Controller(udi_interface.Node):
         self.TypedParameters = Custom(polyglot, 'customtypedparams')
         self.TypedData = Custom(polyglot, 'customtypeddata')
         self.poly.subscribe(self.poly.START, self.start, address)
-        #self.poly.subscribe(self.poly.POLL, self.poll)
         self.poly.subscribe(self.poly.LOGLEVEL, self.handleLevelChange)
         self.poly.subscribe(self.poly.CUSTOMPARAMS, self.parameterHandler)
         self.poly.ready()
@@ -197,7 +196,6 @@ class Controller(udi_interface.Node):
                     node = EnphaseInverter.InverterNode(
                         self.poly, self.address, address, name, str(system_id), self.key, self.user_id, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status,  inv_idx=inv_idx)
                     self.poly.addNode(node)
-                    # , str(system_id), self.key, self.user_id, inv_kWh=inv_kWh, inv_kW=inv_kW,
 
         #### Get Consumption Meter ####
         if system_id is not None:
@@ -220,15 +218,6 @@ class Controller(udi_interface.Node):
         LOGGER.info('remove_notices_all: notices={}'.format(self.Notices))
         # Remove all existing notices
         self.Notices.clear()
-
-    """def poll(self, polltype):
-        if 'shortPoll' in polltype:
-            LOGGER.debug('shortPoll (node)')
-            self.Inverters(self)
-        if 'longpoll' in polltype:
-            self.reportDrivers()
-        else:
-            LOGGER.debug('longPoll (node)')"""
 
     id = 'ctl'
 
