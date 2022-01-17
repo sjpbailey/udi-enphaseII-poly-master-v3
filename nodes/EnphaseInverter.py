@@ -76,9 +76,6 @@ class InverterNode(udi_interface.Node):
                     response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
                 self.setDriver('GV2', response[0]['micro_inverters'][int(
                     self.inv_idx)]['energy']['value']/1000)
-            if (r.status_code != 200):
-                time.sleep(5)
-                self.getpower(self)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
