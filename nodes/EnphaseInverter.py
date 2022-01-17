@@ -71,7 +71,6 @@ class InverterNode(udi_interface.Node):
             LOGGER.info(r)
             response = json.loads(r.text)
             if (r.status_code == 200):
-                sleep(randint(10, 60))
                 LOGGER.info('Energy values are currently present')
                 LOGGER.info('kW {}'.format(
                     response[0]['micro_inverters'][int(self.inv_idx)]['power_produced']))
@@ -83,7 +82,9 @@ class InverterNode(udi_interface.Node):
                 await asyncio.sleep(1)
                 self.setDriver('GV2', response[0]['micro_inverters'][int(
                     self.inv_idx)]['energy']['value']/1000)
-            if (r.status_code != 200):
+            if (r.status_code == 409):
+                sleep(randint(10, 60))
+                asyncio.run(self.getpower(self))
                 LOGGER.info('Energy values not currently present')
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
