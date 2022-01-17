@@ -68,13 +68,13 @@ class InverterNode(udi_interface.Node):
             r = requests.get(URL_SITE, params=params)
             response = json.loads(r.text)
             if (r.status_code == 200):
-                LOGGER.info('kW {}'.format(
+                await LOGGER.info('kW {}'.format(
                     response[0]['micro_inverters'][int(self.inv_idx)]['power_produced']))
-                self.setDriver('GV1', response[0]['micro_inverters'][int(
+                await self.setDriver('GV1', response[0]['micro_inverters'][int(
                     self.inv_idx)]['power_produced'])
-                LOGGER.info('Wh {}'.format(
+                await LOGGER.info('Wh {}'.format(
                     response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
-                self.setDriver('GV2', response[0]['micro_inverters'][int(
+                await self.setDriver('GV2', response[0]['micro_inverters'][int(
                     self.inv_idx)]['energy']['value']/1000)
             if (r.status_code != 200):
                 LOGGER.info('Energy values not currently present')
