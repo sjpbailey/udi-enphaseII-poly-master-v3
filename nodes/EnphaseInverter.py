@@ -76,6 +76,8 @@ class InverterNode(udi_interface.Node):
                     response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
                 self.setDriver('GV2', response[0]['micro_inverters'][int(
                     self.inv_idx)]['energy']['value']/1000)
+            if (r.status_code != 200):
+                LOGGER.info('Energy values not currently present')
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
@@ -85,7 +87,8 @@ class InverterNode(udi_interface.Node):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
             self.query(self)
-            self.reportDrivers()
+            asyncio.run(self.getpower(self))
+            # self.reportDrivers()
         else:
             LOGGER.debug('longPoll (node)')
 
