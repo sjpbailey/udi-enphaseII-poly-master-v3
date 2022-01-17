@@ -54,9 +54,12 @@ print('\n Consumption Meter Life Time\n' + response9)
 
 # {"message":"The given system does not contain any active and enabled consumption meter"}
 
-response8 = requests.get(
+
+URL_SITE = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_stats', params=params).text
-print('\n Consumption Meter Stats \n' + response8)
+r = requests.get(URL_SITE, params=params)
+
+print('\n Consumption Meter Stats \n' + r)
 
 # if response8 is None:
 #    print('False')
