@@ -9,7 +9,7 @@ import udi_interface
 from datetime import datetime, timedelta
 import time
 import json
-import urllib3
+#import urllib3
 import logging
 import pandas as pd
 import numpy as np
@@ -23,8 +23,7 @@ LOGGER = udi_interface.LOGGER
 
 
 class InverterNode(udi_interface.Node):
-    def __init__(self, polyglot, primary, address, name, system_id, key, user_id, inv_id, inv_serial, inv_status,  inv_idx, ):
-        # inv_kWh, inv_kW,
+    def __init__(self, polyglot, primary, address, name, system_id, key, user_id, inv_id, inv_serial, inv_status, inv_idx, ):
         super(InverterNode, self).__init__(polyglot, primary, address, name)
         self.poly = polyglot
         self.lpfx = '%s:%s' % (address, name)
@@ -33,8 +32,6 @@ class InverterNode(udi_interface.Node):
         self.inv_id = inv_id
         self.inv_serial = inv_serial
         self.inv_status = inv_status
-        # self.inv_kWh = inv_kWh
-        # self.inv_kW = inv_kW
         self.inv_idx = int(inv_idx)
         self.system_id = system_id
         self.key = key
@@ -43,7 +40,7 @@ class InverterNode(udi_interface.Node):
     def start(self):
         self.invertInfo(self)
         asyncio.run(self.getpower(self))
-        self.http = urllib3.PoolManager()
+        #self.http = urllib3.PoolManager()
 
     def invertInfo(self, command):
         LOGGER.info('ID {}'.format(self.inv_id))
@@ -82,7 +79,6 @@ class InverterNode(udi_interface.Node):
             if (r.status_code != 200):
                 time.sleep(5)
                 self.getpower(self)
-
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
@@ -91,9 +87,12 @@ class InverterNode(udi_interface.Node):
         pass
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            asyncio.run(self.getpower(self))
+            self.reportDrivers()
         else:
             LOGGER.debug('longPoll (node)')
+
+    def query(self, command):
+        asyncio.run(self.getpower(self))
 
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},
@@ -107,5 +106,5 @@ class InverterNode(udi_interface.Node):
     id = 'inverter'
 
     commands = {
-        'SITEINFO': start
+        'SITEINFO': query
     }
