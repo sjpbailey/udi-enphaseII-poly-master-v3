@@ -42,8 +42,8 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.invertInfo(self)
-        asyncio.run(self.getpower(self))
-        # self.http = urllib3.PoolManager()
+        self.getpower(self)
+        self.http = urllib3.PoolManager()
 
     def invertInfo(self, command):
         LOGGER.info('ID {}'.format(self.inv_id))
@@ -62,8 +62,11 @@ class InverterNode(udi_interface.Node):
             self.setDriver('ST', 0)
             pass
 
+    def getpower(self, command):
+        asyncio.run(self.getpowerNow(self))
+
         #### GET Inverter Data ####
-    async def getpower(self, command):
+    async def getpowerNow(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             self.system_id
         params = (('key', self.key), ('user_id', self.user_id))
