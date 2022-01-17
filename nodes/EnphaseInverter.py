@@ -68,11 +68,11 @@ class InverterNode(udi_interface.Node):
             r = requests.get(URL_SITE, params=params)
             response = json.loads(r.text)
             if (r.status_code == 200):
-                await LOGGER.info('kW {}'.format(
+                LOGGER.info('kW {}'.format(
                     response[0]['micro_inverters'][int(self.inv_idx)]['power_produced']))
                 await self.setDriver('GV1', response[0]['micro_inverters'][int(
                     self.inv_idx)]['power_produced'])
-                await LOGGER.info('Wh {}'.format(
+                LOGGER.info('Wh {}'.format(
                     response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
                 await self.setDriver('GV2', response[0]['micro_inverters'][int(
                     self.inv_idx)]['energy']['value']/1000)
