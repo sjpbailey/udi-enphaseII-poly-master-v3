@@ -204,15 +204,15 @@ class Controller(udi_interface.Node):
             params = (('key', self.key), ('user_id', self.user_id))
             try:
                 r = requests.get(URL_SITE, params=params)
-                #LOGGER.info('\n Summary \n' + r)
+                LOGGER.info(r)
             except requests.exceptions.RequestException as e:
                 LOGGER.error("Error: " + str(e))
 
-            if r is None:
-                LOGGER.info("Meter not found None")
+            if r != 200:
+                LOGGER.info("Meter not found 'None'")
 
-            if r is not None:
-                LOGGER.info("Meter found not None ")
+            if r == 200:
+                LOGGER.info("Meter found 'Not None'")
 
     def remove_notices_all(self, command):
         LOGGER.info('remove_notices_all: notices={}'.format(self.Notices))
