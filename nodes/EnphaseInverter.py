@@ -68,6 +68,7 @@ class InverterNode(udi_interface.Node):
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r = requests.get(URL_SITE, params=params)
+            LOGGER.info(r)
             response = json.loads(r.text)
             if (r.status_code == 200):
                 sleep(randint(10, 60))
