@@ -4,6 +4,8 @@ Copyright (C) 2021 Steven Bailey
 
 MIT License
 """
+from random import randint
+from time import sleep
 import asyncio
 import udi_interface
 from datetime import datetime, timedelta
@@ -39,6 +41,7 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.invertInfo(self)
+        sleep(randint(10, 60))
         asyncio.run(self.getpower(self))
         #self.http = urllib3.PoolManager()
 
@@ -71,12 +74,12 @@ class InverterNode(udi_interface.Node):
                 LOGGER.info('Energy values are currently present')
                 LOGGER.info('kW {}'.format(
                     response[0]['micro_inverters'][int(self.inv_idx)]['power_produced']))
-                await asyncio.sleep(3)
+                await asyncio.sleep(1)
                 self.setDriver('GV1', response[0]['micro_inverters'][int(
                     self.inv_idx)]['power_produced'])
                 LOGGER.info('Wh {}'.format(
                     response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
-                await asyncio.sleep(3)
+                await asyncio.sleep(1)
                 self.setDriver('GV2', response[0]['micro_inverters'][int(
                     self.inv_idx)]['energy']['value']/1000)
             if (r.status_code != 200):
