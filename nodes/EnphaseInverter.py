@@ -87,28 +87,6 @@ class InverterNode(udi_interface.Node):
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
 
-        #### Sort Inverter Status ####
-            """"df = pd.json_normalize(
-                response[int(0)]['micro_inverters'][int(self.inv_idx)])
-            df = df.fillna(-1)
-
-            df['type'] = None
-            df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
-
-            inverters = df[df['type'] == 'inverter'].reset_index(drop=True)
-            # inverter string
-            # if self.system_id is not None:
-            device_list = [inverters]
-            for device in device_list:
-                for idx, row in device.iterrows():
-                    inv_status = row['status']
-                    inv_kWh = row['energy.value']
-                    inv_kW = row['power_produced']
-                    LOGGER.info('\n{inv_status}\n{inv_kWh}\n{inv_kW}\n'.format(
-                        inv_kWh=inv_kWh, inv_kW=inv_kW, inv_status=inv_status))
-                else:
-                    pass"""
-
     def poll(self, polltype):
         pass
         if 'shortPoll' in polltype:
