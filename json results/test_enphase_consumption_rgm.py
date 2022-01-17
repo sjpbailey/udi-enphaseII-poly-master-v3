@@ -41,9 +41,9 @@ end_date = end_date
 
 
 # gives 401 is no consumption meter or {"reason":"404","message":["Resource not found"]}
-response9 = requests.get(
+"""response9 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text
-print('\n Consumption Meter Life Time\n' + response9)
+print('\n Consumption Meter Life Time\n' + response9)"""
 # print(response9)
 # if response9[0] == 401:
 #    print('False')
@@ -55,11 +55,11 @@ print('\n Consumption Meter Life Time\n' + response9)
 # {"message":"The given system does not contain any active and enabled consumption meter"}
 
 
-URL_SITE = requests.get(
+"""URL_SITE = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_stats', params=params).text
 r = requests.get(URL_SITE, params=params)
 
-print('\n Consumption Meter Stats \n' + r)
+print('\n Consumption Meter Stats \n' + r)"""
 
 # if response8 is None:
 #    print('False')

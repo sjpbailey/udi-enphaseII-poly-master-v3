@@ -207,12 +207,10 @@ class Controller(udi_interface.Node):
                 LOGGER.info(r)
             except requests.exceptions.RequestException as e:
                 LOGGER.error("Error: " + str(e))
-
             if r != 200:
-                LOGGER.info("Meter not found 'None'")
-
+                LOGGER.info("Consumption Meter not found 'None'")
             if r == 200:
-                LOGGER.info("Meter found 'Not None'")
+                LOGGER.info("Consumption Meter found 'Not None'")
 
     def remove_notices_all(self, command):
         LOGGER.info('remove_notices_all: notices={}'.format(self.Notices))
