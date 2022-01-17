@@ -106,7 +106,7 @@ class Controller(udi_interface.Node):
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r = requests.get(URL_SITE, params=params)
-            #LOGGER.info('\n Summary \n' + r)
+            # LOGGER.info(r)
             Response = json.loads(r.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
@@ -141,7 +141,7 @@ class Controller(udi_interface.Node):
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r1 = requests.get(URL_SITE, params=params)
-            #LOGGER.info('\n Summary \n' + r1)
+            # LOGGER.info(r1)
             Response1 = json.loads(r1.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
@@ -168,7 +168,7 @@ class Controller(udi_interface.Node):
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r2 = requests.get(URL_SITE, params=params)
-            #LOGGER.info('\n Summary \n' + r2)
+            # LOGGER.info(r2)
             Response2 = json.loads(r2.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
