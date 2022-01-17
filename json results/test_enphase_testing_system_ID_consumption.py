@@ -30,7 +30,8 @@ print(response)"""
 # jsonData = open('snapshot.json',)  # json.loads(jsonData)
 f = open('//Users/stevenbailey/UDI Development PG3/Nodeservers/udi-enphaseII-poly-master-v3/json results/lifetime-consumption-report.json',)
 jsonResponse = json.load(f)
-print(jsonResponse['consumption'][5])
+print(jsonResponse)
+# print(jsonResponse['consumption'][5])
 if jsonResponse['consumption'][0] is not None:
     print('meter up')
 
