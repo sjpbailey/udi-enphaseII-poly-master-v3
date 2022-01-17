@@ -4,7 +4,7 @@ Copyright (C) 2021 Steven Bailey
 
 MIT License
 """
-
+import asyncio
 import udi_interface
 from datetime import datetime, timedelta
 import time
@@ -42,8 +42,7 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.invertInfo(self)
-        time.sleep(75)
-        self.getpower(self)
+        asyncio.run(self.getpower())
         # self.http = urllib3.PoolManager()
 
     def invertInfo(self, command):
@@ -64,7 +63,7 @@ class InverterNode(udi_interface.Node):
             pass
 
         #### GET Inverter Data ####
-    def getpower(self, command):
+    async def getpower(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             self.system_id
         params = (('key', self.key), ('user_id', self.user_id))
