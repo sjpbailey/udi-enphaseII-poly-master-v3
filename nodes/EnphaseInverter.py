@@ -42,7 +42,7 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.invertInfo(self)
-        asyncio.run(self.getpowerNow(self))
+        asyncio.run(self.getpower(self))
         self.http = urllib3.PoolManager()
 
     def invertInfo(self, command):
@@ -113,7 +113,7 @@ class InverterNode(udi_interface.Node):
         pass
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            asyncio.run(self.getpowerNow(self))
+            asyncio.run(self.getpower(self))
         else:
             LOGGER.debug('longPoll (node)')
 
