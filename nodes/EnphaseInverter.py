@@ -11,7 +11,7 @@ import udi_interface
 from datetime import datetime, timedelta
 import time
 import json
-#import urllib3
+import urllib3
 import logging
 import pandas as pd
 import numpy as np
@@ -42,7 +42,7 @@ class InverterNode(udi_interface.Node):
     def start(self):
         self.invertInfo(self)
         asyncio.run(self.getpower(self))
-        #self.http = urllib3.PoolManager()
+        self.http = urllib3.PoolManager()
 
     def invertInfo(self, command):
         LOGGER.info('ID {}'.format(self.inv_id))
@@ -62,7 +62,7 @@ class InverterNode(udi_interface.Node):
             pass
 
         #### GET Inverter Data ####
-    async def getpower(self, command):
+    def getpower(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             self.system_id
         params = (('key', self.key), ('user_id', self.user_id))
@@ -82,8 +82,8 @@ class InverterNode(udi_interface.Node):
                     self.inv_idx)]['energy']['value']/1000)
             if (r.status_code == 409):
                 LOGGER.info('Energy values are not currently present')
-                await asyncio.sleep(1)
-                return
+                time.sleep(1)
+                self.getpower(self)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
@@ -94,7 +94,7 @@ class InverterNode(udi_interface.Node):
             LOGGER.debug('shortPoll (node)')
             self.query(self)
             sleep(randint(10, 60))
-            asyncio.run(self.getpower(self))
+            self.getpower(self)
             # self.reportDrivers()
         else:
             LOGGER.debug('longPoll (node)')
