@@ -70,7 +70,7 @@ class InverterNode(udi_interface.Node):
         try:
             r = requests.get(URL_SITE, params=params)
             LOGGER.info(r.text)
-            response = json.loads(r.readjson)
+            response = json.loads(r.text)
             if (r.status_code == 200):
                 LOGGER.info('Energy values are currently present')
                 LOGGER.info('kW {}'.format(
