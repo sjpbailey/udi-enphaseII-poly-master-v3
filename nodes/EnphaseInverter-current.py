@@ -40,9 +40,9 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.http = urllib3.PoolManager()
-        self.getpower(self)
+        self.invertInfo(self)
 
-    """def invertInfo(self, command):
+    def invertInfo(self, command):
         LOGGER.info('ID {}'.format(self.inv_id))
         self.setDriver('GV5', self.inv_id)  # ID
         LOGGER.info('S/N {}'.format(self.inv_serial))
@@ -59,9 +59,9 @@ class InverterNode(udi_interface.Node):
             self.getpower(self)
         else:
             self.setDriver('ST', 0)
-            pass"""
+            pass
 
-    #### GET Inverter Data ####
+        #### GET Inverter Data ####
     def getpower(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             self.system_id
@@ -71,23 +71,6 @@ class InverterNode(udi_interface.Node):
             LOGGER.info(r.text)
             response = json.loads(r.text)
             if (r.status_code == 200):
-                LOGGER.info('ID {}'.format(self.inv_id))
-                self.setDriver('GV5', self.inv_id)  # ID
-                LOGGER.info('S/N {}'.format(self.inv_serial))
-                self.setDriver('GV3', self.inv_serial)  # Serial Number
-                LOGGER.info('STATUS {}'.format(self.inv_status))
-                LOGGER.info(self.inv_status)
-            if self.inv_status == 'normal':
-                self.setDriver('GV4', 1)
-            else:
-                self.setDriver('GV4', 0)
-            if self.inv_status is not None:
-                self.setDriver('ST', 1)
-                time.sleep(10)
-                self.getpower(self)
-            else:
-                self.setDriver('ST', 0)
-                pass
                 LOGGER.info('Energy values are currently present')
                 LOGGER.info('kW {}'.format(
                     response[0]['micro_inverters'][int(self.inv_idx)]['power_produced']))
