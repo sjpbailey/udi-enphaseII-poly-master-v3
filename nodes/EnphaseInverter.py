@@ -76,15 +76,6 @@ class InverterNode(udi_interface.Node):
                 LOGGER.info('S/N {}'.format(self.inv_serial))
                 self.setDriver('GV3', self.inv_serial)  # Serial Number
                 LOGGER.info('STATUS {}'.format(self.inv_status))
-                LOGGER.info(self.inv_status)
-            if self.inv_status == 'normal':
-                self.setDriver('GV4', 1)
-            else:
-                self.setDriver('GV4', 0)
-            if self.inv_status is not None:
-                self.setDriver('ST', 1)
-            else:
-                self.setDriver('ST', 0)
                 LOGGER.info('Energy values are currently present')
                 LOGGER.info('kW {}'.format(
                     response[0]['micro_inverters'][int(self.inv_idx)]['power_produced']))
@@ -94,9 +85,17 @@ class InverterNode(udi_interface.Node):
                     response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
                 self.setDriver('GV2', response[0]['micro_inverters'][int(
                     self.inv_idx)]['energy']['value']/1000)
+                LOGGER.info(self.inv_status)
+            if self.inv_status == 'normal':
+                self.setDriver('GV4', 1)
+            else:
+                self.setDriver('GV4', 0)
+            if self.inv_status is not None:
+                self.setDriver('ST', 1)
+            else:
+                self.setDriver('ST', 0)
             if (r.status_code != 200):
                 LOGGER.info('Energy values are not currently present')
-                pass
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
