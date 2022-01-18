@@ -40,9 +40,10 @@ class InverterNode(udi_interface.Node):
         self.user_id = user_id
 
     def start(self):
-        self.invertInfo(self)
-        asyncio.run(self.getpower(self))
         self.http = urllib3.PoolManager()
+        self.invertInfo(self)
+        # asyncio.run(self.getpower(self))
+        self.getpower(self)
 
     def invertInfo(self, command):
         LOGGER.info('ID {}'.format(self.inv_id))
@@ -100,7 +101,8 @@ class InverterNode(udi_interface.Node):
             LOGGER.debug('longPoll (node)')
 
     def query(self, command):
-        asyncio.run(self.getpower(self))
+        # asyncio.run(self.getpower(self))
+        self.getpower(self)
 
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},
