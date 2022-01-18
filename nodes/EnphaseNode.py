@@ -77,7 +77,7 @@ class SiteNode(udi_interface.Node):
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r = requests.get(URL_SITE, params=params)
-            #print('\n Summary \n' + response)
+            #print('\n Summary \n' + r)
             Response = json.loads(r.text)
             ystdy = len(Response['production'])-1
             dybfo = len(Response['production'])-2
@@ -100,7 +100,6 @@ class SiteNode(udi_interface.Node):
     def poll(self, polltype):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            time.sleep(1)
             self.siteInfo(self)
         else:
             LOGGER.debug('longPoll (node)')
