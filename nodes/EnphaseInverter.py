@@ -83,11 +83,8 @@ class InverterNode(udi_interface.Node):
                 self.setDriver('GV4', 0)
             if self.inv_status is not None:
                 self.setDriver('ST', 1)
-                time.sleep(10)
-                self.getpower(self)
             else:
                 self.setDriver('ST', 0)
-                pass
                 LOGGER.info('Energy values are currently present')
                 LOGGER.info('kW {}'.format(
                     response[0]['micro_inverters'][int(self.inv_idx)]['power_produced']))
