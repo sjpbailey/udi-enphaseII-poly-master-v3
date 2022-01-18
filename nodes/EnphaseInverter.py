@@ -41,8 +41,6 @@ class InverterNode(udi_interface.Node):
     def start(self):
         self.http = urllib3.PoolManager()
         self.invertInfo(self)
-        time.sleep(90)
-        self.getpower(self)
 
     def invertInfo(self, command):
         LOGGER.info('ID {}'.format(self.inv_id))
@@ -57,6 +55,8 @@ class InverterNode(udi_interface.Node):
             self.setDriver('GV4', 0)
         if self.inv_status is not None:
             self.setDriver('ST', 1)
+            time.sleep(10)
+            self.getpower(self)
         else:
             self.setDriver('ST', 0)
             pass
@@ -82,8 +82,7 @@ class InverterNode(udi_interface.Node):
                     self.inv_idx)]['energy']['value']/1000)
             if (r.status_code != 200):
                 LOGGER.info('Energy values are not currently present')
-                sleep(randint(10, 60))
-                self.getpower(self)
+                pass
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
@@ -92,9 +91,7 @@ class InverterNode(udi_interface.Node):
         pass
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            time.sleep(65)
             self.query(self)
-            # self.reportDrivers()
         else:
             LOGGER.debug('longPoll (node)')
 
