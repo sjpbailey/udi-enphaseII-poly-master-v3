@@ -6,7 +6,6 @@ MIT License
 """
 from random import randint
 from time import sleep
-import asyncio
 import udi_interface
 from datetime import datetime, timedelta
 import time
@@ -42,8 +41,7 @@ class InverterNode(udi_interface.Node):
     def start(self):
         self.http = urllib3.PoolManager()
         self.invertInfo(self)
-        # asyncio.run(self.getpower(self))
-        sleep(randint(75, 90))
+        time.sleep(90)
         self.getpower(self)
 
     def invertInfo(self, command):
@@ -94,14 +92,13 @@ class InverterNode(udi_interface.Node):
         pass
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            time.sleep(50)
+            time.sleep(65)
             self.query(self)
             # self.reportDrivers()
         else:
             LOGGER.debug('longPoll (node)')
 
     def query(self, command):
-        # asyncio.run(self.getpower(self))
         self.getpower(self)
 
     drivers = [
