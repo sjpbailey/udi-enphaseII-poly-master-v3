@@ -43,6 +43,7 @@ class InverterNode(udi_interface.Node):
         self.http = urllib3.PoolManager()
         self.invertInfo(self)
         # asyncio.run(self.getpower(self))
+        sleep(randint(10, 60))
         self.getpower(self)
 
     def invertInfo(self, command):
