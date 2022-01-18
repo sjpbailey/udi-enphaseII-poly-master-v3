@@ -83,7 +83,7 @@ class InverterNode(udi_interface.Node):
                     self.inv_idx)]['energy']['value']/1000)
             if (r.status_code == 409):
                 LOGGER.info('Energy values are not currently present')
-                time.sleep(1)
+                sleep(randint(10, 60))
                 self.getpower(self)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
