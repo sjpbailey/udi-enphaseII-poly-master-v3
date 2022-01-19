@@ -30,9 +30,9 @@ class InverterNode(udi_interface.Node):
         self.lpfx = '%s:%s' % (address, name)
         self.poly.subscribe(self.poly.START, self.start, address)
         self.poly.subscribe(self.poly.POLL, self.poll)
-        #self.inv_id = inv_id
-        #self.inv_serial = inv_serial
-        #self.inv_status = inv_status
+        # self.inv_id = inv_id
+        # self.inv_serial = inv_serial
+        # self.inv_status = inv_status
         self.system_id = system_id
         self.key = key
         self.user_id = user_id
@@ -72,25 +72,25 @@ class InverterNode(udi_interface.Node):
             response = json.loads(r.text)
             if (r.status_code == 200):
                 LOGGER.info('Energy values are currently present')
-                LOGGER.info('kW {}'.format(
-                    response[0]['micro_inverters'][int(self.inv_idx)]['power_produced'])/100)
+                # LOGGER.info('kW {}'.format(
+                #    response[0]['micro_inverters'][int(self.inv_idx)]['power_produced'])/100)
                 self.setDriver('GV1', response[0]['micro_inverters'][int(
                     self.inv_idx)]['power_produced'])
-                LOGGER.info('Wh {}'.format(
-                    response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
+                # LOGGER.info('Wh {}'.format(
+                #    response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
                 self.setDriver('GV2', response[0]['micro_inverters'][int(
-                    self.inv_idx)]['energy']['value']/1000)
-                LOGGER.info('ID {}'.format(
-                    (response[0]['micro_inverters'][int(self.inv_idx)]['id'])))
+                #    self.inv_idx)]['energy']['value']/1000)
+                # LOGGER.info('ID {}'.format(
+                #    (response[0]['micro_inverters'][int(self.inv_idx)]['id'])))
                 self.setDriver(
                     'GV5', response[0]['micro_inverters'][int(self.inv_idx)]['id'])
-                LOGGER.info(
-                    'S/N {}'.format((response[0]['micro_inverters'][int(self.inv_idx)]['serial_number'])))
+                # LOGGER.info(
+                #    'S/N {}'.format((response[0]['micro_inverters'][int(self.inv_idx)]['serial_number'])))
                 self.setDriver('GV3', response[0]['micro_inverters'][int(
                     self.inv_idx)]['serial_number'])
-                LOGGER.info('STATUS {}'.format(
-                    (response[0]['micro_inverters'][int(self.inv_idx)]['status'])))
-                LOGGER.info(self.inv_status)
+                # LOGGER.info('STATUS {}'.format(
+                #    (response[0]['micro_inverters'][int(self.inv_idx)]['status'])))
+                # LOGGER.info(self.inv_status)
                 if response[0]['micro_inverters'][int(self.inv_idx)]['status'] == 'normal':
                     self.setDriver('GV4', 1)
                 else:
@@ -120,7 +120,7 @@ class InverterNode(udi_interface.Node):
     def query(self, command):
         self.getpower(self)
 
-    drivers = [
+    drivers=[
         {'driver': 'ST', 'value': 0, 'uom': 2},
         {'driver': 'GV1', 'value': 0, 'uom': 119},
         {'driver': 'GV2', 'value': 0, 'uom': 33},
@@ -129,8 +129,8 @@ class InverterNode(udi_interface.Node):
         {'driver': 'GV5', 'value': 0, 'uom': 56},
     ]
 
-    id = 'inverter'
+    id='inverter'
 
-    commands = {
+    commands={
         'SITEINFO': query
     }
