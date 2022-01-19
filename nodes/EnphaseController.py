@@ -75,7 +75,7 @@ class Controller(udi_interface.Node):
     def set_module_logs(self, level):
         logging.getLogger('urllib3').setLevel(level)
 
-    def check_params(self, system_id):
+    def check_params(self):
         self.Notices.clear()
         default_key = "YourApiKey"
         default_user_id = "YourUser_id"
@@ -130,62 +130,15 @@ class Controller(udi_interface.Node):
                     node = EnphaseNode.SiteNode(self.poly, self.address,
                                                 'site'+'_%s' % (idx+1), str(name), str(system_id), self.key, self.user_id)
                     self.poly.addNode(node)
-        """if system_id is not None:
-            URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
-                system_id
-            params = (('key', self.key), ('user_id', self.user_id))
-            try:
-                r2 = requests.get(URL_SITE, params=params)
-                # LOGGER.info(r2)
-                Response2 = json.loads(r2.text)
-            except requests.exceptions.RequestException as e:
-                LOGGER.error("Error: " + str(e))
-            #### Sort Inverter Data ####
-            df = pd.json_normalize(Response2[0]['micro_inverters'])
-            df = df.fillna(-1)
-            df['type'] = None
-            df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
-            inverters = df[df['type'] == 'inverter'].reset_index(drop=True)
-            # inverter string
-            if system_id is not None:
-                device_list = [inverters]
-                for device in device_list:
-                    for idx, row in device.iterrows():
-                        inv_id = row['id']
-                        name = 'Inverter' + '-%s' % (idx+1)
-                        inv_serial = row['serial_number']
-                        inv_status = row['status']
-                        inv_kWh = row['energy.value']
-                        inv_kW = row['power_produced']
-                        address = row['type'] + '_%s' % (idx+1)
-                        inv_idx = '%s' % (idx)
-                        LOGGER.info('\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
-                            inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
-                        node = EnphaseInverter.InverterNode(
-                            self.poly, self.address, address, name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW,  inv_idx=inv_idx)
-                        self.poly.addNode(node)
-
-        #### Get Consumption Meter ####
         if system_id is not None:
-            URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
-                self.system_id + '/consumption_stats'
-            params = (('key', self.key), ('user_id', self.user_id))
-            try:
-                r = requests.get(URL_SITE, params=params)
-                LOGGER.info(r)
-            except requests.exceptions.RequestException as e:
-                LOGGER.error("Error: " + str(e))
-            if r != 200:
-                LOGGER.info("Consumption Meter not found 'None'")
-            if r == 200:
-                LOGGER.info("Consumption Meter found 'Not None'")"""
+            self.Inverters(self)
+        else:
+            pass
 
     #### Add Inverters ####
-    # def Inverters(self, command):
-        # GET system_id ####
-    #    system_id = self.system_id
-
-        """URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
+    def Inverters(self, command):
+        #### GET system_id ####
+        URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r1 = requests.get(URL_SITE, params=params)
@@ -209,17 +162,63 @@ class Controller(udi_interface.Node):
                                 .format(name=name, system_id=system_id))
                     LOGGER.info('SystemId {}' .format(system_id))
         if system_id is not None:
-            system_id = str(system_id)"""
+            system_id = str(system_id)
         #### GET Inverter Data ####
+        URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
+            system_id
+        params = (('key', self.key), ('user_id', self.user_id))
+        try:
+            r2 = requests.get(URL_SITE, params=params)
+            # LOGGER.info(r2)
+            Response2 = json.loads(r2.text)
+        except requests.exceptions.RequestException as e:
+            LOGGER.error("Error: " + str(e))
+        #### Sort Inverter Data ####
+        df = pd.json_normalize(Response2[0]['micro_inverters'])
+        df = df.fillna(-1)
+        df['type'] = None
+        df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
+        inverters = df[df['type'] == 'inverter'].reset_index(drop=True)
+        # inverter string
+        if system_id is not None:
+            device_list = [inverters]
+            for device in device_list:
+                for idx, row in device.iterrows():
+                    inv_id = row['id']
+                    name = 'Inverter' + '-%s' % (idx+1)
+                    inv_serial = row['serial_number']
+                    inv_status = row['status']
+                    inv_kWh = row['energy.value']
+                    inv_kW = row['power_produced']
+                    address = row['type'] + '_%s' % (idx+1)
+                    inv_idx = '%s' % (idx)
+                    LOGGER.info('\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
+                        inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
+                    node = EnphaseInverter.InverterNode(
+                        self.poly, self.address, address, name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW,  inv_idx=inv_idx)
+                    self.poly.addNode(node)
+                    #self, polyglot, primary, address, name, inv_id, inv_serial, inv_status, inv_kWh, inv_kW, inv_idx
+                    # str(system_id), self.key, self.user_id,
 
-        # self.poly.reportDrivers(node)
-        #self, polyglot, primary, address, name, inv_id, inv_serial, inv_status, inv_kWh, inv_kW, inv_idx
-        # str(system_id), self.key, self.user_id,
+        #### Get Consumption Meter ####
+        if system_id is not None:
+            URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
+                system_id + '/consumption_stats'
+            params = (('key', self.key), ('user_id', self.user_id))
+            try:
+                r = requests.get(URL_SITE, params=params)
+                LOGGER.info(r)
+            except requests.exceptions.RequestException as e:
+                LOGGER.error("Error: " + str(e))
+            if r != 200:
+                LOGGER.info("Consumption Meter not found 'None'")
+            if r == 200:
+                LOGGER.info("Consumption Meter found 'Not None'")
 
     def poll(self, polltype):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            self.reportDrivers()
+            self.Inverters(self)
         else:
             LOGGER.debug('longPoll (node)')
 
@@ -233,7 +232,7 @@ class Controller(udi_interface.Node):
     commands = {
         'QUERY': query,
         'REMOVE_NOTICES_ALL': remove_notices_all,
-        'SITEINFO': customerSites,
+        'SITEINFO': Inverters,
     }
 
     drivers = [
