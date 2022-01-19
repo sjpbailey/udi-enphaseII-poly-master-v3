@@ -21,7 +21,8 @@ LOGGER = udi_interface.LOGGER
 
 class InverterNode(udi_interface.Node):
     def __init__(self, polyglot, primary, address, name, inv_id, inv_serial, inv_status, inv_kWh, inv_kW, inv_idx):
-        super(InverterNode, self).__init__(polyglot, primary, address, name)
+        super(InverterNode, self).__init__(polyglot, primary, address,
+                                           name, inv_id, inv_serial, inv_status, inv_kWh, inv_kW, inv_idx)
         self.poly = polyglot
         self.lpfx = '%s:%s' % (address, name)
         self.poly.subscribe(self.poly.START, self.start, address)
