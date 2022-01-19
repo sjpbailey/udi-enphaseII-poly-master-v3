@@ -13,7 +13,7 @@ user_id = '4d6a55794e7a55354d413d3d0a'
 system_id = '2527105'
 # 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
 system_id
-inv_idx = 0
+inv_idx = 8
 URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
     system_id + 'summary'
 params = (('key', key), ('user_id', user_id))
@@ -39,7 +39,7 @@ print()
 
 # Response[0]['micro_inverters'][inv_idx]
 # Use Line above to check each inverter one at a tiime
-df = pd.json_normalize(Response[0]['micro_inverters'])  # [inv_idx]
+df = pd.json_normalize(Response[0]['micro_inverters'][inv_idx])  # [inv_idx]
 df = df.fillna(-1)
 
 df['type'] = None
