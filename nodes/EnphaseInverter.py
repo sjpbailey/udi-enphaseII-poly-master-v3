@@ -67,7 +67,9 @@ class InverterNode(udi_interface.Node):
             self.system_id
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-            r = requests.get(URL_SITE, params=params)
+            r = json.loads(requests.get(
+                URL_SITE, params=params).decode("utf-8"))
+            #r = requests.get(URL_SITE, params=params)
             LOGGER.info(r.text)
             response = json.loads(r.text)
             if (r.status_code == 200):
