@@ -75,10 +75,11 @@ class Controller(udi_interface.Node):
     def set_module_logs(self, level):
         logging.getLogger('urllib3').setLevel(level)
 
-    def check_params(self):
+    def check_params(self, system_id):
         self.Notices.clear()
         default_key = "YourApiKey"
         default_user_id = "YourUser_id"
+        system_id = system_id
 
         self.key = self.Parameters.key
         if self.key is None:
@@ -138,7 +139,7 @@ class Controller(udi_interface.Node):
     #### Add Inverters ####
     def Inverters(self, command):
         # GET system_id ####
-        self.system_id = self.system_id
+        system_id = self.system_id
 
         """URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
         params = (('key', self.key), ('user_id', self.user_id))
