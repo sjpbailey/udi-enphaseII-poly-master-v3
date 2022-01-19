@@ -130,7 +130,7 @@ class Controller(udi_interface.Node):
                     node = EnphaseNode.SiteNode(self.poly, self.address,
                                                 'site'+'_%s' % (idx+1), str(name), str(system_id), self.key, self.user_id)
                     self.poly.addNode(node)
-        if system_id is not None:
+        """if system_id is not None:
             URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
                 system_id
             params = (('key', self.key), ('user_id', self.user_id))
@@ -178,7 +178,7 @@ class Controller(udi_interface.Node):
             if r != 200:
                 LOGGER.info("Consumption Meter not found 'None'")
             if r == 200:
-                LOGGER.info("Consumption Meter found 'Not None'")
+                LOGGER.info("Consumption Meter found 'Not None'")"""
 
     #### Add Inverters ####
     # def Inverters(self, command):
