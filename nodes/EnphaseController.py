@@ -39,6 +39,7 @@ class Controller(udi_interface.Node):
         self.TypedParameters = Custom(polyglot, 'customtypedparams')
         self.TypedData = Custom(polyglot, 'customtypeddata')
         self.poly.subscribe(self.poly.START, self.start, address)
+        self.poly.subscribe(self.poly.POLL, self.poll)
         self.poly.subscribe(self.poly.LOGLEVEL, self.handleLevelChange)
         self.poly.subscribe(self.poly.CUSTOMPARAMS, self.parameterHandler)
         self.poly.ready()
@@ -214,6 +215,13 @@ class Controller(udi_interface.Node):
             if r == 200:
                 LOGGER.info("Consumption Meter found 'Not None'")
 
+    def poll(self, polltype):
+        if 'shortPoll' in polltype:
+            LOGGER.debug('shortPoll (node)')
+            self.Inverters(self)
+        else:
+            LOGGER.debug('longPoll (node)')
+
     def remove_notices_all(self, command):
         LOGGER.info('remove_notices_all: notices={}'.format(self.Notices))
         # Remove all existing notices
@@ -224,7 +232,7 @@ class Controller(udi_interface.Node):
     commands = {
         'QUERY': query,
         'REMOVE_NOTICES_ALL': remove_notices_all,
-        'SITEINFO': query,
+        'SITEINFO': Inverters,
     }
 
     drivers = [
