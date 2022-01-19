@@ -71,7 +71,7 @@ class InverterNode(udi_interface.Node):
             LOGGER.info(r.text)
             response = json.loads(r.text)
             if (r.status_code == 200):
-                LOGGER.info('Energy values are currently present')
+                #LOGGER.info('Energy values are currently present')
                 # LOGGER.info('kW {}'.format(
                 #    response[0]['micro_inverters'][int(self.inv_idx)]['power_produced'])/100)
                 self.setDriver('GV1', response[0]['micro_inverters'][int(
@@ -79,7 +79,7 @@ class InverterNode(udi_interface.Node):
                 # LOGGER.info('Wh {}'.format(
                 #    response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
                 self.setDriver('GV2', response[0]['micro_inverters'][int(
-                #    self.inv_idx)]['energy']['value']/1000)
+                    self.inv_idx)]['energy']['value']/1000)
                 # LOGGER.info('ID {}'.format(
                 #    (response[0]['micro_inverters'][int(self.inv_idx)]['id'])))
                 self.setDriver(
@@ -91,20 +91,6 @@ class InverterNode(udi_interface.Node):
                 # LOGGER.info('STATUS {}'.format(
                 #    (response[0]['micro_inverters'][int(self.inv_idx)]['status'])))
                 # LOGGER.info(self.inv_status)
-                if response[0]['micro_inverters'][int(self.inv_idx)]['status'] == 'normal':
-                    self.setDriver('GV4', 1)
-                else:
-                    self.setDriver('GV4', 0)
-                if response[0]['micro_inverters'][int(self.inv_idx)]['status'] is not None:
-                    self.setDriver('ST', 1)
-                    # time.sleep(10)
-                    # self.getpower(self)
-                else:
-                    self.setDriver('ST', 0)
-                    pass
-                if (r.status_code != 200):
-                    LOGGER.info('Energy values are not currently present')
-                    pass
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
             LOGGER.info(self.inv_idx)
@@ -120,7 +106,7 @@ class InverterNode(udi_interface.Node):
     def query(self, command):
         self.getpower(self)
 
-    drivers=[
+    drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},
         {'driver': 'GV1', 'value': 0, 'uom': 119},
         {'driver': 'GV2', 'value': 0, 'uom': 33},
@@ -129,8 +115,8 @@ class InverterNode(udi_interface.Node):
         {'driver': 'GV5', 'value': 0, 'uom': 56},
     ]
 
-    id='inverter'
+    id = 'inverter'
 
-    commands={
+    commands = {
         'SITEINFO': query
     }
