@@ -39,7 +39,7 @@ print()
 
 # Response[0]['micro_inverters'][inv_idx]
 # Use Line above to check each inverter one at a tiime
-"""df = pd.json_normalize(Response[0]['micro_inverters'][inv_idx])
+df = pd.json_normalize(Response[0]['micro_inverters'])  # [inv_idx]
 df = df.fillna(-1)
 
 df['type'] = None
@@ -65,9 +65,10 @@ for device in device_list:
 #inv_serial = Response[0]['micro_inverters'][inv_idx]['serial_number']
 #inv_stat = Response[0]['micro_inverters'][inv_idx]['status']
 #inv_kWh = Response[0]['micro_inverters'][inv_idx]['energy']['value']
-#inv_kW = Response[0]['micro_inverters'][inv_idx]['power_produced']"""
+#inv_kW = Response[0]['micro_inverters'][inv_idx]['power_produced']
 
-df = pd.json_normalize(Response[0]['micro_inverters'][inv_idx])
+
+"""df = pd.json_normalize(Response[0]['micro_inverters'])  # [inv_idx]
 df = df.fillna(-1)
 
 df['type'] = None
@@ -90,7 +91,7 @@ for device in device_list:
         print('\n\nStatus\n{inv_status}\nWh\n{inv_kWh}\nW\n{inv_kW}\nIDX\n{inv_idx}\n'.format(
             inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
 
-print(Response[int(idx)]['micro_inverters'][int(inv_idx)]['power_produced'])
+print(Response[int(idx)]['micro_inverters'][int(inv_idx)]['power_produced'])"""
 # print(Response[0])
 # print(inv_id)
 # print(inv_serial)
