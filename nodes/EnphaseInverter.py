@@ -67,10 +67,37 @@ class InverterNode(udi_interface.Node):
             self.system_id
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-            r = requests.get(URL_SITE, params=params)
-            LOGGER.info(r.text)
-            response = json.loads(r.text)
-            if (r.status_code == 200):
+            r2 = requests.get(URL_SITE, params=params)
+            # LOGGER.info(r2)
+            Response2 = json.loads(r2.text)
+        except requests.exceptions.RequestException as e:
+            LOGGER.error("Error: " + str(e))
+        #### Sort Inverter Data ####
+        df = pd.json_normalize(Response2[0]['micro_inverters'])
+        df = df.fillna(-1)
+        df['type'] = None
+        df['type'] = np.where(df['energy.value'],
+                              'inverter', df['type'][self.inv_idx])
+        inverters = df[df['type'] == 'inverter'].reset_index(drop=True)
+        # inverter string
+        if self.system_id is not None:
+            device_list = [inverters]
+            for device in device_list:
+                for idx, row in device.iterrows():
+                    inv_id = row['id']
+                    name = 'Inverter' + '-%s' % (idx+1)
+                    inv_serial = row['serial_number']
+                    inv_status = row['status']
+                    inv_kWh = row['energy.value']
+                    inv_kW = row['power_produced']
+                    address = row['type'] + '_%s' % (idx+1)
+                    inv_idx = '%s' % (idx)
+                    LOGGER.info('\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
+                        inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
+                    LOGGER.info('inv_kw')
+                    self.setDriver('GV1', 'inv_kw')
+
+            """if (r.status_code == 200):
                 #LOGGER.info('Energy values are currently present')
                 # LOGGER.info('kW {}'.format(
                 #    response[0]['micro_inverters'][int(self.inv_idx)]['power_produced'])/100)
@@ -93,7 +120,7 @@ class InverterNode(udi_interface.Node):
                 # LOGGER.info(self.inv_status)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
-            LOGGER.info(self.inv_idx)
+            LOGGER.info(self.inv_idx)"""
 
     def poll(self, polltype):
         pass
