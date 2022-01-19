@@ -40,7 +40,7 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.http = urllib3.PoolManager()
-        time.sleep(65)
+        time.sleep(35)
         self.getpower(self)
 
     """def invertInfo(self, command):
@@ -68,10 +68,10 @@ class InverterNode(udi_interface.Node):
             self.system_id
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-            r = requests.get(URL_SITE, params=params).decode("utf-8")
-            #r = requests.get(URL_SITE, params=params)
+            #r = requests.get(URL_SITE, params=params).decode("utf-8")
+            r = requests.get(URL_SITE, params=params)
             LOGGER.info(r.text)
-            response = json.loads(r.text)
+            response = json.loads(r.text).decode("utf-8")
             if (r.status_code == 200):
                 LOGGER.info('ID {}'.format(self.inv_id))
                 self.setDriver('GV5', self.inv_id)  # ID
