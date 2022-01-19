@@ -40,7 +40,7 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.http = urllib3.PoolManager()
-        self.invertInfo(self)
+        self.getpower(self)
 
     """def invertInfo(self, command):
         LOGGER.info('ID {}'.format(self.inv_id))
