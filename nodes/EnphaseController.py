@@ -79,7 +79,6 @@ class Controller(udi_interface.Node):
         self.Notices.clear()
         default_key = "YourApiKey"
         default_user_id = "YourUser_id"
-        system_id = system_id
 
         self.key = self.Parameters.key
         if self.key is None:
