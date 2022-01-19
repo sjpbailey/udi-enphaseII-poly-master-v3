@@ -63,6 +63,7 @@ class InverterNode(udi_interface.Node):
 
     #### GET Inverter Data ####
     def getpower(self, command):
+        self.inv_idx = int(self.inv_idx)
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             self.system_id
         params = (('key', self.key), ('user_id', self.user_id))
@@ -94,8 +95,8 @@ class InverterNode(udi_interface.Node):
                     inv_idx = '%s' % (idx)
                     LOGGER.info('\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
                         inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
-                    LOGGER.info('inv_kw')
-                    self.setDriver('GV1', 'inv_kw')
+                    LOGGER.info(inv_kW)
+                    self.setDriver('GV1', inv_kW)
 
             """if (r.status_code == 200):
                 #LOGGER.info('Energy values are currently present')
