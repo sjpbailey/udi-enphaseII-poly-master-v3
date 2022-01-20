@@ -40,7 +40,6 @@ class InverterNode(udi_interface.Node):
         self.http = urllib3.PoolManager()
         time.sleep(15)
         sleeptime = random.uniform(60, 240)
-        #LOGGER.info("sleeping for:", sleeptime, "seconds")
         sleep(sleeptime)
         LOGGER.info("sleeping is over")
         self.getpower(self)
@@ -85,7 +84,7 @@ class InverterNode(udi_interface.Node):
                 LOGGER.info(inv_kW)
                 if inv_kW > 1:
                     self.setDriver('GV1', inv_kW)
-                if inv_kW < 1:
+                if inv_kW <= 1:
                     self.setDriver('GV1', 0)
                 else:
                     pass
