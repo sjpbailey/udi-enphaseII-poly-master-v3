@@ -72,13 +72,41 @@ class InverterNode(udi_interface.Node):
             r2 = requests.get(URL_SITE, params=params)
             # LOGGER.info(r2)
             Response2 = json.loads(r2.text)
-            if r2.status_code == 200:
-                self.setDriver('ST', 1)
+            if (r2.status_code == 200):
+                LOGGER.info('Energy values are currently present')
             else:
-                self.setDriver('ST', 0)
+                LOGGER.info('Energy values are Not currently present')
+                LOGGER.info('kW {}'.format(
+                    Response2[0]['micro_inverters'][int(self.inv_idx)]['power_produced'])/100)
+                self.setDriver('GV1', Response2[0]['micro_inverters'][int(
+                    self.inv_idx)]['power_produced'])
+                # LOGGER.info('Wh {}'.format(
+                #    response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
+                self.setDriver('GV2', Response2[0]['micro_inverters'][int(
+                    self.inv_idx)]['energy']['value']/1000)
+                # LOGGER.info('ID {}'.format(
+                #    (response[0]['micro_inverters'][int(self.inv_idx)]['id'])))
+                self.setDriver(
+                    'GV5', Response2[0]['micro_inverters'][int(self.inv_idx)]['id'])
+                # LOGGER.info(
+                #    'S/N {}'.format((response[0]['micro_inverters'][int(self.inv_idx)]['serial_number'])))
+                self.setDriver('GV3', Response2[0]['micro_inverters'][int(
+                    self.inv_idx)]['serial_number'])
+                # LOGGER.info('STATUS {}'.format(
+                #    (response[0]['micro_inverters'][int(self.inv_idx)]['status'])))
+                # LOGGER.info(self.inv_status)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
-        #### Sort Inverter Data ####
+            LOGGER.info(self.inv_idx)
+
+            # if r2.status_code == 200:
+
+            #    self.setDriver('ST', 1)
+            # else:
+            #    self.setDriver('ST', 0)
+        # except requests.exceptions.RequestException as e:
+        #    LOGGER.error("Error: " + str(e))
+        """#### Sort Inverter Data ####
         df = pd.json_normalize(Response2[0]['micro_inverters'][self.inv_idx])
         df = df.fillna(-1)
         df['type'] = None
@@ -111,32 +139,7 @@ class InverterNode(udi_interface.Node):
                 if normal1 == 'normal':
                     self.setDriver('GV4', 1)
                 else:
-                    self.setDriver('GV4', 0)
-
-            """if (r.status_code == 200):
-                #LOGGER.info('Energy values are currently present')
-                # LOGGER.info('kW {}'.format(
-                #    response[0]['micro_inverters'][int(self.inv_idx)]['power_produced'])/100)
-                self.setDriver('GV1', response[0]['micro_inverters'][int(
-                    self.inv_idx)]['power_produced'])
-                # LOGGER.info('Wh {}'.format(
-                #    response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
-                self.setDriver('GV2', response[0]['micro_inverters'][int(
-                    self.inv_idx)]['energy']['value']/1000)
-                # LOGGER.info('ID {}'.format(
-                #    (response[0]['micro_inverters'][int(self.inv_idx)]['id'])))
-                self.setDriver(
-                    'GV5', response[0]['micro_inverters'][int(self.inv_idx)]['id'])
-                # LOGGER.info(
-                #    'S/N {}'.format((response[0]['micro_inverters'][int(self.inv_idx)]['serial_number'])))
-                self.setDriver('GV3', response[0]['micro_inverters'][int(
-                    self.inv_idx)]['serial_number'])
-                # LOGGER.info('STATUS {}'.format(
-                #    (response[0]['micro_inverters'][int(self.inv_idx)]['status'])))
-                # LOGGER.info(self.inv_status)
-        except requests.exceptions.RequestException as e:
-            LOGGER.error("Error: " + str(e))
-            LOGGER.info(self.inv_idx)"""
+                    self.setDriver('GV4', 0)"""
 
     def poll(self, polltype):
         pass
