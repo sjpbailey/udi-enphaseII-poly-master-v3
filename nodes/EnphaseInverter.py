@@ -42,7 +42,7 @@ class InverterNode(udi_interface.Node):
     def start(self):
         self.http = urllib3.PoolManager()
         time.sleep(15)
-        sleeptime = random.uniform(60, 120)
+        sleeptime = random.uniform(60, 240)
         #LOGGER.info("sleeping for:", sleeptime, "seconds")
         sleep(sleeptime)
         LOGGER.info("sleeping is over")
@@ -104,7 +104,9 @@ class InverterNode(udi_interface.Node):
         pass
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            self.start(self)
+            sleeptime = random.uniform(60, 240)
+            sleep(sleeptime)
+            self.getpower(self)
             # self.reportDrivers()
         else:
             LOGGER.debug('longPoll (node)')
