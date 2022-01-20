@@ -25,6 +25,7 @@ ISY = udi_interface.ISY
 # IF you want a different log format than the current default
 LOG_HANDLER.set_log_format(
     '%(asctime)s %(threadName)-10s %(name)-18s %(levelname)-8s %(module)s:%(funcName)s: %(message)s')
+# TODO
 
 
 class Controller(udi_interface.Node):
@@ -110,6 +111,14 @@ class Controller(udi_interface.Node):
             Response = json.loads(r.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
+        if r.status_code == 409:
+            LOGGER.infor('You have EXCEEDED Your Monthly Hit Rate')
+            time.sleep(66000)
+            self.stop(self)
+        else:
+            # Add unix time for a poly restart "LOGER.info(datetime.utcfromtimestamp(1643673600).strftime('%c'))"
+            ##{'reason': '409', 'message': ['Usage limit exceeded for plan Watt'], 'period': 'month', 'period_start': 1640995200, 'period_end': 1643673600, 'limit': 10000}
+            pass
 
         if self.key != self.default_key:
             df = pd.json_normalize(Response['systems'])
@@ -145,6 +154,13 @@ class Controller(udi_interface.Node):
             Response1 = json.loads(r1.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
+        if r1.status_code == 409:
+            LOGGER.infor('You have EXCEEDED Your Monthly Hit Rate')
+            time.sleep(66000)
+            self.stop(self)
+        else:
+            pass
+
         if self.key != self.default_key:
             df = pd.json_normalize(Response1['systems'])
             df = df.fillna(-1)

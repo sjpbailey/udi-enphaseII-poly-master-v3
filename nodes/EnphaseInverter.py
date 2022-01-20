@@ -60,8 +60,8 @@ class InverterNode(udi_interface.Node):
                 self.setDriver('ST', 0)
             if r2.status_code == 409:
                 LOGGER.infor('You have EXCEEDED Your Monthly Hit Rate')
-                time.sleep(1)
-                self.stop(self)
+            else:
+                pass
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
         #### Sort Inverter Data ####

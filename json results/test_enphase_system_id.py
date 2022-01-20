@@ -1,3 +1,4 @@
+from datetime import datetime
 import requests
 import json
 from datetime import datetime, timedelta
@@ -6,6 +7,7 @@ import numpy as np
 from numpy import random
 from time import sleep
 
+print(datetime.utcfromtimestamp(1643673600).strftime('%c'))
 sleeptime = random.uniform(2, 4)
 print("sleeping for:", sleeptime, "seconds")
 sleep(sleeptime)
@@ -14,7 +16,8 @@ print("sleeping is over")
 # System ID:2527105
 # url auth? 1409622241421
 
-key = '33443540a4c162ed92df1c878e87867b'
+
+"""key = '33443540a4c162ed92df1c878e87867b'
 user_id = '4d6a55794e7a55354d413d3d0a'
 
 params = (('key', key), ('user_id', user_id))
@@ -32,7 +35,7 @@ print(systemResponse)
 #print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 #print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 #print('\n System Status \n', systemResponse["systems"][0]["status"])
-#print('\n System Country \n', systemResponse["systems"][0]["country"])
+#print('\n System Country \n', systemResponse["systems"][0]["country"])"""
 """hellohere = systemResponse["systems"][0]
 # print(hellohere)
 #### Iter Response ####
