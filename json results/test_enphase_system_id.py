@@ -7,7 +7,24 @@ import numpy as np
 from numpy import random
 from time import sleep
 
+
+key = '33443540a4c162ed92df1c878e87867b'
+user_id = '4d6a55794e7a55354d413d3d0a'
+
+params = (('key', key), ('user_id', user_id))
+#('key', '33443540a4c162ed92df1c878e87867b'),  # 4d6a55794e7a55354d413d3d0a #
+# ('user_id', '4d6a55794e7a55354d413d3d0a'),  # 4d6a55794e7a55354d413d3d0a
+# )
+
 print(datetime.utcfromtimestamp(1643673600).strftime('%c'))
+response = requests.get(
+    'https://api.enphaseenergy.com/api/v2/systems',  params=params).text  # for loop for solar array
+#print('\n Inverters \n' + jsonData)
+jsonData = json.loads(response)
+#systemResponse = json.loads(response)
+print(jsonData)
+#print('\n System ID \n', jsonData["period_end"])
+print(datetime.utcfromtimestamp(jsonData["period_end"]).strftime('%c'))
 sleeptime = random.uniform(2, 4)
 print("sleeping for:", sleeptime, "seconds")
 sleep(sleeptime)
@@ -17,15 +34,7 @@ print("sleeping is over")
 # url auth? 1409622241421
 
 
-"""key = '33443540a4c162ed92df1c878e87867b'
-user_id = '4d6a55794e7a55354d413d3d0a'
-
-params = (('key', key), ('user_id', user_id))
-#('key', '33443540a4c162ed92df1c878e87867b'),  # 4d6a55794e7a55354d413d3d0a #
-# ('user_id', '4d6a55794e7a55354d413d3d0a'),  # 4d6a55794e7a55354d413d3d0a
-# )
-
-#### System Status Site ID ####
+"""#### System Status Site ID ####
 response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems',  params=params).text  # for loop for solar array
 #print('\n Inverters \n' + jsonData)
