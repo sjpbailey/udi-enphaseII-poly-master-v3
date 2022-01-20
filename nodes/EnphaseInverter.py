@@ -141,7 +141,7 @@ class InverterNode(udi_interface.Node):
         pass
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            self.getpower(self)
+            self.reportDrivers()
         else:
             LOGGER.debug('longPoll (node)')
 
