@@ -31,9 +31,6 @@ class InverterNode(udi_interface.Node):
         self.lpfx = '%s:%s' % (address, name)
         self.poly.subscribe(self.poly.START, self.start, address)
         self.poly.subscribe(self.poly.POLL, self.poll)
-        # self.inv_id = inv_id
-        # self.inv_serial = inv_serial
-        # self.inv_status = inv_status
         self.system_id = system_id
         self.key = key
         self.user_id = user_id
@@ -83,10 +80,15 @@ class InverterNode(udi_interface.Node):
                 inv_kW = row['power_produced']
                 #address = row['type'] + '_%s' % (idx+1)
                 inv_idx = '%s' % (idx)
-                LOGGER.info('\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
-                    inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
+                LOGGER.info('\Nodes\n\name\n{name}\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
+                    name=name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
                 LOGGER.info(inv_kW)
-                self.setDriver('GV1', inv_kW)
+                if inv_kW > 1:
+                    self.setDriver('GV1', inv_kW)
+                if inv_kW < 1:
+                    self.setDriver('GV1', 0)
+                else:
+                    pass
                 LOGGER.info(inv_kWh)
                 self.setDriver('GV2', inv_kWh)
                 LOGGER.info(inv_serial)
