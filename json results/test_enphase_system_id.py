@@ -3,6 +3,13 @@ import json
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
+from numpy import random
+from time import sleep
+
+sleeptime = random.uniform(2, 4)
+print("sleeping for:", sleeptime, "seconds")
+sleep(sleeptime)
+print("sleeping is over")
 
 # System ID:2527105
 # url auth? 1409622241421

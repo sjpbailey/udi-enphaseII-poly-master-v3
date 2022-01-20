@@ -14,7 +14,6 @@ import urllib3
 import logging
 import pandas as pd
 import numpy as np
-from numpy import random
 import requests
 from requests.auth import HTTPBasicAuth  # HTTP
 
@@ -41,13 +40,48 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.http = urllib3.PoolManager()
-        sleeptime = random.uniform(6, 9)
-        LOGGER.info("sleeping for:", sleeptime, "seconds")
-        sleep(sleeptime)
-        LOGGER.info("sleeping is over")
+        time.sleep(20)
         self.getpower(self)
 
+    #### GET Inverter Data ####
     def getpower(self, command):
+        self.inv_idx = int(self.inv_idx)
+        inv_site = int(0)
+        URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
+            self.system_id
+        params = (('key', self.key), ('user_id', self.user_id))
+        try:
+            r2 = requests.get(URL_SITE, params=params)
+            # LOGGER.info(r2)
+            Response2 = json.loads(r2.text)
+            if (r2.status_code == 200):
+                LOGGER.info('Energy values are currently present')
+            else:
+                LOGGER.info('Energy values are Not currently present')
+                LOGGER.info('kW {}'.format(
+                    Response2[inv_site]['micro_inverters'][int(self.inv_idx)]['power_produced'])/100)
+                self.setDriver('GV1', Response2[inv_site]['micro_inverters'][int(
+                    self.inv_idx)]['power_produced'])
+                # LOGGER.info('Wh {}'.format(
+                #    response[0]['micro_inverters'][int(self.inv_idx)]['energy']['value']/1000))
+                self.setDriver('GV2', Response2[inv_site]['micro_inverters'][int(
+                    self.inv_idx)]['energy']['value']/1000)
+                # LOGGER.info('ID {}'.format(
+                #    (response[0]['micro_inverters'][int(self.inv_idx)]['id'])))
+                self.setDriver(
+                    'GV5', Response2[inv_site]['micro_inverters'][int(self.inv_idx)]['id'])
+                # LOGGER.info(
+                #    'S/N {}'.format((response[0]['micro_inverters'][int(self.inv_idx)]['serial_number'])))
+                self.setDriver('GV3', Response2[inv_site]['micro_inverters'][int(
+                    self.inv_idx)]['serial_number'])
+                # LOGGER.info('STATUS {}'.format(
+                #    (response[0]['micro_inverters'][int(self.inv_idx)]['status'])))
+                # LOGGER.info(self.inv_status)
+        except requests.exceptions.RequestException as e:
+            LOGGER.error("Error: " + str(e))
+            LOGGER.info(self.inv_idx)
+
+    """def getpower(self, command):
         self.inv_idx = int(self.inv_idx)
         inv_site = int(0)
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
@@ -97,7 +131,7 @@ class InverterNode(udi_interface.Node):
                 if normal1 == 'normal':
                     self.setDriver('GV4', 1)
                 else:
-                    self.setDriver('GV4', 0)
+                    self.setDriver('GV4', 0)"""
 
     def poll(self, polltype):
         pass
