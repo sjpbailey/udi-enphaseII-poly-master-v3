@@ -62,7 +62,7 @@ class InverterNode(udi_interface.Node):
             self.setDriver('ST', 0)
             pass"""
 
-    #### GET Inverter Data ####
+    """#### GET Inverter Data ####
     def getpower(self, command):
         self.inv_idx = int(self.inv_idx)
         inv_site = int(0)
@@ -98,17 +98,27 @@ class InverterNode(udi_interface.Node):
                 # LOGGER.info(self.inv_status)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
-            LOGGER.info(self.inv_idx)
+            LOGGER.info(self.inv_idx)"""
 
-            """# if r2.status_code == 200:
-
-            #    self.setDriver('ST', 1)
-            # else:
-            #    self.setDriver('ST', 0)
-        # except requests.exceptions.RequestException as e:
-        #    LOGGER.error("Error: " + str(e))
+    def getpower(self, command):
+        self.inv_idx = int(self.inv_idx)
+        inv_site = int(0)
+        URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
+            self.system_id
+        params = (('key', self.key), ('user_id', self.user_id))
+        try:
+            r2 = requests.get(URL_SITE, params=params)
+            # LOGGER.info(r2)
+            Response2 = json.loads(r2.text)
+            if r2.status_code == 200:
+                self.setDriver('ST', 1)
+            else:
+                self.setDriver('ST', 0)
+        except requests.exceptions.RequestException as e:
+            LOGGER.error("Error: " + str(e))
         #### Sort Inverter Data ####
-        df = pd.json_normalize(Response2[inv_site]['micro_inverters'][self.inv_idx])
+        df = pd.json_normalize(
+            Response2[int(inv_site)]['micro_inverters'][self.inv_idx])
         df = df.fillna(-1)
         df['type'] = None
         df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
@@ -140,7 +150,7 @@ class InverterNode(udi_interface.Node):
                 if normal1 == 'normal':
                     self.setDriver('GV4', 1)
                 else:
-                    self.setDriver('GV4', 0)"""
+                    self.setDriver('GV4', 0)
 
     def poll(self, polltype):
         pass
