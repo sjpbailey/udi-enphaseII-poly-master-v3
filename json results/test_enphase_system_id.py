@@ -28,12 +28,12 @@ response = requests.get(
 #print('\n Inverters \n' + jsonData)
 jsonData = json.loads(response)
 systemResponse = json.loads(response)
-# print(systemResponse["systems"][0]["status"])
+print(systemResponse)
 #print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 #print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 #print('\n System Status \n', systemResponse["systems"][0]["status"])
 #print('\n System Country \n', systemResponse["systems"][0]["country"])
-hellohere = systemResponse["systems"][0]
+"""hellohere = systemResponse["systems"][0]
 # print(hellohere)
 #### Iter Response ####
 df = pd.json_normalize(jsonData['systems'])
@@ -53,7 +53,7 @@ for device in device_list:
         status = row['status']
         timezone = row['timezone']
         print('\nSystem ID\n{id_new}\n\nSystem Name\n{system_name}\n\nType\n{system_public_name}\n''\nstatus ID\n{status}\n'.format(
-            id_new=id_new, system_name=system_name, system_public_name=system_public_name, status=status))
+            id_new=id_new, system_name=system_name, system_public_name=system_public_name, status=status))"""
 
 """print()
 # print(df['id'])
