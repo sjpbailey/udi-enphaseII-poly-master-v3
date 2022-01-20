@@ -82,9 +82,9 @@ class InverterNode(udi_interface.Node):
                 inv_kWh = row['energy.value']
                 inv_kW = row['power_produced']
                 #address = row['type'] + '_%s' % (idx+1)
-                #inv_idx = '%s' % (idx)
-                # LOGGER.info('\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
-                #    inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
+                inv_idx = '%s' % (idx)
+                LOGGER.info('\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
+                    inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
                 LOGGER.info(inv_kW)
                 self.setDriver('GV1', inv_kW)
                 LOGGER.info(inv_kWh)
@@ -106,6 +106,7 @@ class InverterNode(udi_interface.Node):
             LOGGER.debug('shortPoll (node)')
             sleeptime = random.uniform(60, 240)
             sleep(sleeptime)
+            LOGGER.info("sleeping is over")
             self.getpower(self)
             # self.reportDrivers()
         else:

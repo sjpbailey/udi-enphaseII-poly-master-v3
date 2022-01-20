@@ -39,7 +39,6 @@ class Controller(udi_interface.Node):
         self.TypedParameters = Custom(polyglot, 'customtypedparams')
         self.TypedData = Custom(polyglot, 'customtypeddata')
         self.poly.subscribe(self.poly.START, self.start, address)
-        #self.poly.subscribe(self.poly.POLL, self.poll)
         self.poly.subscribe(self.poly.LOGLEVEL, self.handleLevelChange)
         self.poly.subscribe(self.poly.CUSTOMPARAMS, self.parameterHandler)
         self.poly.ready()
@@ -192,12 +191,12 @@ class Controller(udi_interface.Node):
                     inv_kW = row['power_produced']
                     address = row['type'] + '_%s' % (idx+1)
                     inv_idx = '%s' % (idx)
-                    LOGGER.info('\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
+                    LOGGER.info('\nDiscovered by Controller\n\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
                         inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
                     node = EnphaseInverter.InverterNode(
                         self.poly, self.address, address, name, str(system_id), self.key, self.user_id, inv_idx=inv_idx,)
                     self.poly.addNode(node)
-                    # self.poly, self.address, address, name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW,  inv_idx=inv_idx
+                    # to pass all informatin self.poly, self.address, address, name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW,  inv_idx=inv_idx
                     # str(system_id), self.key, self.user_id,
 
         #### Get Consumption Meter ####
@@ -214,13 +213,6 @@ class Controller(udi_interface.Node):
                 LOGGER.info("Consumption Meter not found 'None'")
             if r == 200:
                 LOGGER.info("Consumption Meter found 'Not None'")
-
-    """def poll(self, polltype):
-        if 'shortPoll' in polltype:
-            LOGGER.debug('shortPoll (node)')
-            self.Inverters(self)
-        else:
-            LOGGER.debug('longPoll (node)')"""
 
     def remove_notices_all(self, command):
         LOGGER.info('remove_notices_all: notices={}'.format(self.Notices))
