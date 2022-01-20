@@ -41,8 +41,9 @@ class InverterNode(udi_interface.Node):
 
     def start(self):
         self.http = urllib3.PoolManager()
-        sleeptime = random.uniform(20, 60)
-        LOGGER.info("sleeping for:", sleeptime, "seconds")
+        time.sleep(15)
+        sleeptime = random.uniform(60, 120)
+        #LOGGER.info("sleeping for:", sleeptime, "seconds")
         sleep(sleeptime)
         LOGGER.info("sleeping is over")
         self.getpower(self)
