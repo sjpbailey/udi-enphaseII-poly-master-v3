@@ -58,6 +58,10 @@ class InverterNode(udi_interface.Node):
                 self.setDriver('ST', 1)
             else:
                 self.setDriver('ST', 0)
+            if r2.status_code == 409:
+                LOGGER.infor('You have EXCEEDED Your Monthly Hit Rate')
+                time.sleep(1)
+                self.stop(self)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
         #### Sort Inverter Data ####
@@ -100,6 +104,9 @@ class InverterNode(udi_interface.Node):
                     self.setDriver('GV4', 1)
                 else:
                     self.setDriver('GV4', 0)
+
+    def stop(self):
+        LOGGER.debug('NodeServer stopped.')
 
     def poll(self, polltype):
         pass
