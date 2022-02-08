@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 import time
 import json
 import urllib3
-import logging
+#import logging
 import pandas as pd
 import numpy as np
 from numpy import random
