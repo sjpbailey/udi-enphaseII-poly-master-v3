@@ -11,7 +11,6 @@ from datetime import datetime, timedelta
 import time
 import json
 import urllib3
-#import logging
 import pandas as pd
 import numpy as np
 from numpy import random
@@ -98,7 +97,7 @@ class InverterNode(udi_interface.Node):
                 first_chars = inv_serial[:7]
                 last_chars = inv_serial[-4:]
                 LOGGER.info(first_chars)
-                self.setDriver('GV3', last_chars)
+                self.setDriver('GV3', first_chars)
                 LOGGER.info(last_chars)
                 self.setDriver('GV6', last_chars)
                 # LOGGER.info(inv_id)
