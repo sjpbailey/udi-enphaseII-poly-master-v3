@@ -77,7 +77,7 @@ class InverterNode(udi_interface.Node):
             for idx, row in device.iterrows():
                 inv_id = row['id']
                 name = 'Inverter' + '-%s' % (idx+1)
-                inv_serial = int(row['serial_number'])
+                inv_serial = row['serial_number']
                 inv_status = row['status']
                 inv_kWh = row['energy.value']
                 inv_kW = row['power_produced.value']
