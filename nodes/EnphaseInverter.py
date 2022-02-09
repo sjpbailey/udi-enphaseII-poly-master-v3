@@ -77,14 +77,14 @@ class InverterNode(udi_interface.Node):
             for idx, row in device.iterrows():
                 inv_id = row['id']
                 name = 'Inverter' + '-%s' % (idx+1)
-                inv_serial = row['serial_number']
+                inv_serial = int(row['serial_number'])
                 inv_status = row['status']
                 inv_kWh = row['energy.value']
                 inv_kW = row['power_produced.value']
                 #address = row['type'] + '_%s' % (idx+1)
                 inv_idx = '%s' % (idx)
                 LOGGER.info('\nNodes\n\nname\n{name}\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
-                    name=name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))  # , inv_kW=inv_kW ## \nkW\n{inv_kW}
+                    name=name, inv_id=inv_id, inv_serial=inv_serial/10000, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))  # , inv_kW=inv_kW ## \nkW\n{inv_kW}
                 LOGGER.info(inv_kW)
                 if inv_kWh > 1:
                     self.setDriver('GV1', inv_kW)
