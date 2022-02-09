@@ -94,8 +94,13 @@ class InverterNode(udi_interface.Node):
                     pass
                 # LOGGER.info(inv_kWh)
                 self.setDriver('GV2', inv_kWh)
-                LOGGER.info(inv_serial/10000)
-                self.setDriver('GV3', inv_serial/10000)
+                LOGGER.info(inv_serial)
+                sn_first, sn_second = inv_serial[:len(
+                    inv_serial)//2], inv_serial[len(inv_serial)//2:]
+                LOGGER.info(sn_first)
+                LOGGER.info(sn_second)
+                self.setDriver('GV3', sn_first)
+                self.setDriver('GV6', sn_second)
                 # LOGGER.info(inv_id)
                 self.setDriver('GV5', inv_id)
                 # LOGGER.info(inv_status)
@@ -130,6 +135,7 @@ class InverterNode(udi_interface.Node):
         {'driver': 'GV3', 'value': 0, 'uom': 56},
         {'driver': 'GV4', 'value': 0, 'uom': 25},
         {'driver': 'GV5', 'value': 0, 'uom': 56},
+        {'driver': 'GV6', 'value': 0, 'uom': 56},
     ]
 
     id = 'inverter'
