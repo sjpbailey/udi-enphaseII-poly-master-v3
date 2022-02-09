@@ -24,9 +24,9 @@ print(r)
 
 Response = json.loads(r.text)  # r.text
 if (r.status_code == 200):
-    print(Response[0]['micro_inverters'][inv_idx]['energy']['value'])
-    print(Response[0]['micro_inverters'][inv_idx]['power_produced'])
-    print(int(Response[0]['micro_inverters'][inv_idx]['serial_number']))
+    # print(Response[0]['micro_inverters'][inv_idx]['energy']['value'])
+    # print(Response[0]['micro_inverters'][inv_idx]['power_produced'])
+    # print(int(Response[0]['micro_inverters'][inv_idx]['serial_number']))
 
     test_str = Response[0]['micro_inverters'][inv_idx]['serial_number']
 
@@ -38,9 +38,13 @@ if (r.status_code == 200):
     res_first, res_second = test_str[:len(
         test_str)//2], test_str[len(test_str)//2:]
 
+    first_chars = test_str[:7]
+    last_chars = test_str[-4:]
+    print(first_chars)
+    print(last_chars)
 # printing result
-    print("S/N first part : " + res_first)
-    print("S/N second part : " + res_second)
+    #print("S/N first part : " + res_first)
+    #print("S/N second part : " + res_second)
 
 """params = (('key', key), ('user_id', user_id))
 

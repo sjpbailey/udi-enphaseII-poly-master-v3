@@ -84,7 +84,7 @@ class InverterNode(udi_interface.Node):
                 #address = row['type'] + '_%s' % (idx+1)
                 inv_idx = '%s' % (idx)
                 LOGGER.info('\nNodes\n\nname\n{name}\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
-                    name=name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))  # , inv_kW=inv_kW ## \nkW\n{inv_kW}
+                    name=name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
                 LOGGER.info(inv_kW)
                 if inv_kWh > 1:
                     self.setDriver('GV1', inv_kW)
@@ -95,12 +95,12 @@ class InverterNode(udi_interface.Node):
                 # LOGGER.info(inv_kWh)
                 self.setDriver('GV2', inv_kWh)
                 LOGGER.info(inv_serial)
-                sn_first, sn_second = inv_serial[:len(
-                    inv_serial)//2], inv_serial[len(inv_serial)//2:]
-                LOGGER.info(sn_first)
-                LOGGER.info(sn_second)
-                self.setDriver('GV3', sn_first)
-                self.setDriver('GV6', sn_second)
+                first_chars = inv_serial[:7]
+                last_chars = inv_serial[-4:]
+                LOGGER.info(first_chars)
+                self.setDriver('GV3', last_chars)
+                LOGGER.info(last_chars)
+                self.setDriver('GV6', last_chars)
                 # LOGGER.info(inv_id)
                 self.setDriver('GV5', inv_id)
                 # LOGGER.info(inv_status)
