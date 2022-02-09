@@ -59,7 +59,7 @@ class InverterNode(udi_interface.Node):
             else:
                 self.setDriver('ST', 0)
             if r2.status_code == 409:
-                LOGGER.infor('You have EXCEEDED Your Monthly Hit Rate')
+                LOGGER.info('You have EXCEEDED Your Monthly Hit Rate')
             else:
                 pass
         except requests.exceptions.RequestException as e:
@@ -80,11 +80,11 @@ class InverterNode(udi_interface.Node):
                 inv_serial = row['serial_number']
                 inv_status = row['status']
                 inv_kWh = row['energy.value']
-                #inv_kW = row['power_produced']
+                inv_kW = row['power_produced.value']
                 #address = row['type'] + '_%s' % (idx+1)
                 inv_idx = '%s' % (idx)
-                LOGGER.info('\nNodes\n\nname\n{name}\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nIndex\n{inv_idx}\n'.format(
-                    name=name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_idx=inv_idx))  # , inv_kW=inv_kW ## \nkW\n{inv_kW}
+                LOGGER.info('\nNodes\n\nname\n{name}\nID\n{inv_id}\nSerial\n{inv_serial}\nStatus\n{inv_status}\nkWh\n{inv_kWh}\nkW\n{inv_kW}\nIndex\n{inv_idx}\n'.format(
+                    name=name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))  # , inv_kW=inv_kW ## \nkW\n{inv_kW}
                 LOGGER.info(inv_kWh)
                 if inv_kWh > 1:
                     self.setDriver('GV1', inv_kWh)

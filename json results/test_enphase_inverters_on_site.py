@@ -24,8 +24,8 @@ print(r)
 
 Response = json.loads(r.text)  # r.text
 if (r.status_code == 200):
-    print(Response[0]['micro_inverters'][0]['energy']['value'])
-    print(Response[0]['micro_inverters'][0]['power_produced'])
+    print(Response[0]['micro_inverters'][inv_idx]['energy']['value'])
+    print(Response[0]['micro_inverters'][inv_idx]['power_produced'])
 """params = (('key', key), ('user_id', user_id))
 
 response = requests.get(
@@ -33,7 +33,7 @@ response = requests.get(
 #print('\n Inverters \n' + jsonData)
 jsonData = json.loads(response)"""
 
-print()
+# print(Response)
 # print(Response[0]['micro_inverters'][0]['id'])
 
 
@@ -56,10 +56,10 @@ for device in device_list:
         inv_serial = row['serial_number']
         inv_status = row['status']
         inv_kWh = row['energy.value']
-        #inv_kW = row['power_produced']
+        inv_kW = row['power_produced.value']
         inv_idx = '%s' % (idx)
-        print('\nID\n{inv_id}\nSN\n{inv_serial}\nStatus\n{inv_status}\nWh\n{inv_kWh}\nIDX\n{inv_idx}\n'.format(
-            inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh,  inv_idx=inv_idx))  # inv_kW=inv_kW, ## \nW\n{inv_kW}
+        print('\nID\n{inv_id}\nSN\n{inv_serial}\nStatus\n{inv_status}\nWh\n{inv_kWh}\nW\n{inv_kW}\nIDX\n{inv_idx}\n'.format(
+            inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))  # inv_kW=inv_kW, ## \nW\n{inv_kW}
 # GETS from Inverters
 # inv_id = Response  # 0]['micro_inverters'][inv_idx]  # ['id']
 #inv_serial = Response[0]['micro_inverters'][inv_idx]['serial_number']

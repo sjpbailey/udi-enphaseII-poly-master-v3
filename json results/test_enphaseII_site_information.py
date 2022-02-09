@@ -29,21 +29,21 @@ print('\nsummary_date\n' + str(jsonResponse['summary_date']))
 print('\nstatus\n' + str(jsonResponse['status']))
 print('\ninverters\n' + str(jsonResponse['modules']))
 
-"""print('\n System current kW \n',
-      jsonResponse[0]['micro_inverters']['power_produced'])
-print('\n System energy Wh \n',
-      jsonResponse[0]['micro_inverters']["energy_today"])
-print('\n System Status \n', jsonResponse[0]['micro_inverters']["status"])
-print('\n System kWh Today\n',
-      jsonResponse[0]['micro_inverters']["energy_today"]/1000)
-print('\n System kWh Life Time\n',
-      jsonResponse[0]['micro_inverters']["energy_lifetime"]/1000)
+# print('\n System current kW \n',
+#      jsonResponse[0]['micro_inverters']['power_produced'])
+# print('\n System energy Wh \n',
+#      jsonResponse[0]['micro_inverters']["energy_today"])
+#print('\n System Status \n', jsonResponse[0]['micro_inverters']["status"])
+# print('\n System kWh Today\n',
+#      jsonResponse[0]['micro_inverters']["energy_today"]/1000)
+# print('\n System kWh Life Time\n',
+#      jsonResponse[0]['micro_inverters']["energy_lifetime"]/1000)
 
 # print(int(jsonResponse["current_power"]))
 
 # print(response3["system_id"])
 # for key, value in response7:
-#    print(value)"""
+#    print(value)
 
 
 response = requests.get(
