@@ -25,7 +25,6 @@ ISY = udi_interface.ISY
 # IF you want a different log format than the current default
 LOG_HANDLER.set_log_format(
     '%(asctime)s %(threadName)-10s %(name)-18s %(levelname)-8s %(module)s:%(funcName)s: %(message)s')
-# TODO
 
 
 class Controller(udi_interface.Node):
@@ -212,8 +211,6 @@ class Controller(udi_interface.Node):
                     node = EnphaseInverter.InverterNode(
                         self.poly, self.address, address, name, str(system_id), self.key, self.user_id, inv_idx=inv_idx,)
                     self.poly.addNode(node)
-                    # to pass all informatin self.poly, self.address, address, name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW,  inv_idx=inv_idx
-                    # str(system_id), self.key, self.user_id,
 
         #### Get Consumption Meter ####
         if system_id is not None:

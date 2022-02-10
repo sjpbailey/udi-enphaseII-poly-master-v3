@@ -91,8 +91,8 @@ class InverterNode(udi_interface.Node):
                     self.setDriver('GV1', 0)
                 else:
                     pass
-                # LOGGER.info(inv_kWh)
-                self.setDriver('GV2', inv_kWh)
+                LOGGER.info(inv_kWh)
+                self.setDriver('GV2', float(inv_kWh)/1000)
                 LOGGER.info(inv_serial)
                 first_chars = inv_serial[:7]
                 last_chars = inv_serial[-4:]
@@ -100,9 +100,9 @@ class InverterNode(udi_interface.Node):
                 self.setDriver('GV3', first_chars)
                 LOGGER.info(last_chars)
                 self.setDriver('GV6', last_chars)
-                # LOGGER.info(inv_id)
+                LOGGER.info(inv_id)
                 self.setDriver('GV5', inv_id)
-                # LOGGER.info(inv_status)
+                LOGGER.info(inv_status)
                 normal1 = inv_status
                 if normal1 == 'normal':
                     self.setDriver('GV4', 1)
@@ -111,16 +111,18 @@ class InverterNode(udi_interface.Node):
 
     def stop(self):
         LOGGER.debug('NodeServer stopped.')
+    # Poll when Inverter show status Stop when at 0
+    # Need to test reportDrivers instead of getpower
 
     def poll(self, polltype):
-        pass
-        if 'shortPoll' in polltype:
-            LOGGER.debug('shortPoll (node)')
-            sleeptime = random.uniform(60, 240)
-            sleep(sleeptime)
-            LOGGER.info("sleeping is over")
-            self.getpower(self)
-            # self.reportDrivers()
+        if 'GV1' != 0:
+            if 'shortPoll' in polltype:
+                LOGGER.debug('shortPoll (node)')
+                sleeptime = random.uniform(60, 240)
+                sleep(sleeptime)
+                LOGGER.info("sleeping is over")
+                self.getpower(self)
+                # self.reportDrivers()
         else:
             LOGGER.debug('longPoll (node)')
 

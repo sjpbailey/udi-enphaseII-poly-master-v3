@@ -79,7 +79,7 @@ for device in device_list:
         inv_kW = row['power_produced.value']
         inv_idx = '%s' % (idx)
         print('\nID\n{inv_id}\nSN\n{inv_serial}\nStatus\n{inv_status}\nWh\n{inv_kWh}\nW\n{inv_kW}\nIDX\n{inv_idx}\n'.format(
-            inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))  # inv_kW=inv_kW, ## \nW\n{inv_kW}
+            inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh/1000, inv_kW=inv_kW, inv_idx=inv_idx))  # inv_kW=inv_kW, ## \nW\n{inv_kW}
 # GETS from Inverters
 # inv_id = Response  # 0]['micro_inverters'][inv_idx]  # ['id']
 #inv_serial = Response[0]['micro_inverters'][inv_idx]['serial_number']

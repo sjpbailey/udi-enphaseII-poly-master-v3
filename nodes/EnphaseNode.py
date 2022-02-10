@@ -16,7 +16,6 @@ import numpy as np
 import requests
 from requests.auth import HTTPBasicAuth  # HTTP
 
-
 from nodes import EnphaseController
 from nodes import EnphaseInverter
 
@@ -46,7 +45,6 @@ class SiteNode(udi_interface.Node):
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r = requests.get(URL_SITE, params=params)
-            #print('\n Summary \n' + response)
             Response = json.loads(r.text)
             LOGGER.info(Response["current_power"])
             self.setDriver('GV1', float(Response["current_power"]/100))
@@ -70,7 +68,6 @@ class SiteNode(udi_interface.Node):
             LOGGER.error("Error: " + str(e))
 
     #### Get History ####
-
     def siteHist(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
             self.system_id + '/energy_lifetime'
@@ -98,11 +95,12 @@ class SiteNode(udi_interface.Node):
             LOGGER.error("Error: " + str(e))
 
     def poll(self, polltype):
-        if 'shortPoll' in polltype:
-            LOGGER.debug('shortPoll (node)')
-            self.siteInfo(self)
-        else:
-            LOGGER.debug('longPoll (node)')
+        if 'GV1' > 0:
+            if 'shortPoll' in polltype:
+                LOGGER.debug('shortPoll (node)')
+                self.siteInfo(self)
+            else:
+                LOGGER.debug('longPoll (node)')
 
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},
