@@ -47,7 +47,7 @@ class SiteNode(udi_interface.Node):
             r = requests.get(URL_SITE, params=params)
             Response = json.loads(r.text)
             LOGGER.info(Response["current_power"])
-            self.setDriver('GV1', float(Response["current_power"]/100))
+            self.setDriver('GV1', float(Response["current_power"]/1000))
             LOGGER.info(Response["energy_today"])
             self.setDriver('GV2', float(Response["energy_today"]/1000))
             LOGGER.info(Response["energy_lifetime"])
@@ -95,7 +95,7 @@ class SiteNode(udi_interface.Node):
             LOGGER.error("Error: " + str(e))
 
     def poll(self, polltype):
-        if 'GV1' > 0:
+        if 'GV1' != 0:
             if 'shortPoll' in polltype:
                 LOGGER.debug('shortPoll (node)')
                 self.siteInfo(self)
