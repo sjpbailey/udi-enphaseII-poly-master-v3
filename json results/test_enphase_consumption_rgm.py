@@ -103,9 +103,10 @@ response10 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/production_meter_readings',  params=params).text
 #print('\n Equipmet Inventory \n' + response10)
 
-# gives 401 is no consumption meter
+# consumption_lifetime - {"reason":"401","message":["Not authorized to access requested resource"]}
+# consumption_stats - {"message":"The given system does not contain any active and enabled consumption meter"}
 response8 = requests.get(
-    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetimeconsumption_lifetime',  params=params).text
+    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_stats',  params=params).text  # consumption_lifetime
 print('\n rgm \n' + response8)
 
 

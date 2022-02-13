@@ -38,11 +38,12 @@ class InverterNode(udi_interface.Node):
     def start(self):
         self.http = urllib3.PoolManager()
         time.sleep(15)
-        sleeptime = random.uniform(60, 240)
+        sleeptime = random.uniform(120, 360)
         sleep(sleeptime)
         LOGGER.info("sleeping is over")
         self.getpower(self)
 
+    # GET Inverter Information
     def getpower(self, command):
         self.inv_idx = int(self.inv_idx)
         inv_site = int(0)
@@ -111,9 +112,8 @@ class InverterNode(udi_interface.Node):
 
     def stop(self):
         LOGGER.debug('NodeServer stopped.')
-    # Poll when Inverter show status Stop when at 0
-    # Need to test reportDrivers instead of getpower
 
+    # Do Not Poll unless you have power being produced
     def poll(self, polltype):
         if 'GV1' != 0:
             if 'shortPoll' in polltype:

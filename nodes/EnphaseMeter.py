@@ -17,7 +17,7 @@ import requests
 from requests.auth import HTTPBasicAuth  # HTTP
 
 from nodes import EnphaseController
-from nodes import EnphaseInverter
+#from nodes import EnphaseInverter
 
 LOGGER = udi_interface.LOGGER
 
@@ -41,7 +41,7 @@ class SiteNode(udi_interface.Node):
     #### Get Current Production ####
     def siteInfo(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
-            self.system_id + '/summary'
+            self.system_id + '/consumption_stats'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r = requests.get(URL_SITE, params=params)
