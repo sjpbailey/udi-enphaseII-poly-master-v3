@@ -38,7 +38,7 @@ class SiteNode(udi_interface.Node):
         self.siteInfo(self)
         self.http = urllib3.PoolManager()
 
-    #### Get Current Production ####
+    #### Get Current consumption ####
     def siteInfo(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
             self.system_id + '/consumption_stats'
@@ -76,32 +76,31 @@ class SiteNode(udi_interface.Node):
             r = requests.get(URL_SITE, params=params)
             #print('\n Summary \n' + r)
             Response = json.loads(r.text)
-            ystdy = len(Response['production'])-1
-            dybfo = len(Response['production'])-2
-            dybfy = len(Response['production'])-3
-            dybft = len(Response['production'])-4
-            dybf2 = len(Response['production'])-5
-            LOGGER.info(Response['production'][ystdy]/1000)  # Yesterday
-            self.setDriver('GV5', float(Response["production"][ystdy]/1000))
-            LOGGER.info(Response['production'][dybfo]/1000)  # Two Days Ago
-            self.setDriver('GV6', float(Response["production"][dybfo]/1000))
-            LOGGER.info(Response['production'][dybfy]/1000)  # Three Days Ago
-            self.setDriver('GV7', float(Response["production"][dybfy]/1000))
-            LOGGER.info(Response['production'][dybft]/1000)  # Four Days Ago
-            self.setDriver('GV8', float(Response["production"][dybft]/1000))
-            LOGGER.info(Response['production'][dybf2]/1000)  # Five Days Ago
-            self.setDriver('GV9', float(Response["production"][dybf2]/1000))
+            ystdy = len(Response['consumption'])-1
+            dybfo = len(Response['consumption'])-2
+            dybfy = len(Response['consumption'])-3
+            dybft = len(Response['consumption'])-4
+            dybf2 = len(Response['consumption'])-5
+            LOGGER.info(Response['consumption'][ystdy]/1000)  # Yesterday
+            self.setDriver('GV5', float(Response["consumption"][ystdy]/1000))
+            LOGGER.info(Response['consumption'][dybfo]/1000)  # Two Days Ago
+            self.setDriver('GV6', float(Response["consumption"][dybfo]/1000))
+            LOGGER.info(Response['consumption'][dybfy]/1000)  # Three Days Ago
+            self.setDriver('GV7', float(Response["consumption"][dybfy]/1000))
+            LOGGER.info(Response['consumption'][dybft]/1000)  # Four Days Ago
+            self.setDriver('GV8', float(Response["consumption"][dybft]/1000))
+            LOGGER.info(Response['consumption'][dybf2]/1000)  # Five Days Ago
+            self.setDriver('GV9', float(Response["consumption"][dybf2]/1000))
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
 
     # Do Not Poll unless you have power being produced
     def poll(self, polltype):
-        if 'GV1' != 0:
-            if 'shortPoll' in polltype:
-                LOGGER.debug('shortPoll (node)')
-                self.siteInfo(self)
-            else:
-                LOGGER.debug('longPoll (node)')
+        if 'shortPoll' in polltype and 'GV1' > 0:
+            LOGGER.debug('shortPoll (node)')
+            self.siteInfo(self)
+        else:
+            LOGGER.debug('longPoll (node)')
 
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},

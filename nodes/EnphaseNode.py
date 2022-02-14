@@ -96,7 +96,7 @@ class SiteNode(udi_interface.Node):
 
     # Do Not Poll unless you have power being produced
     def poll(self, polltype):
-        if 'shortPoll' in polltype and 'GV1' > 0:
+        if 'shortPoll' in polltype and 'GV1' != 0:
             LOGGER.debug('shortPoll (node)')
             self.siteInfo(self)
         else:
