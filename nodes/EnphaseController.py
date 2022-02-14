@@ -134,7 +134,8 @@ class Controller(udi_interface.Node):
                     LOGGER.info('\n{name}\n{system_id}\n'
                                 .format(name=name, system_id=system_id))
                     LOGGER.info('SystemId {}' .format(system_id))
-                    node = EnphaseNode.SiteNode(self.poly, self.address,'site'+'_%s' % (idx+1), str(name), str(system_id), self.key, self.user_id)
+                    node = EnphaseNode.SiteNode(self.poly, self.address, 'site'+'_%s' % (
+                        idx+1), str(name), str(system_id), self.key, self.user_id)
                     self.poly.addNode(node)
         if system_id is not None:
             self.Inverters(self)
