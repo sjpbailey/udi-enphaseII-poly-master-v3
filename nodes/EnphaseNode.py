@@ -96,12 +96,11 @@ class SiteNode(udi_interface.Node):
 
     # Do Not Poll unless you have power being produced
     def poll(self, polltype):
-        if 'GV1' != 0:
-            if 'shortPoll' in polltype:
-                LOGGER.debug('shortPoll (node)')
-                self.siteInfo(self)
-            else:
-                LOGGER.debug('longPoll (node)')
+        if 'shortPoll' in polltype and 'GV1' > 0:
+            LOGGER.debug('shortPoll (node)')
+            self.siteInfo(self)
+        else:
+            LOGGER.debug('longPoll (node)')
 
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},
