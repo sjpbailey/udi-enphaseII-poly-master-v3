@@ -115,15 +115,17 @@ class InverterNode(udi_interface.Node):
 
     # Do Not Poll unless you have power being produced  and 'GV1' != 0
     def poll(self, polltype):
-        if 'shortPoll' in polltype:
-            LOGGER.debug('shortPoll (node)')
-            sleeptime = random.uniform(60, 240)
-            sleep(sleeptime)
-            LOGGER.info("sleeping is over")
-            self.getpower(self)
-            # self.reportDrivers()
-        else:
-            LOGGER.debug('longPoll (node)')
+        inv_kW = inv_kW
+        if inv_kW != 0:
+            if 'shortPoll' in polltype:
+                LOGGER.debug('shortPoll (node)')
+                sleeptime = random.uniform(60, 240)
+                sleep(sleeptime)
+                LOGGER.info("sleeping is over")
+                self.getpower(self)
+                # self.reportDrivers()
+            else:
+                LOGGER.debug('longPoll (node)')
 
     def query(self, command):
         self.getpower(self)
