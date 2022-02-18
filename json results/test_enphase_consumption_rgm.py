@@ -99,15 +99,21 @@ print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 
 #### Consumption Meter? ####
 # GET https://api.enphaseenergy.com/api/v2/systems/66/production_meter_readings?end_at=1473901755
-response10 = requests.get(
-    'https://api.enphaseenergy.com/api/v2/systems/2527105/production_meter_readings',  params=params).text
-#print('\n Equipmet Inventory \n' + response10)
+#response10 = requests.get(
+#    'https://api.enphaseenergy.com/api/v2/systems/2527105/production_meter_readings',  params=params).text
+#print('\n production meter \n' + response10)
+
+
+response11 = requests.get(
+    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text
+print('\n consumption lifetime \n' + response11)
+#consumption_lifetime
 
 # consumption_lifetime - {"reason":"401","message":["Not authorized to access requested resource"]}
 # consumption_stats - {"message":"The given system does not contain any active and enabled consumption meter"}
 response8 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_stats',  params=params).text  # consumption_lifetime
-print('\n rgm \n' + response8)
+print('\n consumption meter \n' + response8)
 
 
 """response4 = requests.get(
