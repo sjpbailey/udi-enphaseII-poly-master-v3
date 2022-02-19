@@ -51,8 +51,8 @@ response9 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text
 print('\n Consumption Meter Life Time\n' + response9)
 print(response9)
-if response9[0] == 401:
-    print('False')
+#if response9[0] == 401:
+#    print('False')
 #for i in response9:
 #    print(i)
 #for key in response9:

@@ -222,9 +222,9 @@ class Controller(udi_interface.Node):
                 LOGGER.info(r)
             except requests.exceptions.RequestException as e:
                 LOGGER.error("Error: " + str(e))
-            if r == 401 or 404:
+            if r == 401:
                 LOGGER.info("Consumption Meter not found 'None'")
-            if r != 401 or 404:
+            if r != 401:
                 LOGGER.info("Consumption Meter found 'Not None'")
 
     def remove_notices_all(self, command):
