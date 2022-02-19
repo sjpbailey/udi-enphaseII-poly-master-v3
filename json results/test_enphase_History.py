@@ -21,11 +21,11 @@ response = requests.get(
 #print('\n Inverters \n' + jsonData)
 jsonData = json.loads(response)
 systemResponse = json.loads(response)
-print(systemResponse["systems"][0]["status"])
-print('\n System ID \n', systemResponse["systems"][0]["system_id"])
-print('\n System ID \n', systemResponse["systems"][0]["system_id"])
-print('\n System Status \n', systemResponse["systems"][0]["status"])
-print('\n System Country \n', systemResponse["systems"][0]["country"])
+#print(systemResponse["systems"][0]["status"])
+#print('\n System ID \n', systemResponse["systems"][0]["system_id"])
+#print('\n System ID \n', systemResponse["systems"][0]["system_id"])
+#print('\n System Status \n', systemResponse["systems"][0]["status"])
+#print('\n System Country \n', systemResponse["systems"][0]["country"])
 hellohere = systemResponse["systems"][0]
 
 print()
@@ -47,7 +47,7 @@ for device in device_list:
         print('\n{id_new}\n\n{system_name}\n'.format(
             id_new=id_new, system_name=system_name))
 
-print()
+"""print()
 # print(df['id'])
 print(df['system_id'])
 print('\n')
@@ -55,7 +55,7 @@ print(df['system_name'])
 print('\n')
 # print(df['serial_number'])
 # print(df['energy.value'])
-# print(df['power_produced'])
+# print(df['power_produced'])"""
 
 
 """responseH = requests.get(
@@ -105,7 +105,7 @@ print('\n Lifetime Energy Daily Report \n' + response6)
 #    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetimeconsumption_lifetime',  params=params).text
 #print('\n rgm \n' + response8)"""
 #### HISTORY ####
-response = requests.get(
+"""response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/energy_lifetime',  params=params).text  # for loop for solar array
 jsonData = json.loads(response)
 print(jsonData)
@@ -122,4 +122,26 @@ print('\nYesterday\n' + str(float(Response["production"][ystdy]/1000)))
 print('\nSecond Day Before\n' + str(float(Response["production"][dybfo]/1000)))
 print('\nThird Day Before\n' + str(float(Response["production"][dybfy]/1000)))
 print('\nFourth Day Before\n' + str(float(Response["production"][dybft]/1000)))
-print('\nFourth Day Before\n' + str(float(Response["production"][dybf2]/1000)))
+print('\nFourth Day Before\n' + str(float(Response["production"][dybf2]/1000)))"""
+
+
+#### HISTORY ####
+response = requests.get(
+    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text  # for loop for solar array
+jsonData = json.loads(response)
+print(response)
+print(jsonData)
+
+#response = requests.get(response, params=params)
+#print('\n Summary \n' + response) 
+Response = json.loads(response)
+ystdy = len(Response['consumption'])-1
+dybfo = len(Response['consumption'])-2
+dybfy = len(Response['consumption'])-3
+dybft = len(Response['consumption'])-4
+dybf2 = len(Response['consumption'])-5
+print('\nYesterday\n' + str(float(Response["consumption"][ystdy]/1000)))
+print('\nSecond Day Before\n' + str(float(Response["consumption"][dybfo]/1000)))
+print('\nThird Day Before\n' + str(float(Response["consumption"][dybfy]/1000)))
+print('\nFourth Day Before\n' + str(float(Response["consumption"][dybft]/1000)))
+print('\nFourth Day Before\n' + str(float(Response["consumption"][dybf2]/1000)))
