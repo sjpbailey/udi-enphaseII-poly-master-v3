@@ -1,0 +1,8 @@
+2022-02-21 14:41:41,077 MainThread udi_interface      INFO     polylogger:set_basic_config: set_basic_config: enable=True level=30
+2022-02-21 14:41:41,465 MainThread udi_interface      INFO     __init__:<module>: UDI Python Interface for Polyglot version 3 3.0.34 Starting...
+2022-02-21 14:41:42,173 MainThread udi_interface      ERROR    udi_interface:write: Traceback (most recent call last):
+2022-02-21 14:41:42,173 MainThread udi_interface      ERROR    udi_interface:write: File "/Users/stevenbailey/UDI Development PG3/Nodeservers/udi-enphaseII-poly-master-v3/nodes/EnphaseNode.py", line 19, in <module>
+2022-02-21 14:41:42,173 MainThread udi_interface      ERROR    udi_interface:write: from nodes import EnphaseController
+2022-02-21 14:41:42,173 MainThread udi_interface      ERROR    udi_interface:write: ModuleNotFoundError
+2022-02-21 14:41:42,173 MainThread udi_interface      ERROR    udi_interface:write: :
+2022-02-21 14:41:42,173 MainThread udi_interface      ERROR    udi_interface:write: No module named 'nodes'
