@@ -35,6 +35,7 @@ class InverterNode(udi_interface.Node):
         self.user_id = user_id
         self.inv_idx = int(inv_idx)
 
+    # Randomly poll inverters to prevent API errors
     def start(self):
         self.http = urllib3.PoolManager()
         time.sleep(15)
@@ -96,7 +97,7 @@ class InverterNode(udi_interface.Node):
                 self.setDriver('GV2', float(inv_kWh)/1000)
                 LOGGER.info(inv_serial)
                 first_chars = inv_serial[:7]
-                if 0 in inv_serial[-4:]:
+                if inv_serial[-4:] == 0:
                     last_chars = inv_serial[-3:]
                 else:
                     last_chars = inv_serial[-4:]    
@@ -116,7 +117,8 @@ class InverterNode(udi_interface.Node):
     def stop(self):
         LOGGER.debug('NodeServer stopped.')
 
-    # Do Not Poll unless you have power being produced  and 'GV1' != 0
+    # NEED to do this: Do Not Poll unless you have power being produced  and 'GV1' != 0
+    # Poll at random intervols
     def poll(self, polltype):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
