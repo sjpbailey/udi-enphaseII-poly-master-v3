@@ -39,7 +39,7 @@ class SiteNode(udi_interface.Node):
         self.http = urllib3.PoolManager()
 
     #### Get Current Production ####
-    def siteInfo(self, command):
+    def siteInfo(self, command, **kwargs):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
             self.system_id + '/summary'
         params = (('key', self.key), ('user_id', self.user_id))
@@ -68,7 +68,7 @@ class SiteNode(udi_interface.Node):
             LOGGER.error("Error: " + str(e))
 
     #### Get History ####
-    def siteHist(self, command):
+    def siteHist(self, command, **kwargs):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
             self.system_id + '/energy_lifetime'
         params = (('key', self.key), ('user_id', self.user_id))
