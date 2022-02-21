@@ -44,7 +44,7 @@ class SiteNode(udi_interface.Node):
             self.system_id + '/consumption_stats'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-            r = requests.get(URL_SITE, params=params)
+            r = requests.get(URL_SITE, params=params, **kwargs)
             Response = json.loads(r.text)
             LOGGER.info(Response["current_power"])
             self.setDriver('GV1', float(Response["current_power"]/1000))
@@ -73,7 +73,7 @@ class SiteNode(udi_interface.Node):
             self.system_id + '/energy_lifetime'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-            r = requests.get(URL_SITE, params=params)
+            r = requests.get(URL_SITE, params=params, **kwargs)
             #print('\n Summary \n' + r)
             Response = json.loads(r.text)
             ystdy = len(Response['consumption'])-1
