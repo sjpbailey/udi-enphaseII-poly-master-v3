@@ -48,11 +48,11 @@ class SiteNode(udi_interface.Node):
             Response = json.loads(r.text)
             LOGGER.info(Response["current_power"])
             self.setDriver('GV1', float(Response["current_power"]/1000))
-            kw1 = float(Response["current_power"])
-            kw2 = float((kw1)*1000)
-            kw3 = float((kw2)/220)
+            kw1 = 'GV1'
+            kw2 = float(kw1)*1000
+            kw3 = float(kw2)/220
             LOGGER.info(float(kw3))
-            self.setDriver('GV11', float(kw3), report=True, force=True)
+            self.setDriver('GV11', kw3, report=True, force=True)
             LOGGER.info(Response["energy_today"])
             self.setDriver('GV2', float(Response["energy_today"]/1000))
             LOGGER.info(Response["energy_lifetime"])
