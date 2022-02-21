@@ -50,7 +50,6 @@ class SiteNode(udi_interface.Node):
             self.setDriver('GV1', str(Response["current_power"]/1000))
             kw1 = str(Response["current_power"]/1000)
             kw2 = kw1*1000
-            LOGGER.info(float(kw2))
             self.setDriver('GV11', float(kw2), report=True, force=True)
             LOGGER.info(Response["energy_today"])
             self.setDriver('GV2', float(Response["energy_today"]/1000))
