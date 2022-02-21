@@ -19,6 +19,6 @@
 		<range uom="119" min="-1000000" max="1000000" prec="0" />
 	</editor>
 	<editor id="rawval">
-		<range uom="56" min="-10000000" max="10000000" prec="0" />
+		<range uom="56" min="-10000000" max="10000000" prec="1" />
 	</editor>
 </editors>

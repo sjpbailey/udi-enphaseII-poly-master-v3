@@ -39,7 +39,7 @@ if (r.status_code == 200):
         test_str)//2], test_str[len(test_str)//2:]
 
     first_chars = test_str[:7]
-    last_chars = test_str[-4:]
+    last_chars = test_str[-5:]
     print(first_chars)
     print(last_chars)
 # printing result
