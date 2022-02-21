@@ -48,6 +48,7 @@ class SiteNode(udi_interface.Node):
             Response = json.loads(r.text)
             LOGGER.info(Response["current_power"])
             self.setDriver('GV1', float(Response["current_power"]/1000))
+            self.setDriver('GV11', float(Response["current_power"]*1000/220))
             LOGGER.info(Response["energy_today"])
             self.setDriver('GV2', float(Response["energy_today"]/1000))
             LOGGER.info(Response["energy_lifetime"])
@@ -114,6 +115,7 @@ class SiteNode(udi_interface.Node):
         {'driver': 'GV8', 'value': 0, 'uom': 33},
         {'driver': 'GV9', 'value': 0, 'uom': 33},
         {'driver': 'GV10', 'value': 0, 'uom': 56},
+        {'driver': 'GV11', 'value': 0, 'uom': 1},
     ]
 
     id = 'site'
