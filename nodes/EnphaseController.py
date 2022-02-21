@@ -105,7 +105,7 @@ class Controller(udi_interface.Node):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-            r = requests.get(URL_SITE, params=params)
+            r = requests.kwargs.get(URL_SITE, params=params)
             # LOGGER.info(r)
             Response = json.loads(r.text)
         except requests.exceptions.RequestException as e:
@@ -148,7 +148,7 @@ class Controller(udi_interface.Node):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-            r1 = requests.get(URL_SITE, params=params)
+            r1 = requests.kwargs.get(URL_SITE, params=params)
             # LOGGER.info(r1)
             Response1 = json.loads(r1.text)
         except requests.exceptions.RequestException as e:
