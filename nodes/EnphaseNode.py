@@ -39,7 +39,7 @@ class SiteNode(udi_interface.Node):
         self.http = urllib3.PoolManager()
 
     #### Get Current Production ####
-    def siteInfo(self, command, **kwargs):
+    def siteInfo(self, command, *args,  **kwargs):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
             self.system_id + '/summary'
         params = (('key', self.key), ('user_id', self.user_id))
