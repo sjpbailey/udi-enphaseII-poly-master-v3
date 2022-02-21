@@ -52,7 +52,7 @@ class SiteNode(udi_interface.Node):
             kw2 = float(kw1)*1000
             kw3 = float(kw2)/220
             LOGGER.info(float(kw3))
-            self.setDriver('GV11', float(kw3))
+            self.setDriver('GV11', float(kw3), report=True, force=True)
             LOGGER.info(Response["energy_today"])
             self.setDriver('GV2', float(Response["energy_today"]/1000))
             LOGGER.info(Response["energy_lifetime"])
@@ -119,7 +119,7 @@ class SiteNode(udi_interface.Node):
         {'driver': 'GV8', 'value': 0, 'uom': 33},
         {'driver': 'GV9', 'value': 0, 'uom': 33},
         {'driver': 'GV10', 'value': 0, 'uom': 56},
-        {'driver': 'GV11', 'value': 0, 'uom': 1},
+        {'driver': 'GV11', 'value': 0.1, 'uom': 1},
     ]
 
     id = 'site'
