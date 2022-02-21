@@ -101,7 +101,7 @@ class Controller(udi_interface.Node):
             self.setDriver('ST', 1)
 
     #### Add Sites ####
-    def customerSites(self, command):
+    def customerSites(self, command, **kwargs):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
@@ -143,7 +143,7 @@ class Controller(udi_interface.Node):
             pass
 
     #### Add Inverters ####
-    def Inverters(self, command):
+    def Inverters(self, command, **kwargs):
         #### GET system_id ####
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
         params = (('key', self.key), ('user_id', self.user_id))

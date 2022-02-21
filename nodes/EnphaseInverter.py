@@ -44,7 +44,7 @@ class InverterNode(udi_interface.Node):
         self.getpower(self)
 
     # GET Inverter Information
-    def getpower(self, command):
+    def getpower(self, command, **kwargs):
         self.inv_idx = int(self.inv_idx)
         inv_site = int(0)
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
