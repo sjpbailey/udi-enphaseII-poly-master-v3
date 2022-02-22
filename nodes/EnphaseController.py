@@ -150,7 +150,7 @@ class Controller(udi_interface.Node):
         try:
             r1 = requests.get(URL_SITE, params=params, **kwargs)
             # LOGGER.info(r1)
-            Response1 = r.json() #json.loads(r1.text)
+            Response1 = r1.json() #json.loads(r1.text)
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
         if r1.status_code == 409:
