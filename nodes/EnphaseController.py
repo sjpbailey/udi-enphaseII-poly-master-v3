@@ -46,7 +46,7 @@ class Controller(udi_interface.Node):
         self.default_key = "YourApiKey"
         self.default_user_id = "YourUser_id"
 
-    def start(self, command):
+    def start(self, command=None):
         self.poly.updateProfile()
         self.poly.setCustomParamsDoc()
         #### Find Customer Sites ####
@@ -68,7 +68,7 @@ class Controller(udi_interface.Node):
     def delete(self):
         LOGGER.info('deleted.')
 
-    def stop(self, command):
+    def stop(self, command=None):
         LOGGER.debug('NodeServer stopped.')
 
     def set_module_logs(self, level):
