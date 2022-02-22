@@ -19,13 +19,14 @@ response = requests.get(
 
 jsonResponse = json.loads(response.text)
 print(jsonResponse)
+print(f'\ncurrent power kW\n' + str(jsonResponse['current_power']/1000))
 # print(response.text.encode('utf8'))
 
 print('\nsystem id\n' + str(jsonResponse['system_id']))
 kw1 = str(jsonResponse['current_power']/1000)
 kw2 = float(kw1)*1000/220
-print('\ncurrent power\n' + str(kw2))
-print(f'\ncurrent power\n' + str(jsonResponse['current_power']/1000*(1000)/(220)))
+print('\ncurrent power Amps\n' + str(kw2))
+print(f'\ncurrent power Amps\n' + str(jsonResponse['current_power']/1000*(1000)/(220)))
 print('\nenergy_today\n' + str(jsonResponse['energy_today']))
 print('\nenergy_lifetime\n' + str(jsonResponse['energy_lifetime']))
 print('\nsummary_date\n' + str(jsonResponse['summary_date']))
