@@ -120,7 +120,7 @@ class SiteNode(udi_interface.Node):
         {'driver': 'GV8', 'value': 0, 'uom': 33},
         {'driver': 'GV9', 'value': 0, 'uom': 33},
         {'driver': 'GV10', 'value': 0, 'uom': 56},
-        {'driver': 'GV11', 'value': 0.01, 'uom': 33},
+        {'driver': 'GV11', 'value': 0.01, 'uom': 56},
     ]
 
     id = 'site'
