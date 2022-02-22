@@ -52,11 +52,12 @@ class SiteNode(udi_interface.Node):
             self.setDriver('GV2', float(Response["energy_today"]/1000))
             LOGGER.info(Response["energy_lifetime"])
             self.setDriver('GV3', float(Response["energy_lifetime"]/1000))
-            LOGGER.info(kw3)
+            LOGGER.info(Response["modules"])
             self.setDriver('GV10', str(Response['modules']))
             kw1 = float(Response["current_power"]/1000)
             kw2 = float(kw1*1000)
             kw3 = float(kw2//220)
+            LOGGER.info(kw3)
             self.setDriver('GV11', kw3, report=True, force=True)
             LOGGER.info(Response["status"])
             normal1 = Response["status"]
