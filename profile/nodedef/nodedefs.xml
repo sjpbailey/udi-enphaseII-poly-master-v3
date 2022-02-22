@@ -10,6 +10,8 @@
         <cmd id="QUERY" />
         <cmd id="REMOVE_NOTICES_ALL" />
         <cmd id="SITEINFO" />
+        <cmd id="STOP" />
+        <cmd id="START" />
       </accepts>
     </cmds>
   </nodeDef>

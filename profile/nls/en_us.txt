@@ -5,6 +5,8 @@ ST-ctl-ST-NAME = NodeServer Online
 CMD-ctl-REMOVE_NOTICES_ALL-NAME = Remove Notices
 CMD-ctl-QUERY-NAME = Query
 CMD-ctl-SITEINFO-NAME = Update Information
+CMD-ctl-STOP-NAME = STOP
+CMD-ctl-START-NAME = START
 
 # Customer Sites
 ND-site-NAME = Site

@@ -238,6 +238,8 @@ class Controller(udi_interface.Node):
         'QUERY': query,
         'REMOVE_NOTICES_ALL': remove_notices_all,
         'SITEINFO': Inverters,
+        'STOP': stop,
+        'START': start,
     }
 
     drivers = [
