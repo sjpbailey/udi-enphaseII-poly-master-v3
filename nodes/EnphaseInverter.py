@@ -54,7 +54,7 @@ class InverterNode(udi_interface.Node):
         try:
             r2 = requests.get(URL_SITE, params=params, **kwargs)
             # LOGGER.info(r2)
-            Response2 = json.loads(r2.text)
+            Response2 = r2.json() #json.loads(r2.text)
             if r2.status_code == 200:
                 self.setDriver('ST', 1)
             else:

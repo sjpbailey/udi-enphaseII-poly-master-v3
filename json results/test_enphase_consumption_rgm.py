@@ -4,8 +4,10 @@ import datetime
 from datetime import datetime, timedelta
 from numpy import random
 from time import sleep
+import pandas as pd
+import numpy as np
 
-sleeptime = random.uniform(2, 4)
+sleeptime = random.uniform(1, 2)
 print("sleeping for:", sleeptime, "seconds")
 sleep(sleeptime)
 print("sleeping is over")
@@ -49,8 +51,8 @@ end_date = end_date
 # gives 401 is no consumption meter or {"reason":"404","message":["Resource not found"]}
 response9 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text
-print('\n Consumption Meter Life Time\n' + response9)
-print(response9)
+#print('\n Consumption Meter Life Time\n' + response9)
+#print(response9)
 #if response9[0] == 401:
 #    print('False')
 #for i in response9:
@@ -106,16 +108,42 @@ print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 
 response11 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text
-print('\n consumption lifetime \n' + response11)
+#print('\n consumption lifetime \n' + response11)
 #consumption_lifetime
-print('\n System kW \n', response11[0])
+#print('\n System kW \n', response11[0])
 
 # consumption_lifetime - {"reason":"401","message":["Not authorized to access requested resource"]}
 # consumption_stats - {"message":"The given system does not contain any active and enabled consumption meter"}
 response8 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_stats',  params=params).text  # consumption_lifetime
 print('\n consumption meter \n' + response8)
+#Response = json.loads(response8.text)
+#print(Response)
+print(response8[2])
+#for i in response8:
+#    print(i)
 
+"""df = pd.json_normalize(response8[0]['micro_inverters'][inv_idx])  # [inv_idx]
+df = df.fillna(-1)
+
+df['type'] = None
+df['type'] = np.where(df['energy.value'], 'inverter', df['type'])
+
+inverters = df[df['type'] == 'inverter'].reset_index(drop=True)
+
+# inverter string
+device_list = [inverters]
+for device in device_list:
+    for idx, row in device.iterrows():
+        inv_id = row['id']
+        #id_new = id
+        inv_serial = int(row['serial_number'])
+        inv_status = row['status']
+        inv_kWh = row['energy.value']
+        inv_kW = row['power_produced.value']
+        inv_idx = '%s' % (idx)
+        print('\nID\n{inv_id}\nSN\n{inv_serial}\nStatus\n{inv_status}\nWh\n{inv_kWh}\nW\n{inv_kW}\nIDX\n{inv_idx}\n'.format(
+            inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh/1000, inv_kW=inv_kW, inv_idx=inv_idx))  # inv_kW=inv_kW, ## \nW\n{inv_kW}"""
 
 """response4 = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/inventory',  params=params).text

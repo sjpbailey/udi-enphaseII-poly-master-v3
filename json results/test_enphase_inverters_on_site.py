@@ -53,7 +53,7 @@ response = requests.get(
 #print('\n Inverters \n' + jsonData)
 jsonData = json.loads(response)"""
 
-# print(Response)
+#print(Response)
 # print(Response[0]['micro_inverters'][0]['id'])
 
 

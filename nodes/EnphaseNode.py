@@ -45,7 +45,7 @@ class SiteNode(udi_interface.Node):
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r = requests.get(URL_SITE, params=params, **kwargs)
-            Response = json.loads(r.text)
+            Response = r.json() #json.loads(r.text) #Response1 = r1.json()
             LOGGER.info(Response["current_power"])
             self.setDriver('GV1', str(Response["current_power"]/1000))
             LOGGER.info(Response["energy_today"])
@@ -81,7 +81,7 @@ class SiteNode(udi_interface.Node):
         try:
             r = requests.get(URL_SITE, params=params, **kwargs)
             #print('\n Summary \n' + r)
-            Response = json.loads(r.text)
+            Response = r.json() #json.loads(r.text)
             ystdy = len(Response['production'])-1
             dybfo = len(Response['production'])-2
             dybfy = len(Response['production'])-3
