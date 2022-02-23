@@ -114,12 +114,12 @@ response11 = requests.get(
 
 # consumption_lifetime - {"reason":"401","message":["Not authorized to access requested resource"]}
 # consumption_stats - {"message":"The given system does not contain any active and enabled consumption meter"}
-response8 = requests.get(
-    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_stats',  params=params).text  # consumption_lifetime
-print('\n consumption meter \n' + response8)
+#response8 = requests.get(
+#    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_stats',  params=params).text  # consumption_lifetime
+#print('\n consumption meter \n' + response8)
 #Response = json.loads(response8.text)
 #print(Response)
-print(response8[2])
+#print(response8[2])
 #for i in response8:
 #    print(i)
 
@@ -160,18 +160,18 @@ print('\n Inverters \n' + response6)
 #    inverters = str(["micro_inverters"])
 #    print(inverters)    # inverter"""
 
-"""system_id = '2527105'
+system_id = '2527105'
 response = requests.get(
-    'https://api.enphaseenergy.com/api/v2/systems/' + system_id + '/summary',  params=params)
+    'https://api.enphaseenergy.com/api/v2/systems/' + system_id + '/consumption_stats',  params=params) # https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_stats
 #print('\n Summary \n' + response)
 jsonResponse = json.loads(response.text)
-
-# print(response.text.encode('utf8'))
-print('\n System kW \n', jsonResponse["current_power"])
-print('\n System kWh \n', jsonResponse["energy_today"]/1000)
-print('\n System Status \n', jsonResponse["status"])
-print('\n System kWh Today\n', jsonResponse["energy_today"]/1000)
-print('\n System kWh Life Time\n', jsonResponse["energy_lifetime"]/1000)"""
+print(jsonResponse)
+print(response.text.encode('utf8'))
+print('\n System kW \n', response)
+#print('\n System kWh \n', jsonResponse["energy_today"]/1000)
+#print('\n System Status \n', jsonResponse["status"])
+#print('\n System kWh Today\n', jsonResponse["energy_today"]/1000)
+#print('\n System kWh Life Time\n', jsonResponse["energy_lifetime"]/1000)
 
 # print(int(jsonResponse["current_power"]))
 
