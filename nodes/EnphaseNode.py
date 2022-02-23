@@ -106,6 +106,8 @@ class SiteNode(udi_interface.Node):
             LOGGER.debug('shortPoll (node)')
             if 'GV1' != 0:
                 self.siteInfo(self)
+            if 'GV1' == 0:
+                self.reportDrivers()    
         else:
             LOGGER.debug('longPoll (node)')
 

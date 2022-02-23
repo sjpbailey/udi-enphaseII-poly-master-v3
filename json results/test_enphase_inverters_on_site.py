@@ -2,6 +2,9 @@ import requests
 import pandas as pd
 import json
 import numpy as np
+import datetime
+from datetime import datetime, timedelta
+import time
 
 # from file test
 """f = open('/Users/stevenbailey/UDI Development PG3/Nodeservers/udi-enphaseII-poly-master-v3/json results/inverters.json',)
@@ -53,6 +56,16 @@ response = requests.get(
 #print('\n Inverters \n' + jsonData)
 jsonData = json.loads(response)"""
 
+
+while 1:
+    now = datetime.datetime.now()
+    if now.hour < 9:
+        at_9 = datetime.datetime.combine(datetime.date.today(),datetime.time(9))
+        to_sleep = (at_9 - now).seconds
+        time.sleep(to_sleep)
+        print('sleeping')
+
+    # do the work ...
 #print(Response)
 # print(Response[0]['micro_inverters'][0]['id'])
 
