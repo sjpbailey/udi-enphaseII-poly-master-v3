@@ -32,17 +32,21 @@ if (r.status_code == 200):
     # print(int(Response[0]['micro_inverters'][inv_idx]['serial_number']))
 
     test_str = Response[0]['micro_inverters'][inv_idx]['serial_number']
-
+    
 # printing original string
     print("The original string is : " + test_str)
-
+    print(test_str[0:-3])
 # Using string slicing
 # Splitting string into equal halves
     res_first, res_second = test_str[:len(
         test_str)//2], test_str[len(test_str)//2:]
 
     first_chars = test_str[:7]
-    last_chars = test_str[-5:]
+    if test_str[-4:] == 0:
+        last_chars = test_str[-5:]
+    if test_str[-4:] != 0:
+        last_chars = test_str[-4:] 
+    #last_chars = test_str[-3:]
     print(first_chars)
     print(last_chars)
 # printing result
@@ -57,13 +61,13 @@ response = requests.get(
 jsonData = json.loads(response)"""
 
 
-while 1:
+"""while 1:
     now = datetime.datetime.now()
     if now.hour < 9:
         at_9 = datetime.datetime.combine(datetime.date.today(),datetime.time(9))
         to_sleep = (at_9 - now).seconds
         time.sleep(to_sleep)
-        print('sleeping')
+        print('sleeping')"""
 
     # do the work ...
 #print(Response)
