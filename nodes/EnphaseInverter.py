@@ -45,22 +45,14 @@ class InverterNode(udi_interface.Node):
         self.getpower(self)
 
     # GET Inverter Information
-<<<<<<< HEAD
     def getpower(self, command):
-=======
-    def getpower(self, command, *args, **kwargs):
->>>>>>> 7f3e8ad2a6a2f760c37d6176fb36d66710b74de9
         self.inv_idx = int(self.inv_idx)
         inv_site = int(0)
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/inverters_summary_by_envoy_or_site?site_id=' + \
             self.system_id
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-<<<<<<< HEAD
             r2 = requests.get(URL_SITE, params=params)
-=======
-            r2 = requests.get(URL_SITE, params=params, **kwargs)
->>>>>>> 7f3e8ad2a6a2f760c37d6176fb36d66710b74de9
             # LOGGER.info(r2)
             Response2 = r2.json() #json.loads(r2.text)
             if r2.status_code == 200:

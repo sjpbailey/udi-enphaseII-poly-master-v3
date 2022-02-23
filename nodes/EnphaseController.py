@@ -101,19 +101,11 @@ class Controller(udi_interface.Node):
             self.setDriver('ST', 1)
 
     #### Add Sites ####
-<<<<<<< HEAD
     def customerSites(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r = requests.get(URL_SITE, params=params)
-=======
-    def customerSites(self, command, *args, **kwargs):
-        URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
-        params = (('key', self.key), ('user_id', self.user_id))
-        try:
-            r = requests.get(URL_SITE, params=params, **kwargs)
->>>>>>> 7f3e8ad2a6a2f760c37d6176fb36d66710b74de9
             # LOGGER.info(r)
             Response = r.json() #json.loads(r.text)
         except requests.exceptions.RequestException as e:
@@ -151,20 +143,13 @@ class Controller(udi_interface.Node):
             pass
 
     #### Add Inverters ####
-<<<<<<< HEAD
     def Inverters(self, command):
-=======
-    def Inverters(self, command, *args, **kwargs):
->>>>>>> 7f3e8ad2a6a2f760c37d6176fb36d66710b74de9
         #### GET system_id ####
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-<<<<<<< HEAD
             r1 = requests.get(URL_SITE, params=params)
-=======
-            r1 = requests.get(URL_SITE, params=params, **kwargs)
->>>>>>> 7f3e8ad2a6a2f760c37d6176fb36d66710b74de9
+
             # LOGGER.info(r1)
             Response1 = r1.json() #json.loads(r1.text)
         except requests.exceptions.RequestException as e:

@@ -39,20 +39,13 @@ class SiteNode(udi_interface.Node):
         self.http = urllib3.PoolManager()
 
     #### Get Current Production ####
-<<<<<<< HEAD
-    def siteInfo(self, command, *args):
-=======
-    def siteInfo(self, command, *args, **kwargs):
->>>>>>> 7f3e8ad2a6a2f760c37d6176fb36d66710b74de9
+    def siteInfo(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
             self.system_id + '/summary'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-<<<<<<< HEAD
             r = requests.get(URL_SITE, params=params)
-=======
-            r = requests.get(URL_SITE, params=params, **kwargs)
->>>>>>> 7f3e8ad2a6a2f760c37d6176fb36d66710b74de9
+
             Response = r.json() #json.loads(r.text) #Response1 = r1.json()
             LOGGER.info(Response["current_power"])
             self.setDriver('GV1', str(Response["current_power"]/1000))
@@ -82,20 +75,12 @@ class SiteNode(udi_interface.Node):
             LOGGER.error("Error: " + str(e))
 
     #### Get History ####
-<<<<<<< HEAD
     def siteHist(self, command):
-=======
-    def siteHist(self, command, **kwargs):
->>>>>>> 7f3e8ad2a6a2f760c37d6176fb36d66710b74de9
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
             self.system_id + '/energy_lifetime'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-<<<<<<< HEAD
             r = requests.get(URL_SITE, params=params)
-=======
-            r = requests.get(URL_SITE, params=params, **kwargs)
->>>>>>> 7f3e8ad2a6a2f760c37d6176fb36d66710b74de9
             #print('\n Summary \n' + r)
             Response = r.json() #json.loads(r.text)
             ystdy = len(Response['production'])-1
