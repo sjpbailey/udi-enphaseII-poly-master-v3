@@ -104,7 +104,8 @@ class SiteNode(udi_interface.Node):
     def poll(self, polltype):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            self.siteInfo(self)
+            if 'GV1' != 0:
+                self.siteInfo(self)
         else:
             LOGGER.debug('longPoll (node)')
 

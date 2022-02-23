@@ -125,7 +125,8 @@ class InverterNode(udi_interface.Node):
             sleeptime = random.uniform(60, 240)
             sleep(sleeptime)
             LOGGER.info("sleeping is over")
-            self.getpower(self)
+            if 'GV1' != 0:
+                self.getpower(self)
             # self.reportDrivers()
         else:
             LOGGER.debug('longPoll (node)')
