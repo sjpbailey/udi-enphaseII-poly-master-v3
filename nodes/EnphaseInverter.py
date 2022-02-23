@@ -133,7 +133,7 @@ class InverterNode(udi_interface.Node):
         else:
             LOGGER.debug('longPoll (node)')
 
-    def query(self, command):
+    def query(self,command):
         self.getpower(self)
 
     drivers = [

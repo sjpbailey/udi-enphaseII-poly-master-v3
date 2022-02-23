@@ -60,7 +60,7 @@ class Controller(udi_interface.Node):
     def handleLevelChange(self, level):
         LOGGER.info('New log level: {}'.format(level))
 
-    def query(self, command=None):
+    def query(self,command):
         nodes = self.poly.getNodes()
         for node in nodes:
             nodes[node].reportDrivers()
