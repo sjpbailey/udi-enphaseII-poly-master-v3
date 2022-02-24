@@ -60,8 +60,17 @@ class Controller(udi_interface.Node):
     def handleLevelChange(self, level):
         LOGGER.info('New log level: {}'.format(level))
 
-    def query(self,command):
-        self.reportDrivers()
+    #def query(self,command=None):
+        """
+        Optional.
+
+        The query method will be called when the ISY attempts to query the
+        status of the node directly.  You can do one of two things here.
+        You can send the values currently held by Polyglot back to the
+        ISY by calling reportDriver() or you can actually query the 
+        device represented by the node and report back the current 
+        status.
+        """
         #nodes = self.poly.getNodes()
         #for node in nodes:
         #    nodes[node].reportDrivers()
@@ -236,7 +245,7 @@ class Controller(udi_interface.Node):
     id = 'ctl'
 
     commands = {
-        'QUERY': query,
+        #'QUERY': query,
         'REMOVE_NOTICES_ALL': remove_notices_all,
         'SITEINFO': Inverters,
     }
