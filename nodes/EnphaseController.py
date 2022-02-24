@@ -61,9 +61,10 @@ class Controller(udi_interface.Node):
         LOGGER.info('New log level: {}'.format(level))
 
     def query(self,command):
-        nodes = self.poly.getNodes()
-        for node in nodes:
-            nodes[node].reportDrivers()
+        self.reportDrivers()
+        #nodes = self.poly.getNodes()
+        #for node in nodes:
+        #    nodes[node].reportDrivers()
 
     def delete(self):
         LOGGER.info('deleted.')

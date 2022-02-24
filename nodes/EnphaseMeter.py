@@ -122,7 +122,7 @@ class SiteNode(udi_interface.Node):
     id = 'site'
 
     commands = {
-        'SITEINFO': siteInfo
+        'SITEINFO': siteInfo,
         'QUERY': query,
 
     }
