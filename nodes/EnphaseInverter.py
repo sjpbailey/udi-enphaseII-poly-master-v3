@@ -96,13 +96,10 @@ class InverterNode(udi_interface.Node):
                 LOGGER.info(inv_kWh)
                 self.setDriver('GV2', float(inv_kWh)/1000)
                 LOGGER.info(inv_serial)
-                first_chars = inv_serial[:7]
+                first_chars = inv_serial[:5]
                 LOGGER.info(first_chars)
                 self.setDriver('GV3', first_chars)
-                if inv_serial[0:-3] == 0:
-                    last_chars = inv_serial[-5:]
-                if inv_serial[0:-3] != 0:
-                    last_chars = inv_serial[-4:]
+                last_chars = inv_serial[-7:]
                 LOGGER.info(last_chars)
                 self.setDriver('GV6', last_chars)
                 LOGGER.info(inv_id)

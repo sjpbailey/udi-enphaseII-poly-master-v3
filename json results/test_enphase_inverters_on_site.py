@@ -35,18 +35,14 @@ if (r.status_code == 200):
     
 # printing original string
     print("The original string is : " + test_str)
-    print(test_str[0:-3])
+    #print(test_str[0:-3])
 # Using string slicing
 # Splitting string into equal halves
     res_first, res_second = test_str[:len(
         test_str)//2], test_str[len(test_str)//2:]
 
-    first_chars = test_str[:7]
-    if test_str[-4:] == 0:
-        last_chars = test_str[-5:]
-    if test_str[-4:] != 0:
-        last_chars = test_str[-4:] 
-    #last_chars = test_str[-3:]
+    first_chars = test_str[:5]
+    last_chars = test_str[-7:]
     print(first_chars)
     print(last_chars)
 # printing result
