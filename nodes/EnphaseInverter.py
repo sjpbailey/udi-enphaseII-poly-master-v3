@@ -43,11 +43,6 @@ class InverterNode(udi_interface.Node):
         sleep(sleeptime)
         LOGGER.info("sleeping is over")
         self.getpower(self)
-        
-    def query(self,command):
-        nodes = self.poly.getNodes()
-        for node in nodes:
-            nodes[node].reportDrivers()
 
     # GET Inverter Information
     def getpower(self, command):
@@ -119,6 +114,12 @@ class InverterNode(udi_interface.Node):
     def stop(self):
         LOGGER.debug('NodeServer stopped.')
 
+    def query(self,command):
+        nodes = self.poly.getNodes()
+        for node in nodes:
+            nodes[node].reportDrivers()
+
+    
     # NEED to do this: Do Not Poll unless you have power being produced  and 'GV1' != 0
     # Poll at random intervols
     def poll(self, polltype):

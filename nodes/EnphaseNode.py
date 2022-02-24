@@ -37,11 +37,6 @@ class SiteNode(udi_interface.Node):
     def start(self):
         self.siteInfo(self)
         self.http = urllib3.PoolManager()
-        
-    def query(self,command):
-        nodes = self.poly.getNodes()
-        for node in nodes:
-            nodes[node].reportDrivers()
 
     #### Get Current Production ####
     def siteInfo(self, command):
@@ -105,6 +100,11 @@ class SiteNode(udi_interface.Node):
             self.setDriver('GV9', float(Response["production"][dybf2]/1000))
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
+
+    def query(self,command):
+        nodes = self.poly.getNodes()
+        for node in nodes:
+            nodes[node].reportDrivers()
 
     # Do Not Poll unless you have power being produced
     def poll(self, polltype):
