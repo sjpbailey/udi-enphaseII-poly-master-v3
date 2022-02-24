@@ -7,7 +7,6 @@
     <cmds>
       <sends />
       <accepts>
-        <!-- <cmd id="QUERY" /> =-->
         <cmd id="REMOVE_NOTICES_ALL" />
         <cmd id="SITEINFO" />
       </accepts>
