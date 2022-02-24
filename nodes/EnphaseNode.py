@@ -37,6 +37,11 @@ class SiteNode(udi_interface.Node):
     def start(self):
         self.siteInfo(self)
         self.http = urllib3.PoolManager()
+        
+    def query(self,command):
+        nodes = self.poly.getNodes()
+        for node in nodes:
+            nodes[node].reportDrivers()
 
     #### Get Current Production ####
     def siteInfo(self, command):
@@ -131,6 +136,7 @@ class SiteNode(udi_interface.Node):
     id = 'site'
 
     commands = {
-        'SITEINFO': siteInfo
+        'SITEINFO': siteInfo,
+        'QUERY': query,
 
     }

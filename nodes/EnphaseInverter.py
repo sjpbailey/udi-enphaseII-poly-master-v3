@@ -43,6 +43,11 @@ class InverterNode(udi_interface.Node):
         sleep(sleeptime)
         LOGGER.info("sleeping is over")
         self.getpower(self)
+        
+    def query(self,command):
+        nodes = self.poly.getNodes()
+        for node in nodes:
+            nodes[node].reportDrivers()
 
     # GET Inverter Information
     def getpower(self, command):
@@ -123,15 +128,15 @@ class InverterNode(udi_interface.Node):
             sleep(sleeptime)
             LOGGER.info("sleeping is over")
             self.getpower(self)
-            #if 'GV1' != 0:
-            #    self.getpower(self)
+            # if 'GV1' == 0 start while loop, end while loop at sunrise
             #if 'GV1' == 0:
-            #    self.reportDrivers()
+            #   self.reportDrivers() 
+            #   start while loop:
+            #   Wait for Sunrise
+            #    self.getpower(self)
+            
         else:
             LOGGER.debug('longPoll (node)')
-
-    def query(self,command):
-        self.getpower(self)
 
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},
@@ -146,5 +151,6 @@ class InverterNode(udi_interface.Node):
     id = 'inverter'
 
     commands = {
-        'SITEINFO': query
+        'SITEINFO': getpower,
+        'QUERY': query,
     }

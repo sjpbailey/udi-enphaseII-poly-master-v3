@@ -12,7 +12,7 @@ print(t0)
 gyg = 23
     
 while True:
-    t0 = gyg #time.time()
+    t0 = time.time()
 if (time.strftime("%H:%M",time.localtime(t0))) > (today_sr.strftime('%H:%M')) and (time.strftime("%H:%M",time.localtime(t0))) < (today_ss.strftime('%H:%M')):
     print (random.randint(0,20))
     
