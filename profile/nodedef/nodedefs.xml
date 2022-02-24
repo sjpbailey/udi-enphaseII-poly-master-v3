@@ -33,6 +33,7 @@
       <sends />
       <accepts>
         <cmd id="SITEINFO" />
+        <cmd id="QUERY" />
       </accepts>
     </cmds>
   </nodeDef>
@@ -52,6 +53,7 @@
       <sends />
       <accepts>
         <cmd id="SITEINFO" />
+        <cmd id="QUERY" />
       </accepts>
     </cmds>
   </nodeDef>

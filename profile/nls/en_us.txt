@@ -22,6 +22,7 @@ ST-str-GV7-NAME = kWh Three Days Ago
 ST-str-GV8-NAME = kWh Four Days Ago
 ST-str-GV9-NAME = kWh Five Days Ago
 CMD-str-SITEINFO-NAME = Update Information
+CMD-str-QUERY-NAME = Query
 
 # Inverters OnSite
 ND-inverter-NAME = Inverter
@@ -34,6 +35,7 @@ ST-inv-GV3-NAME = Serial Part 1
 ST-inv-GV6-NAME = Serial Part 2
 ST-inv-GV4-NAME = Status
 CMD-inv-SITEINFO-NAME = Update Information
+CMD-inv-QUERY-NAME = Query
 
 
 # Status Text
