@@ -114,10 +114,8 @@ class InverterNode(udi_interface.Node):
     def stop(self):
         LOGGER.debug('NodeServer stopped.')
 
-    def query(self,command):
-        nodes = self.poly.getNodes()
-        for node in nodes:
-            nodes[node].reportDrivers()
+    def query(self,command=None):
+        self.reportDrivers()
 
     
     # NEED to do this: Do Not Poll unless you have power being produced  and 'GV1' != 0

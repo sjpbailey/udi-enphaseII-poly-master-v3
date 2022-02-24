@@ -101,10 +101,8 @@ class SiteNode(udi_interface.Node):
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
 
-    def query(self,command):
-        nodes = self.poly.getNodes()
-        for node in nodes:
-            nodes[node].reportDrivers()
+    def query(self,command=None):
+        self.reportDrivers()
 
     # Do Not Poll unless you have power being produced
     def poll(self, polltype):
