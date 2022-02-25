@@ -35,6 +35,10 @@ class MeterNode(udi_interface.Node):
         self.user_id = user_id
 
     def start(self):
+        if self.system_id is not None:
+            self.setDriver('ST', 1)
+        else:
+            self.setDriver('ST', 0)
         self.siteInfo(self)
         self.http = urllib3.PoolManager()
 
@@ -46,10 +50,7 @@ class MeterNode(udi_interface.Node):
         try:
             r = requests.get(URL_SITE, params=params, **kwargs)
             Response = r.json() #loads(r.text)
-            if Response['meta']['status'] is not None:
-                self.setDriver('ST', 1)
-            else:
-                self.setDriver('ST', 0)
+            
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))    
 
