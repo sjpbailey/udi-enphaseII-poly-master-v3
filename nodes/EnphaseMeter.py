@@ -46,7 +46,7 @@ class MeterNode(udi_interface.Node):
         try:
             r = requests.get(URL_SITE, params=params, **kwargs)
             Response = r.json() #loads(r.text)
-            hmr = len(Response["intervals"])-1
+            hmr = 37 #len(Response["intervals"])-1
             LOGGER.info(Response["intervals"][hmr]['enwh']/1000)
             self.setDriver('GV1', ["intervals"][hmr]['enwh']/1000)
             #LOGGER.info(Response["energy_today"])
