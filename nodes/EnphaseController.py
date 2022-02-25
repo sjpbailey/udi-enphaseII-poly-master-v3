@@ -134,7 +134,7 @@ class Controller(udi_interface.Node):
                     self.poly.addNode(node)
         if system_id is not None:
             self.Inverters(self)
-            self.setDriver('GV1', system_id)
+            self.setDriver('GV1', str(system_id))
         else:
             pass
 
@@ -223,7 +223,7 @@ class Controller(udi_interface.Node):
                 LOGGER.info("Consumption Meter not found 'None'")
             if r != 401:
                 LOGGER.info("Consumption Meter found 'Not None'")
-            address = 1
+            address = 'Meter_1'
             name = 'Meter 1'
             #if r == 200:
             node = EnphaseMeter.MeterNode(self.poly, self.address, address, name, str(system_id), self.key, self.user_id)
