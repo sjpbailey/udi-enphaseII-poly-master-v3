@@ -46,7 +46,7 @@ class MeterNode(udi_interface.Node):
         try:
             r = requests.get(URL_SITE, params=params, **kwargs)
             Response = r.json() #loads(r.text)
-            if r.status_code == 200:
+            if self.system_id is not None:
                 self.setDriver('ST', 1)
             else:
                 self.setDriver('ST', 0)
@@ -72,8 +72,8 @@ class MeterNode(udi_interface.Node):
                 print('\nReport Time\n{id_new}\n\nDevice\n{device}\nkWh\n{kwh}\n\nIndex\n{mtr_idx}\n'.format(
                     id_new=id_new, device=device, kwh=kwh, mtr_idx=mtr_idx))
             
-                LOGGER.info(kwh/1000)
-                self.setDriver('GV1', float(kwh)/1000)
+                #LOGGER.info(kwh/1000)
+                #self.setDriver('GV1', float(kwh)/1000)
                 self.siteHist(self)
                 #LOGGER.info(Response["energy_today"])
                 #self.setDriver('GV2', float(Response["energy_today"]/1000))
