@@ -16,7 +16,7 @@ params = (('key', key), ('user_id', user_id))
 # ('user_id', '4d6a55794e7a55354d413d3d0a'),  # 4d6a55794e7a55354d413d3d0a
 # )
 
-print(datetime.utcfromtimestamp(1643673600).strftime('%c'))
+"""print(datetime.utcfromtimestamp(1643673600).strftime('%c'))
 response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems',  params=params).text  # for loop for solar array
 #print('\n Inverters \n' + jsonData)
@@ -28,13 +28,13 @@ print(datetime.utcfromtimestamp(jsonData["period_end"]).strftime('%c'))
 sleeptime = random.uniform(2, 4)
 print("sleeping for:", sleeptime, "seconds")
 sleep(sleeptime)
-print("sleeping is over")
+print("sleeping is over")"""
 
 # System ID:2527105
 # url auth? 1409622241421
 
 
-"""#### System Status Site ID ####
+#### System Status Site ID ####
 response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems',  params=params).text  # for loop for solar array
 #print('\n Inverters \n' + jsonData)
@@ -45,7 +45,7 @@ print(systemResponse)
 #print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 #print('\n System Status \n', systemResponse["systems"][0]["status"])
 #print('\n System Country \n', systemResponse["systems"][0]["country"])"""
-"""hellohere = systemResponse["systems"][0]
+hellohere = systemResponse["systems"][0]
 # print(hellohere)
 #### Iter Response ####
 df = pd.json_normalize(jsonData['systems'])
@@ -65,7 +65,7 @@ for device in device_list:
         status = row['status']
         timezone = row['timezone']
         print('\nSystem ID\n{id_new}\n\nSystem Name\n{system_name}\n\nType\n{system_public_name}\n''\nstatus ID\n{status}\n'.format(
-            id_new=id_new, system_name=system_name, system_public_name=system_public_name, status=status))"""
+            id_new=id_new, system_name=system_name, system_public_name=system_public_name, status=status))
 
 """print()
 # print(df['id'])

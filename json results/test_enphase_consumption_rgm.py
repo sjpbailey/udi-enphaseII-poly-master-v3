@@ -162,30 +162,92 @@ print('\n Inverters \n' + response6)
 #    print(inverters)    # inverter"""
 
 
+
+
+
+"""#### System Status Site ID ####
+response = requests.get(
+    'https://api.enphaseenergy.com/api/v2/systems',  params=params).text  # for loop for solar array
+#print('\n Inverters \n' + jsonData)
+jsonData = json.loads(response)
+systemResponse = json.loads(response)
+print(systemResponse)
+#print('\n System ID \n', systemResponse["systems"][0]["system_id"])
+#print('\n System ID \n', systemResponse["systems"][0]["system_id"])
+#print('\n System Status \n', systemResponse["systems"][0]["status"])
+#print('\n System Country \n', systemResponse["systems"][0]["country"])"""
+"""hellohere = systemResponse["systems"][0]
+# print(hellohere)
+#### Iter Response ####
+df = pd.json_normalize(jsonData['systems'])
+df = df.fillna(-1)
+
+df['type'] = None
+df['type'] = np.where(df['system_id'], 'system', df['type'])
+system = df[df['type'] == 'system'].reset_index(drop=True)
+# System string
+device_list = [system]
+for device in device_list:
+    for idx, row in device.iterrows():
+        id = row['system_id']
+        id_new = id
+        system_name = row['system_name']
+        system_public_name = row['system_public_name']
+        status = row['status']
+        timezone = row['timezone']
+        print('\nSystem ID\n{id_new}\n\nSystem Name\n{system_name}\n\nType\n{system_public_name}\n''\nstatus ID\n{status}\n'.format(
+            id_new=id_new, system_name=system_name, system_public_name=system_public_name, status=status))"""
+
 sitenum = 37
 system_id = '2527105'
 response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/' + system_id + '/consumption_stats',  params=params) # https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_stats
 #print('\n Summary \n' + response)
 jsonResponse = json.loads(response.text)
-print(response)
-print('\n System how mant more times \n', len(jsonResponse["intervals"])-1)
-print('\n System JSON UTF8 \n',response.text.encode('utf8'))
-#print('\n System Status \n', response)
-print('\n System kWh Consumed \n', jsonResponse["intervals"][sitenum]['enwh'])
+#print(response)
+#print(jsonResponse)
+"""print('\n System INTERVALS \n', jsonResponse["system_id"])#[37])#[sitenum]['enwh'])
+print('\n System ID \n', jsonResponse["system_id"])
+print('\n Total Devices \n', jsonResponse["total_devices"])
+print('\n Intervals \n', jsonResponse["intervals"])
+print('\n System how many intervals \n', len(jsonResponse["intervals"])-1)
 print('\n System Device \n', jsonResponse["intervals"][sitenum]['devices_reporting'])
-print('\n System Unix Time Ending \n', jsonResponse["intervals"][sitenum]['end_at'])
+print('\n System Unix Time Ending \n', jsonResponse["intervals"][sitenum]['end_at'])"""
+
+
+#### Iter Response ####
+df = pd.json_normalize(jsonResponse['intervals'])
+df = df.fillna(-1)
+
+df['type'] = None
+df['type'] = np.where(df['end_at'], 'system', df['type'])
+system = df[df['type'] == 'system'].reset_index(drop=True)
+# System string
+device_list = [system]
+for device in device_list:
+    for idx, row in device.iterrows():
+        id = row['end_at']
+        id_new = id
+        device = row['devices_reporting']
+        kwh = row['enwh']
+        mtr_idx = '%s' % (idx)
+        print('\nReport Time\n{id_new}\n\nDevice\n{device}\nkWh\n{kwh}\n\nIndex\n{mtr_idx}\n'.format(
+            id_new=id_new, device=device, kwh=kwh, mtr_idx=mtr_idx))
+
 #print('\n System Unix Time Ending \n', jsonResponse["intervals"][sitenum]['end_at'])
 ut = int(time.time())
 print(ut)
-print('\n System kWh Consumed \n', jsonResponse['meta'])#["intervals"][sitenum]['enwh'])
+#print('\n System kWh Consumed \n', jsonResponse['meta'])#["intervals"][sitenum]['enwh'])
 
-for key in jsonResponse:
-    print(key)
+#for key in jsonResponse:
+#    print(key)
 
+#print('\n System how mant more times \n', len(jsonResponse["intervals"])-1)
+#print('\n System JSON UTF8 \n',response.text.encode('utf8'))
+#print('\n System Status \n', response)
 
 #### HISTORY ####
-response = requests.get(
+"""response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text  # for loop for solar array
 jsonData = json.loads(response)
 print(response)
@@ -203,7 +265,7 @@ print('\nYesterday\n' + str(float(Response["consumption"][ystdy]/1000)))
 print('\nSecond Day Before\n' + str(float(Response["consumption"][dybfo]/1000)))
 print('\nThird Day Before\n' + str(float(Response["consumption"][dybfy]/1000)))
 print('\nFourth Day Before\n' + str(float(Response["consumption"][dybft]/1000)))
-print('\nFourth Day Before\n' + str(float(Response["consumption"][dybf2]/1000)))
+print('\nFourth Day Before\n' + str(float(Response["consumption"][dybf2]/1000)))"""
 
 
 
