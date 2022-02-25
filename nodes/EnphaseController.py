@@ -226,7 +226,7 @@ class Controller(udi_interface.Node):
             address = 1
             name = 'Meter 1'
             #if r == 200:
-            node = EnphaseNode.MeterNode(self.poly, self.address, address, name, str(system_id), self.key, self.user_id)
+            node = EnphaseMeter.MeterNode(self.poly, self.address, address, name, str(system_id), self.key, self.user_id)
             self.poly.addNode(node)
 
     def remove_notices_all(self, command):
