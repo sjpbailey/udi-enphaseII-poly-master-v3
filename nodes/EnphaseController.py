@@ -225,9 +225,9 @@ class Controller(udi_interface.Node):
                 LOGGER.info("Consumption Meter found 'Not None'")
             address = 1
             name = 'Meter 1'
-            if r == 200:
-                    node = EnphaseNode.MeterNode(self.poly, self.address, address, name, str(system_id), self.key, self.user_id)
-                    self.poly.addNode(node)
+            #if r == 200:
+            node = EnphaseNode.MeterNode(self.poly, self.address, address, name, str(system_id), self.key, self.user_id)
+            self.poly.addNode(node)
 
     def remove_notices_all(self, command):
         LOGGER.info('remove_notices_all: notices={}'.format(self.Notices))
