@@ -33,7 +33,7 @@ class MeterNode(udi_interface.Node):
         self.system_id = system_id
         self.key = key
         self.user_id = user_id
-        if system_id is not None:
+        if system_id != None:
             self.setDriver('ST', 1)
         else:
             self.setDriver('ST', 0)
