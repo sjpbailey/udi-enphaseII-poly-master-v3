@@ -16,6 +16,7 @@ import udi_interface
 
 from nodes import EnphaseNode
 from nodes import EnphaseInverter
+from nodes import EnphaseMeter
 
 LOGGER = udi_interface.LOGGER
 LOG_HANDLER = udi_interface.LOG_HANDLER
@@ -133,6 +134,7 @@ class Controller(udi_interface.Node):
                     self.poly.addNode(node)
         if system_id is not None:
             self.Inverters(self)
+            self.setDriver('GV1', system_id)
         else:
             pass
 
@@ -221,6 +223,11 @@ class Controller(udi_interface.Node):
                 LOGGER.info("Consumption Meter not found 'None'")
             if r != 401:
                 LOGGER.info("Consumption Meter found 'Not None'")
+            address = 1
+            name = 'Meter 1'
+            if r == 200:
+                    node = EnphaseNode.MeterNode(self.poly, self.address, address, name, str(system_id), self.key, self.user_id)
+                    self.poly.addNode(node)
 
     def remove_notices_all(self, command):
         LOGGER.info('remove_notices_all: notices={}'.format(self.Notices))
@@ -236,5 +243,6 @@ class Controller(udi_interface.Node):
 
     drivers = [
         {'driver': 'ST', 'value': 1, 'uom': 2},
+        {'driver': 'ST', 'value': 1, 'uom':56}
 
     ]

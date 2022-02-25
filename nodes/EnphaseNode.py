@@ -59,7 +59,7 @@ class SiteNode(udi_interface.Node):
             kw2 = float(kw1*1000)
             kw3 = float(kw2//220)
             LOGGER.info(kw3)
-            self.setDriver('GV11', kw3, report=True, force=True)
+            self.setDriver('GV11', float(kw3), report=True, force=True)
             LOGGER.info(Response["status"])
             normal1 = Response["status"]
             if normal1 == 'normal':

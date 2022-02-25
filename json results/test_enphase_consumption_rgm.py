@@ -6,6 +6,7 @@ from numpy import random
 from time import sleep
 import pandas as pd
 import numpy as np
+import time
 
 sleeptime = random.uniform(1, 2)
 print("sleeping for:", sleeptime, "seconds")
@@ -49,8 +50,8 @@ end_date = end_date
 
 
 # gives 401 is no consumption meter or {"reason":"404","message":["Resource not found"]}
-response9 = requests.get(
-    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text
+#response9 = requests.get(
+#    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text
 #print('\n Consumption Meter Life Time\n' + response9)
 #print(response9)
 #if response9[0] == 401:
@@ -106,8 +107,8 @@ print('\n System ID \n', systemResponse["systems"][0]["system_id"])
 #print('\n production meter \n' + response10)
 
 
-response11 = requests.get(
-    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text
+#response11 = requests.get(
+#    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text
 #print('\n consumption lifetime \n' + response11)
 #consumption_lifetime
 #print('\n System kW \n', response11[0])
@@ -160,18 +161,51 @@ print('\n Inverters \n' + response6)
 #    inverters = str(["micro_inverters"])
 #    print(inverters)    # inverter"""
 
+
+sitenum = 37
 system_id = '2527105'
 response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/' + system_id + '/consumption_stats',  params=params) # https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_stats
 #print('\n Summary \n' + response)
 jsonResponse = json.loads(response.text)
-print(jsonResponse)
-print(response.text.encode('utf8'))
-print('\n System kW \n', response)
-#print('\n System kWh \n', jsonResponse["energy_today"]/1000)
-#print('\n System Status \n', jsonResponse["status"])
-#print('\n System kWh Today\n', jsonResponse["energy_today"]/1000)
-#print('\n System kWh Life Time\n', jsonResponse["energy_lifetime"]/1000)
+print(response)
+print('\n System how mant more times \n', len(jsonResponse["intervals"])-1)
+print('\n System JSON UTF8 \n',response.text.encode('utf8'))
+#print('\n System Status \n', response)
+print('\n System kWh Consumed \n', jsonResponse["intervals"][sitenum]['enwh'])
+print('\n System Device \n', jsonResponse["intervals"][sitenum]['devices_reporting'])
+print('\n System Unix Time Ending \n', jsonResponse["intervals"][sitenum]['end_at'])
+#print('\n System Unix Time Ending \n', jsonResponse["intervals"][sitenum]['end_at'])
+ut = int(time.time())
+print(ut)
+print('\n System kWh Consumed \n', jsonResponse['meta'])#["intervals"][sitenum]['enwh'])
+
+for key in jsonResponse:
+    print(key)
+
+
+#### HISTORY ####
+response = requests.get(
+    'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text  # for loop for solar array
+jsonData = json.loads(response)
+print(response)
+print(jsonData)
+
+#response = requests.get(response, params=params)
+#print('\n Summary \n' + response) 
+Response = json.loads(response)
+ystdy = len(Response['consumption'])-1
+dybfo = len(Response['consumption'])-2
+dybfy = len(Response['consumption'])-3
+dybft = len(Response['consumption'])-4
+dybf2 = len(Response['consumption'])-5
+print('\nYesterday\n' + str(float(Response["consumption"][ystdy]/1000)))
+print('\nSecond Day Before\n' + str(float(Response["consumption"][dybfo]/1000)))
+print('\nThird Day Before\n' + str(float(Response["consumption"][dybfy]/1000)))
+print('\nFourth Day Before\n' + str(float(Response["consumption"][dybft]/1000)))
+print('\nFourth Day Before\n' + str(float(Response["consumption"][dybf2]/1000)))
+
+
 
 # print(int(jsonResponse["current_power"]))
 

@@ -10,7 +10,7 @@
 		<range uom="30" min="-1000000" max="1000000" prec="0" />
 	</editor>
 	<editor id="kwh">
-		<range uom="30" min="-1000000" max="1000000" prec="0" />
+		<range uom="33" min="-1000000" max="1000000" prec="0" />
     </editor>
 	<editor id="amp">
 		<range uom="1" min="-100000" max="1000000" prec=".1" />

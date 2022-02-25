@@ -22,9 +22,9 @@ from nodes import EnphaseController
 LOGGER = udi_interface.LOGGER
 
 
-class SiteNode(udi_interface.Node):
+class MeterNode(udi_interface.Node):
     def __init__(self, polyglot, primary, address, name, system_id, key, user_id):
-        super(SiteNode, self).__init__(polyglot, primary, address, name)
+        super(MeterNode, self).__init__(polyglot, primary, address, name)
         self.poly = polyglot
         self.lpfx = '%s:%s' % (address, name)
         self.poly.subscribe(self.poly.START, self.start, address)
@@ -45,21 +45,22 @@ class SiteNode(udi_interface.Node):
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r = requests.get(URL_SITE, params=params, **kwargs)
-            Response = json.loads(r.text)
-            LOGGER.info(Response["current_power"])
-            self.setDriver('GV1', float(Response["current_power"]/1000))
-            LOGGER.info(Response["energy_today"])
-            self.setDriver('GV2', float(Response["energy_today"]/1000))
-            LOGGER.info(Response["energy_lifetime"])
-            self.setDriver('GV3', float(Response["energy_lifetime"]/1000))
-            self.setDriver('GV10', str(Response['modules']))
-            LOGGER.info(Response["status"])
-            normal1 = Response["status"]
-            if normal1 == 'normal':
-                self.setDriver('GV4', 1)
-                self.siteHist(self)
-            else:
-                self.setDriver('GV4', 0)
+            Response = r.json() #loads(r.text)
+            hmr = len(Response["intervals"])-1
+            LOGGER.info(Response["intervals"][hmr]['enwh']/1000)
+            self.setDriver('GV1', ["intervals"][hmr]['enwh']/1000)
+            #LOGGER.info(Response["energy_today"])
+            #self.setDriver('GV2', float(Response["energy_today"]/1000))
+            #LOGGER.info(Response["energy_lifetime"])
+            #self.setDriver('GV3', float(Response["energy_lifetime"]/1000))
+            #self.setDriver('GV10', str(Response['modules']))
+            #LOGGER.info(Response["status"])
+            #normal1 = Response["status"]
+            #if normal1 == 'normal':
+            #    self.setDriver('GV4', 1)
+            #    self.siteHist(self)
+            #else:
+            #    self.setDriver('GV4', 0)
             if r.status_code == 200:
                 self.setDriver('ST', 1)
             else:
@@ -108,9 +109,9 @@ class SiteNode(udi_interface.Node):
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 2},
         {'driver': 'GV1', 'value': 0, 'uom': 30},
-        {'driver': 'GV2', 'value': 0, 'uom': 33},
-        {'driver': 'GV3', 'value': 0, 'uom': 33},
-        {'driver': 'GV4', 'value': 0, 'uom': 25},
+        #{'driver': 'GV2', 'value': 0, 'uom': 33},
+        #{'driver': 'GV3', 'value': 0, 'uom': 33},
+        #{'driver': 'GV4', 'value': 0, 'uom': 25},
         {'driver': 'GV5', 'value': 0, 'uom': 33},
         {'driver': 'GV6', 'value': 0, 'uom': 33},
         {'driver': 'GV7', 'value': 0, 'uom': 33},
@@ -119,7 +120,7 @@ class SiteNode(udi_interface.Node):
         {'driver': 'GV10', 'value': 0, 'uom': 56},
     ]
 
-    id = 'site'
+    id = 'meter'
 
     commands = {
         'SITEINFO': siteInfo,
