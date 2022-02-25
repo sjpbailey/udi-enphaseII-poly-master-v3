@@ -251,7 +251,7 @@ response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text  # for loop for solar array
 jsonData = json.loads(response)
 print(response)
-print(jsonData)
+print(jsonData['meta']['status'])
 
 #response = requests.get(response, params=params)
 #print('\n Summary \n' + response) 

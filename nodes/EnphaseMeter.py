@@ -46,7 +46,7 @@ class MeterNode(udi_interface.Node):
         try:
             r = requests.get(URL_SITE, params=params, **kwargs)
             Response = r.json() #loads(r.text)
-            if self.system_id is not None:
+            if Response['meta']['status'] is not None:
                 self.setDriver('ST', 1)
             else:
                 self.setDriver('ST', 0)
