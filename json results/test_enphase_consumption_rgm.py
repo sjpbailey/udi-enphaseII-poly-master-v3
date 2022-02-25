@@ -247,7 +247,7 @@ print(ut)
 #print('\n System Status \n', response)
 
 #### HISTORY ####
-"""response = requests.get(
+response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text  # for loop for solar array
 jsonData = json.loads(response)
 print(response)
@@ -265,7 +265,7 @@ print('\nYesterday\n' + str(float(Response["consumption"][ystdy]/1000)))
 print('\nSecond Day Before\n' + str(float(Response["consumption"][dybfo]/1000)))
 print('\nThird Day Before\n' + str(float(Response["consumption"][dybfy]/1000)))
 print('\nFourth Day Before\n' + str(float(Response["consumption"][dybft]/1000)))
-print('\nFourth Day Before\n' + str(float(Response["consumption"][dybf2]/1000)))"""
+print('\nFourth Day Before\n' + str(float(Response["consumption"][dybf2]/1000)))
 
 
 

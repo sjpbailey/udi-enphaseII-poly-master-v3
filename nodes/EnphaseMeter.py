@@ -93,7 +93,7 @@ class MeterNode(udi_interface.Node):
     #### Get History ####
     def siteHist(self, command, **kwargs):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
-            self.system_id + '/energy_lifetime'
+            self.system_id + '/consumption_lifetime'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
             r = requests.get(URL_SITE, params=params, **kwargs)
