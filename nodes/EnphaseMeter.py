@@ -33,10 +33,7 @@ class MeterNode(udi_interface.Node):
         self.system_id = system_id
         self.key = key
         self.user_id = user_id
-        if system_id != None:
-            self.setDriver('ST', 1)
-        else:
-            self.setDriver('ST', 0)
+        
 
     def start(self):
         self.siteInfo(self)
@@ -50,6 +47,10 @@ class MeterNode(udi_interface.Node):
         try:
             r = requests.get(URL_SITE, params=params, **kwargs)
             Response = r.json() #loads(r.text)
+            if r.status_code == 200:
+                self.setDriver('ST', 1)
+            else:
+                self.setDriver('ST', 0)
             
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))    
@@ -75,6 +76,10 @@ class MeterNode(udi_interface.Node):
             
                 #LOGGER.info(kwh/1000)
                 #self.setDriver('GV1', float(kwh)/1000)
+                if self.system_id != None:
+                    self.setDriver('ST', 1)
+                else:
+                    self.setDriver('ST', 0)
                 self.siteHist(self)
                 #LOGGER.info(Response["energy_today"])
                 #self.setDriver('GV2', float(Response["energy_today"]/1000))
