@@ -216,7 +216,7 @@ print('\n System Unix Time Ending \n', jsonResponse["intervals"][sitenum]['end_a
 
 
 #### Iter Response ####
-df = pd.json_normalize(jsonResponse['intervals'])
+df = pd.json_normalize(jsonResponse['intervals'][0])
 df = df.fillna(-1)
 
 df['type'] = None

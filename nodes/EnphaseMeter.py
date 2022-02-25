@@ -54,7 +54,7 @@ class MeterNode(udi_interface.Node):
             LOGGER.error("Error: " + str(e))    
 
         #### Iter Response ####
-        df = pd.json_normalize(Response['intervals'])
+        df = pd.json_normalize(Response['intervals'][0])
         df = df.fillna(-1)
 
         df['type'] = None
