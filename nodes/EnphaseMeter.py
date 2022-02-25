@@ -46,27 +46,48 @@ class MeterNode(udi_interface.Node):
         try:
             r = requests.get(URL_SITE, params=params, **kwargs)
             Response = r.json() #loads(r.text)
-            hmr = 0 #len(Response["intervals"])-1
-            LOGGER.info(Response["intervals"][hmr]['enwh']/1000)
-            self.setDriver('GV1', ["intervals"][hmr]['enwh']/1000)
-            #LOGGER.info(Response["energy_today"])
-            #self.setDriver('GV2', float(Response["energy_today"]/1000))
-            #LOGGER.info(Response["energy_lifetime"])
-            #self.setDriver('GV3', float(Response["energy_lifetime"]/1000))
-            #self.setDriver('GV10', str(Response['modules']))
-            #LOGGER.info(Response["status"])
-            #normal1 = Response["status"]
-            #if normal1 == 'normal':
-            #    self.setDriver('GV4', 1)
-            #    self.siteHist(self)
-            #else:
-            #    self.setDriver('GV4', 0)
             if r.status_code == 200:
                 self.setDriver('ST', 1)
             else:
                 self.setDriver('ST', 0)
         except requests.exceptions.RequestException as e:
-            LOGGER.error("Error: " + str(e))
+            LOGGER.error("Error: " + str(e))    
+
+        #### Iter Response ####
+        df = pd.json_normalize(Response['intervals'])
+        df = df.fillna(-1)
+
+        df['type'] = None
+        df['type'] = np.where(df['end_at'], 'system', df['type'])
+        system = df[df['type'] == 'system'].reset_index(drop=True)
+        # System string
+        device_list = [system]
+        for device in device_list:
+            for idx, row in device.iterrows():
+                id = row['end_at']
+                id_new = id
+                device = row['devices_reporting']
+                kwh = row['enwh']
+                mtr_idx = '%s' % (idx)
+                print('\nReport Time\n{id_new}\n\nDevice\n{device}\nkWh\n{kwh}\n\nIndex\n{mtr_idx}\n'.format(
+                    id_new=id_new, device=device, kwh=kwh, mtr_idx=mtr_idx))    
+            
+                LOGGER.info(kwh/1000)
+                self.setDriver('GV1', kwh/1000)
+                #LOGGER.info(Response["energy_today"])
+                #self.setDriver('GV2', float(Response["energy_today"]/1000))
+                #LOGGER.info(Response["energy_lifetime"])
+                #self.setDriver('GV3', float(Response["energy_lifetime"]/1000))
+                #self.setDriver('GV10', str(Response['modules']))
+                #LOGGER.info(Response["status"])
+                #normal1 = Response["status"]
+                #if normal1 == 'normal':
+                #    self.setDriver('GV4', 1)
+                #    self.siteHist(self)
+                #else:
+                #    self.setDriver('GV4', 0)
+            
+        
 
     #### Get History ####
     def siteHist(self, command, **kwargs):
