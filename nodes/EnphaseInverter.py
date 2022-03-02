@@ -88,7 +88,7 @@ class InverterNode(udi_interface.Node):
                     name=name, inv_id=inv_id, inv_serial=inv_serial, inv_status=inv_status, inv_kWh=inv_kWh, inv_kW=inv_kW, inv_idx=inv_idx))
                 LOGGER.info(inv_kW)
                 if inv_kWh > 1:
-                    self.setDriver('GV1', float(inv_kW))
+                    self.setDriver('GV1', float(inv_kW)/1000)
                 if inv_kW <= 1:
                     self.setDriver('GV1', 0)
                 else:
