@@ -41,7 +41,7 @@
   <nodeDef id="meter" nodeType="139" nls="mtr">
     <sts>
       <st id="ST" editor="bool" />
-      <st id="GV1" editor="kwh" />
+      <st id="GV1" editor="kw" />
       <st id="GV2" editor="kwh" />
       <st id="GV3" editor="kwh" />
       <st id="GV4" editor="kwh" />
