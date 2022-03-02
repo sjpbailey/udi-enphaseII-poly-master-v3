@@ -76,8 +76,8 @@ class MeterNode(udi_interface.Node):
                 print('\nReport Time\n{id_new}\n\nDevice\n{device}\nkWh\n{kwh}\n\nIndex\n{mtr_idx}\n'.format(
                     id_new=id_new, device=device, kwh=kwh, mtr_idx=mtr_idx))
             
-                LOGGER.info(kwh/1000)
-                self.setDriver('GV1', float(kwh)/1000)
+                LOGGER.info(kwh/100)
+                self.setDriver('GV1', float(kwh)/100)
 
     #### Get History ####
     def meterHist(self, command, **kwargs):
