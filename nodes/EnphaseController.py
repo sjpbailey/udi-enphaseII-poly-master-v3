@@ -246,7 +246,7 @@ class Controller(udi_interface.Node):
                         LOGGER.info('\nReport Time\n{id_new}\n\nDevice\n{device}\nkWh\n{kwh}\n\nIndex\n{mtr_idx}\n'.format(
                         id_new=id_new, device=device, kwh=kwh, mtr_idx=mtr_idx))
             
-                        node = EnphaseMeter.MeterNode(self.poly, self.address, 'meter'+'_%s' % (idx+1), 'Consumption Meter'+ device, str(system_id), self.key, self.user_id)
+                        node = EnphaseMeter.MeterNode(self.poly, self.address, 'meter'+'_%s' % (idx+1), 'Consumption Meter', str(system_id), self.key, self.user_id)
                         self.poly.addNode(node)
 
     def remove_notices_all(self, command):
