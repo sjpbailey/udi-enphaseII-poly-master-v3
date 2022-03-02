@@ -52,7 +52,7 @@ class MeterNode(udi_interface.Node):
                 self.setDriver('ST', 1)
             else:
                 self.setDriver('ST', 0)
-                self.meterHist(self)
+                
             
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))    
@@ -78,6 +78,7 @@ class MeterNode(udi_interface.Node):
             
                 LOGGER.info(kwh/100)
                 self.setDriver('GV1', float(kwh)/100)
+                self.meterHist(self)
 
     #### Get History ####
     def meterHist(self, command, **kwargs):
