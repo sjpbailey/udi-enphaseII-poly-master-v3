@@ -204,7 +204,7 @@ response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/' + system_id + '/consumption_stats',  params=params) # https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_stats
 #print('\n Summary \n' + response)
 jsonResponse = json.loads(response.text)
-#print(response)
+print(response)
 #print(jsonResponse)
 """print('\n System INTERVALS \n', jsonResponse["system_id"])#[37])#[sitenum]['enwh'])
 print('\n System ID \n', jsonResponse["system_id"])
@@ -250,8 +250,8 @@ print(ut)
 response = requests.get(
     'https://api.enphaseenergy.com/api/v2/systems/2527105/consumption_lifetime',  params=params).text  # for loop for solar array
 jsonData = json.loads(response)
-print(response)
-print(jsonData['meta']['status'])
+#print(response)
+#print(jsonData['meta']['status'])
 
 #response = requests.get(response, params=params)
 #print('\n Summary \n' + response) 
@@ -261,11 +261,11 @@ dybfo = len(Response['consumption'])-2
 dybfy = len(Response['consumption'])-3
 dybft = len(Response['consumption'])-4
 dybf2 = len(Response['consumption'])-5
-print('\nYesterday\n' + str(float(Response["consumption"][ystdy]/1000)))
-print('\nSecond Day Before\n' + str(float(Response["consumption"][dybfo]/1000)))
-print('\nThird Day Before\n' + str(float(Response["consumption"][dybfy]/1000)))
-print('\nFourth Day Before\n' + str(float(Response["consumption"][dybft]/1000)))
-print('\nFourth Day Before\n' + str(float(Response["consumption"][dybf2]/1000)))
+#print('\nYesterday\n' + str(float(Response["consumption"][ystdy]/1000)))
+#print('\nSecond Day Before\n' + str(float(Response["consumption"][dybfo]/1000)))
+#print('\nThird Day Before\n' + str(float(Response["consumption"][dybfy]/1000)))
+#print('\nFourth Day Before\n' + str(float(Response["consumption"][dybft]/1000)))
+#print('\nFourth Day Before\n' + str(float(Response["consumption"][dybf2]/1000)))
 
 
 

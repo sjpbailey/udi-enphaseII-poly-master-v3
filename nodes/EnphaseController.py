@@ -217,17 +217,37 @@ class Controller(udi_interface.Node):
             try:
                 r = requests.get(URL_SITE, params=params)
                 LOGGER.info(r)
+                jsonResponse = r.json() #json.loads(r.text)
             except requests.exceptions.RequestException as e:
                 LOGGER.error("Error: " + str(e))
-            if r == 401:
+            if r.status_code == 401:
                 LOGGER.info("Consumption Meter not found 'None'")
             if r != 401:
-                LOGGER.info("Consumption Meter found 'Not None'")
+                LOGGER.info("Consumption Meter found")
             address = 'Meter_1'
             name = 'Meter 1'
             #if r == 200:
-            node = EnphaseMeter.MeterNode(self.poly, self.address, address, name, str(system_id), self.key, self.user_id)
-            self.poly.addNode(node)
+            if r.status_code == 200:
+                df = pd.json_normalize(jsonResponse['intervals'][0])
+                df = df.fillna(-1)
+
+                df['type'] = None
+                df['type'] = np.where(df['end_at'], 'system', df['type'])
+                system = df[df['type'] == 'system'].reset_index(drop=True)
+                # System string
+                device_list = [system]
+                for device in device_list:
+                    for idx, row in device.iterrows():
+                        id = row['end_at']
+                        id_new = id
+                        device = row['devices_reporting']
+                        kwh = row['enwh']
+                        mtr_idx = '%s' % (idx)
+                        LOGGER.info('\nReport Time\n{id_new}\n\nDevice\n{device}\nkWh\n{kwh}\n\nIndex\n{mtr_idx}\n'.format(
+                        id_new=id_new, device=device, kwh=kwh, mtr_idx=mtr_idx))
+            
+                        node = EnphaseMeter.MeterNode(self.poly, self.address, 'meter'+'_%s' % (idx+1), device, str(system_id), self.key, self.user_id)
+                        self.poly.addNode(node)
 
     def remove_notices_all(self, command):
         LOGGER.info('remove_notices_all: notices={}'.format(self.Notices))
@@ -243,6 +263,6 @@ class Controller(udi_interface.Node):
 
     drivers = [
         {'driver': 'ST', 'value': 1, 'uom': 2},
-        {'driver': 'ST', 'value': 1, 'uom':56}
+        {'driver': 'GV1', 'value': 1, 'uom':56}
 
     ]

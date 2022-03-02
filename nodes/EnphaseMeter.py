@@ -36,17 +36,18 @@ class MeterNode(udi_interface.Node):
         
 
     def start(self):
-        self.siteInfo(self)
+        self.meterInfo(self)
         self.http = urllib3.PoolManager()
 
     #### Get Current consumption ####
-    def siteInfo(self, command, **kwargs):
+    def meterInfo(self, command):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
             self.system_id + '/consumption_stats'
         params = (('key', self.key), ('user_id', self.user_id))
         try:
-            r = requests.get(URL_SITE, params=params, **kwargs)
+            r = requests.get(URL_SITE, params=params)
             Response = r.json() #loads(r.text)
+            LOGGER.infor(r.status_code)
             if r.status_code == 200:
                 self.setDriver('ST', 1)
             else:
@@ -80,7 +81,7 @@ class MeterNode(udi_interface.Node):
                     self.setDriver('ST', 1)
                 else:
                     self.setDriver('ST', 0)
-                self.siteHist(self)
+                self.meterHist(self)
                 #LOGGER.info(Response["energy_today"])
                 #self.setDriver('GV2', float(Response["energy_today"]/1000))
                 #LOGGER.info(Response["energy_lifetime"])
@@ -97,7 +98,7 @@ class MeterNode(udi_interface.Node):
         
 
     #### Get History ####
-    def siteHist(self, command, **kwargs):
+    def meterHist(self, command, **kwargs):
         URL_SITE = 'https://api.enphaseenergy.com/api/v2/systems/' + \
             self.system_id + '/consumption_lifetime'
         params = (('key', self.key), ('user_id', self.user_id))
@@ -130,7 +131,7 @@ class MeterNode(udi_interface.Node):
     def poll(self, polltype):
         if 'shortPoll' in polltype:
             LOGGER.debug('shortPoll (node)')
-            self.siteInfo(self)
+            self.meterInfo(self)
         else:
             LOGGER.debug('longPoll (node)')
 
@@ -151,7 +152,7 @@ class MeterNode(udi_interface.Node):
     id = 'meter'
 
     commands = {
-        'SITEINFO': siteInfo,
+        'SITEINFO': meterInfo,
         'QUERY': query,
 
     }
