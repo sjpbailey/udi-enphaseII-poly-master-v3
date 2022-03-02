@@ -47,7 +47,7 @@ class MeterNode(udi_interface.Node):
         try:
             r = requests.get(URL_SITE, params=params)
             Response = r.json() #loads(r.text)
-            LOGGER.infor(r.status_code)
+            LOGGER.info(r.status_code)
             if r.status_code == 200:
                 self.setDriver('ST', 1)
             else:
