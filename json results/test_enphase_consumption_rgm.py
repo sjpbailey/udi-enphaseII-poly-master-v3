@@ -261,11 +261,11 @@ dybfo = len(Response['consumption'])-2
 dybfy = len(Response['consumption'])-3
 dybft = len(Response['consumption'])-4
 dybf2 = len(Response['consumption'])-5
-#print('\nYesterday\n' + str(float(Response["consumption"][ystdy]/1000)))
-#print('\nSecond Day Before\n' + str(float(Response["consumption"][dybfo]/1000)))
-#print('\nThird Day Before\n' + str(float(Response["consumption"][dybfy]/1000)))
-#print('\nFourth Day Before\n' + str(float(Response["consumption"][dybft]/1000)))
-#print('\nFourth Day Before\n' + str(float(Response["consumption"][dybf2]/1000)))
+print('\nYesterday\n' + str(float(Response["consumption"][ystdy]/1000)))
+print('\nSecond Day Before\n' + str(float(Response["consumption"][dybfo]/1000)))
+print('\nThird Day Before\n' + str(float(Response["consumption"][dybfy]/1000)))
+print('\nFourth Day Before\n' + str(float(Response["consumption"][dybft]/1000)))
+print('\nFourth Day Before\n' + str(float(Response["consumption"][dybf2]/1000)))
 
 
 

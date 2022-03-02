@@ -52,6 +52,7 @@ class MeterNode(udi_interface.Node):
                 self.setDriver('ST', 1)
             else:
                 self.setDriver('ST', 0)
+                self.meterHist(self)
             
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))    
@@ -75,27 +76,8 @@ class MeterNode(udi_interface.Node):
                 print('\nReport Time\n{id_new}\n\nDevice\n{device}\nkWh\n{kwh}\n\nIndex\n{mtr_idx}\n'.format(
                     id_new=id_new, device=device, kwh=kwh, mtr_idx=mtr_idx))
             
-                #LOGGER.info(kwh/1000)
-                #self.setDriver('GV1', float(kwh)/1000)
-                if self.system_id != None:
-                    self.setDriver('ST', 1)
-                else:
-                    self.setDriver('ST', 0)
-                self.meterHist(self)
-                #LOGGER.info(Response["energy_today"])
-                #self.setDriver('GV2', float(Response["energy_today"]/1000))
-                #LOGGER.info(Response["energy_lifetime"])
-                #self.setDriver('GV3', float(Response["energy_lifetime"]/1000))
-                #self.setDriver('GV10', str(Response['modules']))
-                #LOGGER.info(Response["status"])
-                #normal1 = Response["status"]
-                #if normal1 == 'normal':
-                #    self.setDriver('GV4', 1)
-                #    self.siteHist(self)
-                #else:
-                #    self.setDriver('GV4', 0)
-            
-        
+                LOGGER.info(kwh/1000)
+                self.setDriver('GV1', float(kwh)/1000)
 
     #### Get History ####
     def meterHist(self, command, **kwargs):
