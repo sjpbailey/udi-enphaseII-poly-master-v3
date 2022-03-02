@@ -11,8 +11,8 @@
 	"logLevel": "INFO",
 	"profile_version": "1.0.0",
 	"customParams": {
-		"key": "33443540a4c162ed92df1c878e87867b",
-		"user_id": "4d6a55794e7a55354d413d3d0a"
+		"key": "Enter Your API Key",
+		"user_id": "Enter Your User ID"
 	},
 	"credits": [
 		{
