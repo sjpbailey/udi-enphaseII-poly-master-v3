@@ -42,16 +42,11 @@
     <sts>
       <st id="ST" editor="bool" />
       <st id="GV1" editor="kwh" />
-      <!--<st id="GV11" editor="amp" />
-      <st id="GV4" editor="stat" />
+      <st id="GV2" editor="kwh" />
       <st id="GV3" editor="kwh" />
-      <st id="GV2" editor="kwh" />-->
+      <st id="GV4" editor="kwh" />
       <st id="GV5" editor="kwh" />
       <st id="GV6" editor="kwh" />
-      <st id="GV7" editor="kwh" />
-      <st id="GV8" editor="kwh" />
-      <st id="GV9" editor="kwh" />
-      <st id="GV10" editor="rawval" />
     </sts>
     <cmds>
       <sends />

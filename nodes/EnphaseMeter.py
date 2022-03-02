@@ -95,15 +95,15 @@ class MeterNode(udi_interface.Node):
             dybft = len(Response['consumption'])-4
             dybf2 = len(Response['consumption'])-5
             LOGGER.info(Response['consumption'][ystdy]/1000)  # Yesterday
-            self.setDriver('GV5', float(Response["consumption"][ystdy]/1000))
+            self.setDriver('GV2', float(Response["consumption"][ystdy]/1000))
             LOGGER.info(Response['consumption'][dybfo]/1000)  # Two Days Ago
-            self.setDriver('GV6', float(Response["consumption"][dybfo]/1000))
+            self.setDriver('GV3', float(Response["consumption"][dybfo]/1000))
             LOGGER.info(Response['consumption'][dybfy]/1000)  # Three Days Ago
-            self.setDriver('GV7', float(Response["consumption"][dybfy]/1000))
+            self.setDriver('GV4', float(Response["consumption"][dybfy]/1000))
             LOGGER.info(Response['consumption'][dybft]/1000)  # Four Days Ago
-            self.setDriver('GV8', float(Response["consumption"][dybft]/1000))
+            self.setDriver('GV5', float(Response["consumption"][dybft]/1000))
             LOGGER.info(Response['consumption'][dybf2]/1000)  # Five Days Ago
-            self.setDriver('GV9', float(Response["consumption"][dybf2]/1000))
+            self.setDriver('GV6', float(Response["consumption"][dybf2]/1000))
         except requests.exceptions.RequestException as e:
             LOGGER.error("Error: " + str(e))
 
@@ -121,15 +121,11 @@ class MeterNode(udi_interface.Node):
     drivers = [
         {'driver': 'ST', 'value': 1, 'uom': 2},
         {'driver': 'GV1', 'value': 0, 'uom': 33},
-        #{'driver': 'GV2', 'value': 0, 'uom': 33},
-        #{'driver': 'GV3', 'value': 0, 'uom': 33},
-        #{'driver': 'GV4', 'value': 0, 'uom': 25},
+        {'driver': 'GV2', 'value': 0, 'uom': 33},
+        {'driver': 'GV3', 'value': 0, 'uom': 33},
+        {'driver': 'GV4', 'value': 0, 'uom': 33},
         {'driver': 'GV5', 'value': 0, 'uom': 33},
         {'driver': 'GV6', 'value': 0, 'uom': 33},
-        {'driver': 'GV7', 'value': 0, 'uom': 33},
-        {'driver': 'GV8', 'value': 0, 'uom': 33},
-        {'driver': 'GV9', 'value': 0, 'uom': 33},
-        {'driver': 'GV10', 'value': 0, 'uom': 56},
     ]
 
     id = 'meter'
