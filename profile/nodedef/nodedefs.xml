@@ -1,0 +1,80 @@
+<nodeDefs>
+
+  <nodeDef id="ctl" nodeType="139" nls="ctl">
+    <sts>
+      <st id="ST" editor="bool" />
+      <st id="GV1" editor="rawval" />
+    </sts>
+    <cmds>
+      <sends />
+      <accepts>
+        <cmd id="REMOVE_NOTICES_ALL" />
+        <cmd id="SITEINFO" />
+      </accepts>
+    </cmds>
+  </nodeDef>
+
+  <nodeDef id="site" nodeType="139" nls="str">
+    <sts>
+      <st id="ST" editor="bool" />
+      <st id="GV4" editor="stat" />
+      <st id="GV10" editor="rawval" />
+      <st id="GV1" editor="kw" />
+      <st id="GV11" editor="amp" />
+      <st id="GV3" editor="kwh" />
+      <st id="GV2" editor="kwh" />
+      <st id="GV5" editor="kwh" />
+      <st id="GV6" editor="kwh" />
+      <st id="GV7" editor="kwh" />
+      <st id="GV8" editor="kwh" />
+      <st id="GV9" editor="kwh" />
+    </sts>
+    <cmds>
+      <sends />
+      <accepts>
+        <cmd id="SITEINFO" />
+        <cmd id="QUERY" />
+      </accepts>
+    </cmds>
+  </nodeDef>
+  <!-- These are for our heartbeat -->
+  <nodeDef id="meter" nodeType="139" nls="mtr">
+    <sts>
+      <st id="ST" editor="bool" />
+      <st id="GV1" editor="kw" />
+      <st id="GV2" editor="kwh" />
+      <st id="GV3" editor="kwh" />
+      <st id="GV4" editor="kwh" />
+      <st id="GV5" editor="kwh" />
+      <st id="GV6" editor="kwh" />
+    </sts>
+    <cmds>
+      <sends />
+      <accepts>
+        <cmd id="SITEINFO" />
+        <cmd id="QUERY" />
+      </accepts>
+    </cmds>
+  </nodeDef>
+
+  <nodeDef id="inverter" nodeType="139" nls="inv">
+    <sts>
+      <st id="ST" editor="bool" />
+      <st id="GV4" editor="stat" />
+      <st id="GV1" editor="kwh" />
+      <st id="GV2" editor="kwh" />
+      <st id="GV3" editor="rawval" />
+      <st id="GV6" editor="rawval" />
+      <st id="GV5" editor="rawval" />
+
+    </sts>
+    <cmds>
+      <sends />
+      <accepts>
+        <cmd id="SITEINFO" />
+        <cmd id="QUERY" />
+      </accepts>
+    </cmds>
+  </nodeDef>
+
+</nodeDefs>

@@ -1,0 +1,56 @@
+# controller
+ND-ctl-NAME = Enphase Controller
+ND-ctl-ICON = Electricity
+ST-ctl-ST-NAME = NodeServer Online
+ST-ctl-GV1-NAME = System ID
+CMD-ctl-REMOVE_NOTICES_ALL-NAME = Remove Notices
+CMD-ctl-SITEINFO-NAME = Update Information
+
+# Customer Sites
+ND-site-NAME = Site
+ND-site-ICON = Electricity
+ST-str-ST-NAME = Active
+ST-str-GV4-NAME = Status
+ST-str-GV10-NAME = Inverters
+ST-str-GV1-NAME = Current Power
+ST-str-GV11-NAME = Calcuated Amps
+ST-str-GV3-NAME = kWh Life Time
+ST-str-GV2-NAME = kWh Today
+ST-str-GV5-NAME = kWh Yesterday
+ST-str-GV6-NAME = kWh Two Days Ago
+ST-str-GV7-NAME = kWh Three Days Ago
+ST-str-GV8-NAME = kWh Four Days Ago
+ST-str-GV9-NAME = kWh Five Days Ago
+CMD-str-SITEINFO-NAME = Update Information
+CMD-str-QUERY-NAME = Query
+
+# Customer Sites
+ND-meter-NAME = Meter
+ND-meter-ICON = Electricity
+ST-mtr-ST-NAME = Active
+ST-mtr-GV1-NAME = Current Power
+ST-mtr-GV2-NAME = kWh Yesterday
+ST-mtr-GV3-NAME = kWh Two Days Ago
+ST-mtr-GV4-NAME = kWh Three Days Ago
+ST-mtr-GV5-NAME = kWh Four Days Ago
+ST-mtr-GV6-NAME = kWh Five Days Ago
+CMD-mtr-SITEINFO-NAME = Update Information
+CMD-mtr-QUERY-NAME = Query
+
+# Inverters OnSite
+ND-inverter-NAME = Inverter
+ND-inverter-ICON = Electricity
+ST-inv-ST-NAME = Active
+ST-inv-GV1-NAME = Current kWh
+ST-inv-GV2-NAME = LifeTime kWh
+ST-inv-GV5-NAME = Panel ID
+ST-inv-GV3-NAME = Serial Part 1
+ST-inv-GV6-NAME = Serial Part 2
+ST-inv-GV4-NAME = Status
+CMD-inv-SITEINFO-NAME = Update Information
+CMD-inv-QUERY-NAME = Query
+
+
+# Status Text
+NORMAL-1 = Normal
+NORMAL-0 = Fault

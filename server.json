@@ -1,0 +1,34 @@
+{
+	"name": "EnphaseII",
+	"docs": "https://github.com/sjpbailey/udi-enphaseII-poly-master-v3/README.md",
+	"type": "python3",
+	"executable": "ENPHASEII.py",
+	"install": "install.sh",
+	"description": "Enphase Solae Site Summary with micro inverter inventory per customer site.",
+	"notice": "",
+	"shortPoll": "3600",
+	"longPoll": "6000",
+	"logLevel": "INFO",
+	"profile_version": "1.0.0",
+	"customParams": {
+		"key": "YourApiKey",
+		"user_id": "YourUser_id"
+	},
+	"credits": [
+		{
+			"title": "Enphase Solar",
+			"author": "Steve Bailey",
+			"version": "1.0.0",
+			"date": "November 21, 2021",
+			"source": "https://github.com/sjpbailey/udi-enphaseII-poly-master-v3",
+			"license": "https://github.com/sjpbailey/udi-enphaseII-poly-master-v3/LICENSE"
+		}
+	],
+	"store": {
+		"developer": "sjpbailey@comast.net",
+		"price": 0.00,
+		"recurring": 0,
+		"recurring_interval": "month",
+		"recurring_period": 0
+	}
+}
